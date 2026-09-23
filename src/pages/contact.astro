@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../lib/site';
+---
+<Base title="Contact" description="Talk to OnPoint. Brands, media partners, and candidates: tell us what you are trying to grow and a real person will get back to you.">
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-16 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Tell us what you are <span class="text-teal-ink">trying to grow.</span></h1>
+        <p class="mt-6 text-lg text-slate leading-relaxed">Brands, media partners, and future teammates. A real person reads every message and replies, usually within one to two business days.</p>
+        <dl class="mt-8 space-y-4 font-mono text-[13px]">
+          <div class="flex gap-4"><dt class="text-mist w-24">hq</dt><dd class="text-navy">Wyckoff, New Jersey</dd></div>
+          <div class="flex gap-4"><dt class="text-mist w-24">status</dt><dd class="text-navy">accepting new brands and partners</dd></div>
+          <div class="flex gap-4"><dt class="text-mist w-24">email</dt><dd><a class="text-navy underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
+          <div class="flex gap-4"><dt class="text-mist w-24">legal</dt><dd><a class="text-navy underline" href={`mailto:${SITE.legalEmail}`}>{SITE.legalEmail}</a></dd></div>
+        </dl>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+</Base>

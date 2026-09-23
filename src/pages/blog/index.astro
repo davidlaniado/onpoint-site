@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href } from '../../lib/site';
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const aud: Record<string, string> = { brands: 'For brands', partners: 'For partners', both: 'Brands + partners' };
+---
+<Base title="Blog" description="Plain-English notes on telehealth affiliate marketing, compliant traffic, tracking, and payouts. Written by operators who run it daily.">
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-10 md:pt-24 md:pb-14 max-w-3xl">
+      <p class="eyebrow">The OnPoint blog</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Notes from inside <span class="text-teal-ink">regulated health acquisition.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">How telehealth offers, tracking, compliance, and payouts actually work. Short, plain English, written by people who run this every day.</p>
+    </div>
+  </section>
+  <section class="container-x mt-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {posts.map((p) => (
+        <a href={href(`/blog/${p.id}/`)} class="card card-hover p-6 reveal block">
+          <div class="flex items-center justify-between gap-3">
+            <p class="mono-label">{fmt(p.data.pubDate)}</p>
+            <span class="text-[11px] font-medium text-teal-ink bg-teal-soft px-2 py-0.5 rounded-full">{aud[p.data.audience]}</span>
+          </div>
+          <h2 class="mt-3 text-xl font-bold leading-snug">{p.data.title}</h2>
+          <p class="mt-2 text-[15px] text-slate leading-relaxed">{p.data.description}</p>
+          <p class="mt-4 text-sm font-medium text-teal-ink">Read →</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

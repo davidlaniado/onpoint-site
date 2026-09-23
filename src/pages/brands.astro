@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Feature from '../components/Feature.astro';
+import Steps from '../components/Steps.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABand from '../components/CTABand.astro';
+import { href } from '../lib/site';
+const faq = [
+  { q: 'Who approves the health claims in my ads?', a: 'You do. Brands retain full ownership and approval authority over all health and medical claims. OnPoint reviews ads and funnels for advertising standards but does not create, modify, or substantiate clinical claims.' },
+  { q: 'Can I see which partners are running my offer?', a: 'Yes. Attribution is visible at the partner and channel level. Only verified partners on approved channels and placements can run your offer.' },
+  { q: 'What commercial structures do you support?', a: 'CPA, revenue share, and hybrid structures. Terms are agreed before launch and wired into tracking and payment logic from day one.' },
+  { q: 'How fast can we launch?', a: 'It depends on verification and how ready your funnel and tracking are. Brands with a working funnel, LegitScript where required, and a clear offer can usually be live with partners within a couple of weeks.' },
+  { q: 'Do you handle patient data?', a: 'No. OnPoint does not collect, store, or process protected health information. Tracking runs on advertising and performance events only.' },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="For Brands" description="Scale telehealth patient acquisition through verified partners with full control of your claims, your tracking, and your payouts." jsonLd={faqLd}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 max-w-3xl">
+      <p class="eyebrow">For brands</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Predictable acquisition, <span class="text-teal-ink">full control.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">You keep ownership of your claims. Only verified partners run your offer. Attribution, funnel events, and payments are visible end to end. That is the deal.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href={href('/contact/?as=brand')} class="btn btn-primary">Apply as a brand →</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <Section eyebrow="What you get" title="Compliant scale without losing control.">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <Feature icon="check" title="Claims reviewed before launch">Ad and funnel structures are checked against health advertising standards before a single dollar runs. You approve the claims. We enforce the standard.</Feature>
+      <Feature icon="users" title="Verified partners only">Every partner clears identity, KYC, channel, and traffic source verification before they can see your offer, let alone run it.</Feature>
+      <Feature icon="chart" title="Attribution you can act on">Everflow, Google Tag Manager, and server-side events give you clear attribution across channels, devices, and funnel steps.</Feature>
+      <Feature icon="eye" title="Real-time reporting">Traffic, conversion events, payments, and funnel performance in one view, so scaling decisions are made on numbers, not vibes.</Feature>
+      <Feature icon="card" title="Payments and reconciliation">Payment processing, card tracking, reconciliation, and portability through WowSuite. Tied directly to performance.</Feature>
+      <Feature icon="bolt" title="Operational support as you grow">Conversion rate optimization on key funnel stages, creative and asset management, and support as you add offers, volume, and markets.</Feature>
+    </div>
+  </Section>
+
+  <Section id="how" eyebrow="How it works" title="Nine steps from intake to scale.">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <Steps label="Before launch" steps={[
+        'Business, credential, and compliance verification.',
+        'Offer intake, health claims review, and commercial terms agreed (CPA, revenue share, or hybrid).',
+        'Funnel, creative, and conversion structure review.',
+        'Tracking, events, attribution, and payment logic set up.',
+      ]} />
+      <Steps label="After launch" steps={[
+        'Launch with verified partners on approved channels only.',
+        'Ongoing performance reporting and decision-grade analytics.',
+        'Conversion rate optimization on key funnel stages.',
+        'Content and asset management for active offers.',
+        'Payment processing, card tracking, and reconciliation.',
+      ]} />
+    </div>
+  </Section>
+
+  <Section eyebrow="Categories" title="Offers we support">
+    <div class="flex flex-wrap gap-3">
+      {['Metabolic and weight management', 'Hormone optimization', 'Men’s wellness and preventive health', 'Dermatology, hair, and skin', 'Diagnostics and wellness subscriptions'].map((c) => (
+        <span class="px-4 py-2 rounded-full border border-line text-navy font-medium text-sm reveal">{c}</span>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="Brand FAQ" title="Questions brands ask first.">
+    <FAQ items={faq} />
+  </Section>
+
+  <CTABand title="Bring us your offer." lead="Tell us the category, the funnel, and where you are stuck. We will tell you honestly whether we can help." />
+</Base>

@@ -1,0 +1,24 @@
+---
+const items = [
+  ['kyc.verified', 'new partner cleared'],
+  ['claims.reviewed', 'brand keeps approval'],
+  ['postback.received', 'sale attributed'],
+  ['placement.approved', 'channel whitelisted'],
+  ['creative.reviewed', 'before launch'],
+  ['payout.cleared', 'approved performance'],
+  ['report.sent', 'daily numbers to brand'],
+  ['source.removed', 'quality below standard'],
+  ['offer.live', 'metabolic health'],
+  ['terms.locked', 'cpa · revshare · hybrid'],
+];
+const doubled = [...items, ...items];
+---
+<div class="ticker mt-10 border-y border-line bg-paper overflow-hidden" aria-hidden="true">
+  <div class="ticker-track py-3">
+    {doubled.map(([k, v]) => (
+      <span class="font-mono text-[11px] text-mist whitespace-nowrap px-6 border-r border-line">
+        <span class="text-teal-ink">{k}</span> <span class="text-slate">→ {v}</span>
+      </span>
+    ))}
+  </div>
+</div>

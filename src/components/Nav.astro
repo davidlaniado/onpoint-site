@@ -1,0 +1,39 @@
+---
+import { NAV, href } from '../lib/site';
+const current = Astro.url.pathname;
+const isActive = (p: string) => current.startsWith(href(p).replace(/\/$/, ''));
+---
+<header class="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-line">
+  <div class="container-x flex items-center justify-between h-16 md:h-[68px]">
+    <a href={href('/')} class="flex items-center" aria-label="OnPoint home">
+      <img src={href('/img/logo.png')} srcset={`${href('/img/logo-2x.png')} 2x`} alt="OnPoint Health Media & Tech" class="h-8 md:h-9 w-auto" width="720" height="195" />
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-navy" aria-label="Main">
+      {NAV.map((n) => (
+        <a href={href(n.path)} class:list={['hover:text-teal-ink transition-colors', isActive(n.path) && 'text-teal-ink']}>{n.label}</a>
+      ))}
+      <a href={href('/contact/')} class="btn btn-teal !py-2.5 !px-4 text-sm">Contact us</a>
+    </nav>
+    <button id="nav-toggle" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-line text-navy" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="nav-open" d="M3 5h14M3 10h14M3 15h14"/><path class="nav-close hidden" d="M5 5l10 10M15 5L5 15"/></svg>
+    </button>
+  </div>
+  <div id="nav-mobile" class="hidden md:hidden border-t border-line bg-white">
+    <nav class="container-x py-3 flex flex-col" aria-label="Mobile">
+      {NAV.map((n) => (
+        <a href={href(n.path)} class="py-3 text-[17px] font-medium text-navy border-b border-line last:border-0">{n.label}</a>
+      ))}
+      <a href={href('/contact/')} class="btn btn-teal mt-3">Contact us</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const t = document.getElementById('nav-toggle');
+  const m = document.getElementById('nav-mobile');
+  t?.addEventListener('click', () => {
+    const open = m!.classList.toggle('hidden') === false;
+    t.setAttribute('aria-expanded', String(open));
+    t.querySelector('.nav-open')?.classList.toggle('hidden', open);
+    t.querySelector('.nav-close')?.classList.toggle('hidden', !open);
+  });
+</script>

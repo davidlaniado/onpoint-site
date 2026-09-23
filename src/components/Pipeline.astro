@@ -1,0 +1,77 @@
+---
+// Animated "verified pipeline" loop. Pure SVG + a little JS. No framework.
+const nodes = [
+  { id: 'brand', label: 'BRAND', sub: 'applies' },
+  { id: 'review', label: 'REVIEW', sub: 'kyc · claims · tracking' },
+  { id: 'partner', label: 'PARTNER', sub: 'verified traffic' },
+  { id: 'convert', label: 'CONVERSION', sub: 'postback logged' },
+  { id: 'payout', label: 'PAYOUT', sub: 'approved · audited' },
+];
+const cx = 260, cy = 168, r = 112;
+const pts = nodes.map((n, i) => {
+  const a = (-90 + i * 72) * (Math.PI / 180);
+  return { ...n, x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+});
+const logs = [
+  'brand.verified → business + kyc cleared',
+  'claims.reviewed → advertiser owns approval',
+  'tracking.live → s2s postback confirmed',
+  'partner.approved → channel + placement ok',
+  'conversion.logged → attributed end to end',
+  'payout.cleared → on approved performance',
+  'report.delivered → data back to the brand',
+];
+---
+<div class="card overflow-hidden min-w-0 shadow-[0_30px_60px_-30px_rgba(24,40,88,.35)]">
+  <div class="flex items-center justify-between px-4 py-3 border-b border-line">
+    <span class="mono-label">verified.pipeline</span>
+    <span class="mono-label flex items-center gap-2"><span>cycle</span><span id="pl-cycle" class="text-navy">01</span><span class="inline-block w-1.5 h-1.5 rounded-full bg-teal live-dot"></span><span class="text-teal-ink">live</span></span>
+  </div>
+  <svg id="pl-svg" viewBox="0 0 520 336" class="w-full h-auto block" role="img" aria-label="Diagram: brand applies, OnPoint reviews, verified partner runs traffic, conversion is tracked, payout clears, and reporting feeds back to the brand.">
+    <defs>
+      <path id="pl-ring" d={`M ${cx} ${cy - r} a ${r} ${r} 0 1 1 -0.01 0`} />
+    </defs>
+    <circle cx={cx} cy={cy} r={r} fill="none" stroke="#e4e8f0" stroke-width="1.5" stroke-dasharray="3 5" />
+    <circle cx={cx} cy={cy} r={r - 34} fill="none" stroke="#eef1f6" stroke-width="1" />
+    <!-- center mark -->
+    <g>
+      <circle cx={cx} cy={cy} r="30" fill="#fff" stroke="#e4e8f0" />
+      <image href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/img/icon-192.png`} x={cx - 22} y={cy - 22} width="44" height="44" />
+    </g>
+    <!-- travelling dot -->
+    <circle r="5" fill="#14867a">
+      <animateMotion dur="7s" repeatCount="indefinite" rotate="auto"><mpath href="#pl-ring" /></animateMotion>
+    </circle>
+    <circle r="11" fill="#60d8c8" opacity=".25">
+      <animateMotion dur="7s" repeatCount="indefinite"><mpath href="#pl-ring" /></animateMotion>
+    </circle>
+    {pts.map((p, i) => (
+      <g class="pl-node" data-i={i} transform={`translate(${p.x - 58} ${p.y - 22})`}>
+        <rect width="116" height="44" rx="8" />
+        <circle class="pl-dot" cx="12" cy="14" r="3" />
+        <text x="22" y="18" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1.2" font-weight="500">{p.label}</text>
+        <text x="12" y="34" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#8a93ab">{p.sub}</text>
+      </g>
+    ))}
+  </svg>
+  <div class="px-4 py-3 border-t border-line flex items-center justify-between gap-3 bg-paper min-w-0">
+    <span id="pl-log" class="font-mono text-[11px] text-slate truncate min-w-0 flex-1">{logs[0]}</span>
+    <span class="font-mono text-[11px] text-teal-ink whitespace-nowrap">no open access</span>
+  </div>
+</div>
+<script define:vars={{ logs }}>
+  const nodes = [...document.querySelectorAll('.pl-node')];
+  const log = document.getElementById('pl-log');
+  const cyc = document.getElementById('pl-cycle');
+  const step = 1400; // 5 nodes × 1.4s = 7s = one dot lap
+  let i = 0, cycle = 1;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tick() {
+    nodes.forEach((n, k) => { n.classList.toggle('active', k === i); n.classList.toggle('done', k < i); });
+    if (log) log.textContent = logs[(cycle * 5 + i) % logs.length];
+    i = (i + 1) % nodes.length;
+    if (i === 0) { cycle++; if (cyc) cyc.textContent = String(cycle).padStart(2, '0'); }
+  }
+  tick();
+  if (!reduce) setInterval(tick, step);
+</script>

@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { href, SITE } from '../../lib/site';
+export async function getStaticPaths() {
+  const jobs = await getCollection('jobs');
+  return jobs.map((j) => ({ params: { slug: j.id }, props: { job: j } }));
+}
+const { job } = Astro.props;
+const { Content } = await render(job);
+const d = job.data;
+const subject = encodeURIComponent(`${d.jobId ? d.jobId + ' – ' : ''}${d.title} application`);
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'JobPosting',
+  title: d.title,
+  description: d.summary,
+  datePosted: d.datePosted.toISOString().slice(0, 10),
+  employmentType: d.type.toUpperCase().includes('CONTRACT') ? ['FULL_TIME', 'CONTRACTOR'] : 'FULL_TIME',
+  hiringOrganization: { '@type': 'Organization', name: SITE.name, sameAs: SITE.url },
+  jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: SITE.address.city, addressRegion: SITE.address.region, addressCountry: 'US' } },
+  jobLocationType: 'TELECOMMUTE',
+  applicantLocationRequirements: { '@type': 'Country', name: 'USA' },
+  directApply: true,
+};
+---
+<Base title={`${d.title} | Careers`} description={d.summary} jsonLd={ld}>
+  <div class="container-x pt-10 md:pt-16">
+    <a href={href('/careers/')} class="text-sm text-mist hover:text-navy">← All roles</a>
+    <div class="mt-6 grid lg:grid-cols-[1fr_320px] gap-10 items-start">
+      <article>
+        <p class="eyebrow">{d.department}</p>
+        <h1 class="mt-4 text-[32px] md:text-[44px] leading-[1.1] font-extrabold">{d.title}</h1>
+        <p class="mt-4 text-lg text-slate leading-relaxed">{d.summary}</p>
+        <div class="prose-op mt-8"><Content /></div>
+      </article>
+      <aside class="card p-6 lg:sticky lg:top-24">
+        <p class="mono-label">Details</p>
+        <dl class="mt-3 space-y-3 text-sm">
+          <div><dt class="text-mist">Location</dt><dd class="text-navy font-medium">{d.location}</dd></div>
+          <div><dt class="text-mist">Type</dt><dd class="text-navy font-medium">{d.type}</dd></div>
+          {d.compensation && <div><dt class="text-mist">Compensation</dt><dd class="text-navy font-medium">{d.compensation}</dd></div>}
+          {d.jobId && <div><dt class="text-mist">Job ID</dt><dd class="text-navy font-medium font-mono">{d.jobId}</dd></div>}
+        </dl>
+        <a href={`mailto:${SITE.careersEmail}?subject=${subject}`} class="btn btn-primary w-full mt-6">Apply by email</a>
+        <p class="mt-3 text-xs text-mist">Send to {SITE.careersEmail}. Include the role in your subject line.</p>
+      </aside>
+    </div>
+  </div>
+</Base>

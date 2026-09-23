@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Feature from '../components/Feature.astro';
+import Steps from '../components/Steps.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABand from '../components/CTABand.astro';
+import { href } from '../lib/site';
+const faq = [
+  { q: 'Who can join OnPoint as a partner?', a: 'Partners with verified identities, approved traffic sources, and a commitment to advertising standards. If you run clean traffic and want offers that last, you will like it here.' },
+  { q: 'What types of offers are available?', a: 'Vetted telehealth, wellness, and diagnostics offers with clear claim rules, category standards, and defined operating requirements per offer.' },
+  { q: 'Are revenue share offers available?', a: 'Yes, on certain offers. Where available, terms are defined before launch with transparent attribution, payouts, reconciliation, and reporting built for revenue share.' },
+  { q: 'How does tracking and reporting work?', a: 'Full attribution visibility through server-side postbacks and platform-level reporting. You see the same conversion events the brand sees.' },
+  { q: 'How and when are partners paid?', a: 'On approved performance under the terms agreed for each offer. Reporting is transparent, payouts are auditable, and timing follows the agreed commercial structure.' },
+  { q: 'Can I scale here?', a: 'Yes. Partners who follow the rules, maintain quality, and perform consistently get stable infrastructure, transparent data, and long-term offer support.' },
+];
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<Base title="For Media Partners" description="Premium telehealth, wellness, and diagnostics offers with clear rules, full attribution, and payouts you can audit. Built for partners who run clean traffic." jsonLd={faqLd}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 max-w-3xl">
+      <p class="eyebrow">For media partners</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Premium health offers <span class="text-teal-ink">built to last.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">Exclusive telehealth offers with clear rules, real tracking, and payouts you can check. A governed environment built for regulated health categories, so the offers you scale today are still here next quarter.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href={href('/contact/?as=partner')} class="btn btn-primary">Apply as a partner →</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+    </div>
+  </section>
+
+  <Section eyebrow="What you get" title="Offers worth building on.">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <Feature icon="shield" title="Vetted offers">Telehealth, wellness, and diagnostics brands that have cleared business and compliance verification. No mystery advertisers.</Feature>
+      <Feature icon="check" title="Clear claim rules">Category standards and claim rules defined per offer, so you know what you can say before you build a single creative.</Feature>
+      <Feature icon="chart" title="Accurate attribution">S2S tracking and platform-level reporting. Your numbers and the brand's numbers come from the same events.</Feature>
+      <Feature icon="card" title="Auditable payouts">Paid on approved performance under terms agreed before launch. CPA, revenue share, or hybrid depending on the offer.</Feature>
+      <Feature icon="bolt" title="Live launch support">Real answers on creative, tracking, or compliance questions, fast. Optimization guidance from people who buy media themselves.</Feature>
+      <Feature icon="route" title="Approved creative structures">Access to ad and funnel structures already reviewed for health categories, so you start from what works.</Feature>
+    </div>
+  </Section>
+
+  <Section id="how" eyebrow="How it works" title="Six steps from application to scale.">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <Steps label="Getting in" steps={[
+        'Identity, KYC, and traffic source verification.',
+        'Channel and placement approval for quality and compliance.',
+        'Access to approved creative structures, offer rules, and defined CPA or revenue share terms.',
+      ]} />
+      <Steps label="Running" steps={[
+        'Launch support and ongoing optimization guidance.',
+        'Transparent tracking, reporting, and payouts on approved performance.',
+        'Continuous monitoring for quality, compliance, and performance.',
+      ]} />
+    </div>
+  </Section>
+
+  <Section eyebrow="Fit check" title="Is OnPoint right for you?">
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card p-7 reveal">
+        <p class="mono-label text-teal-ink">Good fit</p>
+        <ul class="mt-4 space-y-2 text-[15px] text-slate">
+          <li>• You buy media on Meta, search, native, email, or SMS and can show where traffic comes from.</li>
+          <li>• You want health offers with long payout stability, not a cap that disappears next week.</li>
+          <li>• You are fine with claim rules because you would rather scale for a year than burn out in a month.</li>
+        </ul>
+      </div>
+      <div class="card p-7 reveal">
+        <p class="mono-label">Not a fit</p>
+        <ul class="mt-4 space-y-2 text-[15px] text-slate">
+          <li>• Undisclosed traffic sources or borrowed accounts.</li>
+          <li>• Creative that makes medical claims the brand has not approved.</li>
+          <li>• Anyone looking for an open network with instant links. That is not what this is.</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section eyebrow="Partner FAQ" title="Questions partners ask first.">
+    <FAQ items={faq} />
+  </Section>
+
+  <CTABand title="Run offers that last." lead="Tell us what you buy, where it comes from, and what you are looking for. We will reply with what we have." />
+</Base>

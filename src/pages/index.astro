@@ -1,0 +1,173 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import StatStrip from '../components/StatStrip.astro';
+import Ticker from '../components/Ticker.astro';
+import Section from '../components/Section.astro';
+import Feature from '../components/Feature.astro';
+import Steps from '../components/Steps.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABand from '../components/CTABand.astro';
+import { href, SITE } from '../lib/site';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+const jobs = (await getCollection('jobs', ({ data }) => data.open)).sort((a, b) => a.data.order - b.data.order);
+
+const faq = [
+  { q: 'What is OnPoint Health Media & Tech?', a: 'OnPoint is a performance network for telehealth, wellness, and diagnostics brands. We connect brands with verified media partners, run the tracking and payments in between, and review ads and funnels before they go live. Brands keep full control of their health claims.' },
+  { q: 'Is OnPoint an open affiliate network?', a: 'No. Access is gated on both sides. Brands go through business and compliance verification. Partners go through identity, KYC, channel, and traffic source checks before they can run anything.' },
+  { q: 'Who owns and approves health and medical claims?', a: 'The brand does. OnPoint reviews ads and funnels for advertising standards, but we do not create, modify, or substantiate clinical claims.' },
+  { q: 'How does tracking work?', a: 'Server-to-server postbacks and platform-level reporting through enterprise tools including Everflow and Google Tag Manager. Both sides see the same conversion events, across channels and devices.' },
+  { q: 'How are commercial terms set?', a: 'Terms are defined before launch. Depending on the offer that can be CPA, revenue share, or a hybrid. Partners are paid on approved performance under those terms, and payouts are auditable.' },
+  { q: 'Does OnPoint provide medical services or handle patient data?', a: 'No. OnPoint is a marketing platform, not a medical provider. We do not give medical advice, and we do not collect, store, or process protected health information. Tracking and reporting run on advertising and performance events only.' },
+  { q: 'How do I get started?', a: 'Brands and partners both apply through the contact page. Every application is reviewed for compliance readiness and fit before anything goes live.' },
+];
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+<Base title="OnPoint Health Media & Tech | Compliant scale for telehealth brands" description={SITE.description} jsonLd={faqLd}>
+  <Hero />
+  <StatStrip />
+  <Ticker />
+
+  <Section eyebrow="Why OnPoint" title="Health acquisition is different. <em class='not-italic text-teal-ink'>We built for it.</em>" lead="The rules are tighter, the scrutiny is higher, and the consequences are real. Most networks are open by default and hope for the best. OnPoint verifies first, tracks everything, and keeps the brand in control of its claims.">
+    <div class="grid md:grid-cols-3 gap-5">
+      <Feature icon="shield" title="Verified on both sides">Brands clear business and compliance review. Partners clear identity, KYC, channel, and traffic source checks. Nobody runs blind.</Feature>
+      <Feature icon="chart" title="Tracking you can trust">Server-side postbacks and platform reporting through Everflow and Google Tag Manager. Same numbers for the brand and the partner.</Feature>
+      <Feature icon="card" title="Payouts you can audit">Terms are locked before launch. Partners are paid on approved performance. Reconciliation is transparent on both ends.</Feature>
+    </div>
+  </Section>
+
+  <Section eyebrow="Two sides, one standard" title="Built for brands. Built for partners.">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="card p-7 md:p-9 reveal">
+        <p class="mono-label">For brands</p>
+        <h3 class="mt-3 text-2xl md:text-[28px] font-extrabold leading-tight">Predictable acquisition with full control.</h3>
+        <ul class="mt-5 space-y-3 text-[15px] text-slate">
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>You approve and own every health claim. Ads and funnels are reviewed before launch.</li>
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>Only verified partners on approved channels can run your offer.</li>
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>Attribution, funnel events, and payments visible end to end.</li>
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>CPA, revenue share, or hybrid structures, agreed before day one.</li>
+        </ul>
+        <a href={href('/brands/')} class="btn btn-primary mt-7">How it works for brands →</a>
+      </div>
+      <div class="card p-7 md:p-9 reveal">
+        <p class="mono-label">For media partners</p>
+        <h3 class="mt-3 text-2xl md:text-[28px] font-extrabold leading-tight">Premium health offers built to scale and last.</h3>
+        <ul class="mt-5 space-y-3 text-[15px] text-slate">
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>Vetted telehealth, wellness, and diagnostics offers with clear claim rules per offer.</li>
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>Full attribution visibility through S2S tracking and platform reporting.</li>
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>Reliable, auditable payouts on approved performance.</li>
+          <li class="flex gap-3"><span class="text-teal-ink mt-0.5">✓</span>Live launch support and fast answers on creative, tracking, or compliance.</li>
+        </ul>
+        <a href={href('/partners/')} class="btn btn-ghost mt-7">How it works for partners →</a>
+      </div>
+    </div>
+  </Section>
+
+  <Section eyebrow="Categories" title="Where we work" lead="Regulated health categories where compliant traffic is the whole game.">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      {['Metabolic and weight management', 'Hormone optimization and wellness', 'Dermatology, hair, and skin', 'Men’s wellness and preventive health', 'Diagnostics and wellness subscriptions'].map((c) => (
+        <div class="card p-5 reveal"><p class="font-display font-bold text-navy leading-snug">{c}</p></div>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="How OnPoint operates" title="Verify, launch, track, pay. In that order.">
+    <div class="grid lg:grid-cols-2 gap-6">
+      <Steps label="Brands" steps={[
+        'Business, credential, and compliance verification.',
+        'Offer intake, claims review, and commercial terms agreed before launch.',
+        'Funnel, creative, and conversion flow review.',
+        'Tracking, events, attribution, and payment logic set up.',
+        'Launch with verified partners on approved channels only.',
+        'Ongoing reporting, optimization, and support as you scale.',
+      ]} />
+      <Steps label="Media partners" steps={[
+        'Identity, KYC, and traffic source verification.',
+        'Channel and placement approval for quality and compliance.',
+        'Access to approved creative structures, offer rules, and defined terms.',
+        'Launch support and optimization guidance.',
+        'Transparent tracking, reporting, and payouts on approved performance.',
+        'Continuous monitoring for quality, compliance, and performance.',
+      ]} />
+    </div>
+  </Section>
+
+  <Section eyebrow="Standards" title="What we hold every offer and every partner to." lead="Our founders are members of the American Telemedicine Association. OnPoint runs with the same expectation of responsibility and transparency.">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {[
+        ['lock', 'Privacy-forward advertising and tracking'],
+        ['check', 'Brand-owned and approved health claims'],
+        ['eye', 'Internal review of ads and funnels before launch'],
+        ['users', 'Identity, KYC, channel, and traffic source verification'],
+        ['route', 'Policy-aligned, high-quality traffic only'],
+        ['bolt', 'Ongoing monitoring and removal of sources that fall below standard'],
+      ].map(([icon, t]) => (
+        <div class="flex items-start gap-3 p-4 rounded-xl bg-paper reveal">
+          <span class="shrink-0 w-2 h-2 mt-2 rounded-full bg-teal"></span>
+          <p class="text-[15px] font-medium text-navy leading-snug">{t}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="Technology" title="Enterprise tracking. No black boxes." lead="OnPoint runs on and integrates with systems brands already trust, so the numbers hold up when finance asks.">
+    <div class="grid md:grid-cols-4 gap-4">
+      {[
+        ['Everflow', 'Partner tracking, offers, and payouts'],
+        ['Google Tag Manager', 'Event and pixel management'],
+        ['Server-side events', 'Postbacks that survive browsers and devices'],
+        ['WowSuite', 'Payment processing, card tracking, and reconciliation'],
+      ].map(([n, d]) => (
+        <div class="card p-5 reveal">
+          <p class="font-display font-bold text-navy">{n}</p>
+          <p class="mt-1 text-sm text-slate">{d}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="Frequently asked" title="Straight answers.">
+    <FAQ items={faq} />
+  </Section>
+
+  {posts.length > 0 && (
+    <Section eyebrow="From the blog" title="What we are learning in regulated health acquisition.">
+      <div class="grid md:grid-cols-3 gap-5">
+        {posts.map((p) => (
+          <a href={href(`/blog/${p.id}/`)} class="card card-hover p-6 reveal block">
+            <p class="mono-label">{fmt(p.data.pubDate)}</p>
+            <h3 class="mt-3 text-lg font-bold leading-snug">{p.data.title}</h3>
+            <p class="mt-2 text-sm text-slate leading-relaxed">{p.data.description}</p>
+            <p class="mt-4 text-sm font-medium text-teal-ink">Read →</p>
+          </a>
+        ))}
+      </div>
+      <a href={href('/blog/')} class="inline-block mt-6 text-navy font-medium underline underline-offset-4">All articles</a>
+    </Section>
+  )}
+
+  {jobs.length > 0 && (
+    <Section eyebrow="Careers" title="Small team. Big lanes." lead="Founder-led, senior, and moving fast. Every person here owns a lane and sees their impact in the numbers.">
+      <div class="divide-y divide-line border-y border-line">
+        {jobs.map((j) => (
+          <a href={href(`/careers/${j.id}/`)} class="flex items-center justify-between gap-4 py-4 group">
+            <div>
+              <p class="font-display font-bold text-navy group-hover:text-teal-ink">{j.data.title}</p>
+              <p class="text-sm text-mist">{j.data.department} · {j.data.location}</p>
+            </div>
+            <span class="text-teal-ink">→</span>
+          </a>
+        ))}
+      </div>
+    </Section>
+  )}
+
+  <CTABand />
+</Base>

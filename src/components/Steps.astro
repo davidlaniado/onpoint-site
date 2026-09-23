@@ -1,0 +1,15 @@
+---
+interface Props { steps: string[]; label: string }
+const { steps, label } = Astro.props;
+---
+<div class="card p-6 md:p-8 reveal">
+  <p class="mono-label mb-5">{label}</p>
+  <ol class="space-y-4">
+    {steps.map((s, i) => (
+      <li class="flex gap-4">
+        <span class="shrink-0 w-8 h-8 rounded-full bg-navy text-white font-mono text-xs flex items-center justify-center">{String(i + 1).padStart(2, '0')}</span>
+        <p class="text-[15px] text-slate leading-relaxed pt-1">{s}</p>
+      </li>
+    ))}
+  </ol>
+</div>

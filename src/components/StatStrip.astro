@@ -1,0 +1,18 @@
+---
+const stats = [
+  { n: '$1B+', l: 'in revenue driven for brands our founders have scaled' },
+  { n: '7', l: 'offices built at our founders’ last performance company' },
+  { n: '5', l: 'health categories supported' },
+  { n: 'ATA', l: 'founders are American Telemedicine Association members' },
+];
+---
+<section class="container-x">
+  <div class="grid grid-cols-2 lg:grid-cols-4 border-y border-line divide-x divide-line">
+    {stats.map((s) => (
+      <div class="py-6 md:py-8 px-4 md:px-6 first:pl-0">
+        <p class="font-display text-3xl md:text-4xl font-extrabold text-navy tracking-tight">{s.n}</p>
+        <p class="mt-1 font-mono text-[11px] leading-snug text-mist uppercase tracking-wider">{s.l}</p>
+      </div>
+    ))}
+  </div>
+</section>
