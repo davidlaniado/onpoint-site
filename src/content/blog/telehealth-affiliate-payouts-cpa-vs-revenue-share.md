@@ -2,6 +2,7 @@
 title: "How telehealth affiliate payouts work: CPA vs revenue share vs hybrid"
 description: "The three ways telehealth brands pay media partners, what each one means for cash flow and risk, and how to pick the structure that will not blow up in month three."
 pubDate: 2026-09-23
+cover: blog-payouts
 audience: both
 tags: [payouts, CPA, revenue share, telehealth]
 faq:

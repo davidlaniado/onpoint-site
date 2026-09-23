@@ -2,6 +2,7 @@
 title: "Why telehealth brands should own every health claim in their affiliate program"
 description: "The single rule that separates networks that last from networks that get brands shut down: the brand approves the claims, and nobody else writes them."
 pubDate: 2026-09-08
+cover: blog-claims
 audience: brands
 tags: [claims, compliance, brand safety]
 faq:

@@ -2,6 +2,7 @@
 title: "Reading a telehealth funnel: the five numbers that actually matter"
 description: "Cost per click is noise. Here are the five metrics we watch daily on GLP-1, ED, and TRT funnels, the rough ranges we expect, and what each one tells you to fix."
 pubDate: 2026-09-03
+cover: blog-funnel
 audience: both
 tags: [media buying, funnel, metrics, optimization]
 faq:

@@ -2,6 +2,7 @@
 title: "Server-to-server postback tracking, explained for telehealth offers"
 description: "Why browser pixels miss telehealth conversions, what a server-to-server postback does differently, and how to set one up so brands and partners see the same sale."
 pubDate: 2026-09-12
+cover: blog-postback
 audience: both
 tags: [tracking, postback, Everflow, attribution]
 faq:

@@ -6,6 +6,7 @@ import Steps from '../components/Steps.astro';
 import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 import { href } from '../lib/site';
+import Photo from '../components/Photo.astro';
 const faq = [
   { q: 'Who can join OnPoint as a partner?', a: 'Partners with verified identities, approved traffic sources, and a commitment to advertising standards. If you run clean traffic and want offers that last, you will like it here.' },
   { q: 'What types of offers are available?', a: 'Vetted telehealth, wellness, and diagnostics offers with clear claim rules, category standards, and defined operating requirements per offer.' },
@@ -19,7 +20,8 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 <Base title="For Media Partners" description="Premium telehealth, wellness, and diagnostics offers with clear rules, full attribution, and payouts you can audit. Built for partners who run clean traffic." jsonLd={faqLd}>
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
-    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 max-w-3xl">
+    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
+    <div>
       <p class="eyebrow">For media partners</p>
       <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Premium health offers <span class="text-teal-ink">built to last.</span></h1>
       <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">Exclusive telehealth offers with clear rules, real tracking, and payouts you can check. A governed environment built for regulated health categories, so the offers you scale today are still here next quarter.</p>
@@ -27,6 +29,8 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <a href={href('/contact/?as=partner')} class="btn btn-primary">Apply as a partner →</a>
         <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
+    </div>
+    <div class="reveal rounded-3xl overflow-hidden aspect-[4/5] max-h-[560px] lg:max-h-none"><Photo name="partners-hero" alt="A media buyer at his desk with analytics on screen" width="1344" height="2000" eager /></div>
     </div>
   </section>
 

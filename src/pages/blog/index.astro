@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { href } from '../../lib/site';
+import Photo from '../../components/Photo.astro';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const aud: Record<string, string> = { brands: 'For brands', partners: 'For partners', both: 'Brands + partners' };
@@ -18,7 +19,9 @@ const aud: Record<string, string> = { brands: 'For brands', partners: 'For partn
   <section class="container-x mt-6">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {posts.map((p) => (
-        <a href={href(`/blog/${p.id}/`)} class="card card-hover p-6 reveal block">
+        <a href={href(`/blog/${p.id}/`)} class="card card-hover overflow-hidden reveal block">
+          {p.data.cover && <div class="aspect-[16/9]"><Photo name={p.data.cover} alt="" width="2000" height="1120" /></div>}
+          <div class="p-6">
           <div class="flex items-center justify-between gap-3">
             <p class="mono-label">{fmt(p.data.pubDate)}</p>
             <span class="text-[11px] font-medium text-teal-ink bg-teal-soft px-2 py-0.5 rounded-full">{aud[p.data.audience]}</span>
@@ -26,6 +29,7 @@ const aud: Record<string, string> = { brands: 'For brands', partners: 'For partn
           <h2 class="mt-3 text-xl font-bold leading-snug">{p.data.title}</h2>
           <p class="mt-2 text-[15px] text-slate leading-relaxed">{p.data.description}</p>
           <p class="mt-4 text-sm font-medium text-teal-ink">Read →</p>
+          </div>
         </a>
       ))}
     </div>

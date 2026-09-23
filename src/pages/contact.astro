@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { SITE } from '../lib/site';
+import Photo from '../components/Photo.astro';
 ---
 <Base title="Contact" description="Talk to OnPoint. Brands, media partners, and candidates: tell us what you are trying to grow and a real person will get back to you.">
   <section class="relative overflow-hidden">
@@ -17,6 +18,7 @@ import { SITE } from '../lib/site';
           <div class="flex gap-4"><dt class="text-mist w-24">email</dt><dd><a class="text-navy underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
           <div class="flex gap-4"><dt class="text-mist w-24">legal</dt><dd><a class="text-navy underline" href={`mailto:${SITE.legalEmail}`}>{SITE.legalEmail}</a></dd></div>
         </dl>
+        <div class="hidden lg:block mt-10 rounded-3xl overflow-hidden aspect-[4/3]"><Photo name="contact" alt="A team member on a call by a bright window" width="1344" height="2000" /></div>
       </div>
       <ContactForm />
     </div>

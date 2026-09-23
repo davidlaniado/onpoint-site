@@ -2,6 +2,7 @@
 title: "What \"compliant traffic\" actually means for GLP-1 and telehealth offers"
 description: "Brands say it, networks promise it, and almost nobody defines it. Here is the working definition we use for compliant traffic in regulated health categories, and the checklist behind it."
 pubDate: 2026-09-20
+cover: blog-compliant
 audience: both
 tags: [compliance, GLP-1, traffic quality, claims]
 faq:

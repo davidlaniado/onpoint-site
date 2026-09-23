@@ -2,6 +2,7 @@
 title: "How to vet an affiliate network before you send it traffic"
 description: "A media buyer's checklist for deciding whether a health affiliate network is worth building on. Nine questions to ask, and the answers that should make you walk away."
 pubDate: 2026-09-16
+cover: blog-vet
 audience: partners
 tags: [affiliates, media buying, due diligence]
 faq:
