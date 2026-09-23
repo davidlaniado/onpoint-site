@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, NAV } from '../lib/site';
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const programs = (await getCollection('programs')).sort((a, b) => a.data.order - b.data.order);
+const jobs = await getCollection('jobs', ({ data }) => data.open);
+const cols = [
+  ['Pages', [['Home', '/'], ...NAV.map((n) => [n.label, n.path]), ['Contact', '/contact/'], ['Glossary', '/glossary/'], ['Terms of Use', '/terms/'], ['Privacy Policy', '/privacy/']]],
+  ['Programs', programs.map((p) => [p.data.title, `/programs/${p.id}/`])],
+  ['Articles', posts.map((p) => [p.data.title, `/blog/${p.id}/`])],
+  ['Open roles', jobs.map((j) => [j.data.title, `/careers/${j.id}/`])],
+] as const;
+---
+<Base title="Sitemap" description="Every page on onpointhealthmedia.com.">
+  <section class="container-x pt-14 md:pt-20">
+    <p class="eyebrow">Sitemap</p>
+    <h1 class="mt-4 text-4xl font-extrabold">Every page on this site.</h1>
+    <div class="mt-10 grid md:grid-cols-2 gap-10">
+      {cols.map(([title, items]) => (
+        <div>
+          <p class="mono-label mb-3">{title}</p>
+          <ul class="space-y-2">{items.map(([t, p]) => <li><a class="text-navy hover:text-teal-ink" href={href(p)}>{t}</a></li>)}</ul>
+        </div>
+      ))}
+    </div>
+    <p class="mt-10 text-sm text-mist">Machine-readable: <a class="underline" href={href('/sitemap-index.xml')}>XML sitemap</a> · <a class="underline" href={href('/llms.txt')}>llms.txt</a> · <a class="underline" href={href('/rss.xml')}>RSS</a></p>
+  </section>
+</Base>

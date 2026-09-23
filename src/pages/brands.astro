@@ -7,6 +7,9 @@ import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 import { href } from '../lib/site';
 import Photo from '../components/Photo.astro';
+import { getCollection } from 'astro:content';
+const programs = (await getCollection('programs')).filter((p) => p.data.group === 'brand').sort((a, b) => a.data.order - b.data.order);
+const verticalPrograms = (await getCollection('programs')).filter((p) => p.data.group === 'vertical').sort((a, b) => a.data.order - b.data.order);
 const faq = [
   { q: 'Who approves the health claims in my ads?', a: 'You do. Brands retain full ownership and approval authority over all health and medical claims. OnPoint reviews ads and funnels for advertising standards but does not create, modify, or substantiate clinical claims.' },
   { q: 'Can I see which partners are running my offer?', a: 'Yes. Attribution is visible at the partner and channel level. Only verified partners on approved channels and placements can run your offer.' },
@@ -66,6 +69,14 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="flex flex-wrap gap-3">
       {['Metabolic and weight management', 'Hormone optimization', 'Men’s wellness and preventive health', 'Dermatology, hair, and skin', 'Diagnostics and wellness subscriptions'].map((c) => (
         <span class="px-4 py-2 rounded-full border border-line text-navy font-medium text-sm reveal">{c}</span>
+      ))}
+    </div>
+  </Section>
+
+  <Section eyebrow="Programs" title="Brand-side programs" lead="Each page has the rules, the tracking setup, the payout structure, and an FAQ.">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {[...programs, ...verticalPrograms].map((p) => (
+        <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">{p.data.group === 'vertical' ? 'Vertical' : p.data.group === 'channel' ? 'Channel' : 'For brands'}</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>
       ))}
     </div>
   </Section>

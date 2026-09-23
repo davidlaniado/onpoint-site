@@ -33,8 +33,12 @@ const orgLd = {
     postalCode: SITE.address.postal,
     addressCountry: SITE.address.country,
   },
-  sameAs: [SITE.linkedin],
-  description: SITE.description,
+  sameAs: SITE.sameAs,
+  description: SITE.boilerplate,
+  foundingLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Wyckoff', addressRegion: 'NJ', addressCountry: 'US' } },
+  areaServed: 'US',
+  knowsAbout: SITE.knowsAbout,
+  contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', email: SITE.email, availableLanguage: ['English', 'Spanish'] }],
 };
 const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])];
 ---

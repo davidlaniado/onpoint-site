@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
   <div class="container-x py-12 md:py-16 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
     <div>
       <img src={href('/img/logo.png')} srcset={`${href('/img/logo-2x.png')} 2x`} alt="OnPoint Health Media & Tech" class="h-8 w-auto" width="720" height="195" loading="lazy" />
-      <p class="mt-4 text-[15px] text-slate max-w-sm leading-relaxed">A verified performance network for telehealth, wellness, and diagnostics brands. Built for regulated health categories.</p>
+      <p class="mt-4 text-[14px] text-slate max-w-md leading-relaxed">{SITE.boilerplate}</p>
       <p class="mt-4 text-sm text-mist">{SITE.address.street}<br />{SITE.address.city}, {SITE.address.region} {SITE.address.postal}</p>
     </div>
     <div>
@@ -22,6 +22,7 @@ const year = new Date().getFullYear();
         <li><a class="hover:text-teal-ink" href={href('/contact/?as=brand')}>Apply as a brand</a></li>
         <li><a class="hover:text-teal-ink" href={href('/contact/?as=partner')}>Apply as a partner</a></li>
         <li><a class="hover:text-teal-ink" href={href('/careers/')}>Open roles</a></li>
+        <li><a class="hover:text-teal-ink" href={href('/glossary/')}>Glossary</a></li>
         <li><a class="hover:text-teal-ink" href={SITE.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>
       </ul>
     </div>
@@ -31,6 +32,8 @@ const year = new Date().getFullYear();
         <li><a class="hover:text-teal-ink" href={href('/terms/')}>Terms of Use</a></li>
         <li><a class="hover:text-teal-ink" href={href('/privacy/')}>Privacy Policy</a></li>
         <li><a class="hover:text-teal-ink" href={`mailto:${SITE.legalEmail}`}>{SITE.legalEmail}</a></li>
+        <li><a class="hover:text-teal-ink" href={href('/sitemap/')}>Sitemap</a></li>
+        <li><a class="hover:text-teal-ink" href={href('/llms.txt')}>llms.txt</a></li>
       </ul>
     </div>
   </div>

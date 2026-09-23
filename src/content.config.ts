@@ -16,6 +16,25 @@ const blog = defineCollection({
       .default([]),
     draft: z.boolean().default(false),
     cover: z.string().optional(),
+    quickAnswer: z.string().optional(),
+    related: z.array(z.string()).default([]),
+  }),
+});
+
+const programs = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/programs' }),
+  schema: z.object({
+    title: z.string(),
+    h1: z.string(),
+    description: z.string(),
+    quickAnswer: z.string(),
+    audience: z.enum(['brands', 'partners', 'both']).default('both'),
+    group: z.enum(['vertical', 'channel', 'brand']),
+    cover: z.string().optional(),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    related: z.array(z.string()).default([]),
+    order: z.number().default(99),
+    updated: z.coerce.date(),
   }),
 });
 
@@ -35,4 +54,4 @@ const jobs = defineCollection({
   }),
 });
 
-export const collections = { blog, jobs };
+export const collections = { blog, jobs, programs };

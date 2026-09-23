@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import CTABand from '../components/CTABand.astro';
+import { SITE, href } from '../lib/site';
+const terms: [string, string][] = [
+  ['Affiliate network', 'A company that sits between advertisers (brands) and media partners (affiliates), providing offers, tracking, and payouts. OnPoint is a gated network built for regulated health categories.'],
+  ['Advertiser / brand', 'The company whose offer is being promoted. In telehealth, the brand operates the funnel and engages the licensed providers, and it owns every health claim.'],
+  ['Media partner / affiliate', 'A person or company that sends traffic to an offer and is paid on results. Includes Meta media buyers, search buyers, native buyers, and email and SMS publishers.'],
+  ['CPA (cost per action)', 'A fixed payout for each qualifying event, usually a paid first order. The most common structure for new telehealth offers.'],
+  ['Revenue share', 'A payout equal to a percentage of what the patient actually pays over time, including renewals. Requires tracking that covers rebills and refunds.'],
+  ['Hybrid payout', 'A reduced fixed payout on the first order plus a percentage of later payments. Common once retention data exists.'],
+  ['RPA (revenue per acquisition)', 'What the advertiser pays the network per approved acquisition. The affiliate payout is set below RPA. Network margin is the difference.'],
+  ['EPC (earnings per click)', 'Total earnings divided by total clicks. The number media partners use to compare offers.'],
+  ['Approved sale', 'A conversion that has passed the advertiser’s validation rules (charged, not refunded, not duplicate, not fraud) and is therefore payable.'],
+  ['Reversal', 'A previously credited conversion that is removed because of refund, chargeback, duplicate, or fraud. Good networks show the reason for every reversal.'],
+  ['Cap', 'The maximum number of payable conversions an advertiser will accept from a partner or the whole network in a period, usually daily.'],
+  ['Server-to-server (S2S) postback', 'A conversion signal sent from the advertiser’s server to the tracking platform when a sale happens, carrying the click ID. More reliable than a browser pixel for long telehealth funnels.'],
+  ['Click ID', 'A unique identifier created on every tracked click and stored with the order so the sale can be attributed back to the exact partner, ad, and channel.'],
+  ['Sub ID', 'Extra parameters a partner adds to a tracking link (campaign, ad, placement) so they can see performance at that level in reports.'],
+  ['Everflow', 'The partner tracking platform OnPoint runs on for offers, click IDs, postbacks, reporting, and payouts.'],
+  ['Claim set', 'The written list of statements a brand has approved for use in ads and landing pages for its offer, along with what is off limits. Every OnPoint offer ships with one.'],
+  ['Compliant traffic', 'Traffic from a disclosed and verified source, using only approved claims, landing on a brand-controlled funnel, with auditable tracking. All four must be true.'],
+  ['KYC (know your customer)', 'Identity and business verification. OnPoint applies it to both brands and partners before access is granted.'],
+  ['LegitScript', 'A third-party certification body that reviews merchants marketing prescription products. Ad platforms often require it for telehealth advertisers.'],
+  ['Quiz / intake', 'The medical questionnaire a patient completes before a licensed provider reviews their case. Quiz start rate and checkout rate are the key funnel diagnostics.'],
+  ['Cost per approved sale', 'Ad spend divided by approved, charged orders tracked server-side. The number that decides whether a telehealth campaign is working.'],
+  ['PHI (protected health information)', 'Individually identifiable health data covered by HIPAA. OnPoint does not collect, store, or process PHI; tracking runs on advertising and performance events only.'],
+];
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  name: 'Telehealth performance marketing glossary',
+  url: new URL(Astro.url.pathname, Astro.site).toString(),
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  hasDefinedTerm: terms.map(([t, d]) => ({ '@type': 'DefinedTerm', name: t, description: d, inDefinedTermSet: new URL(Astro.url.pathname, Astro.site).toString() })),
+};
+const slug = (t: string) => t.toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+---
+<Base title="Glossary: telehealth performance marketing terms" description="Plain-English definitions of the terms used in telehealth affiliate marketing: CPA, revenue share, RPA, EPC, S2S postback, click ID, claim set, compliant traffic, and more." jsonLd={ld}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-8 md:pt-24 md:pb-10 max-w-3xl">
+      <p class="eyebrow">Glossary</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">The words, <span class="text-teal-ink">defined plainly.</span></h1>
+      <p class="mt-6 text-lg text-slate leading-relaxed">Every term we use on this site and in our offer docs, in one place. If a network cannot define these for you, that tells you something.</p>
+    </div>
+  </section>
+  <section class="container-x mt-6">
+    <dl class="max-w-3xl divide-y divide-line border-y border-line">
+      {terms.map(([t, d]) => (
+        <div id={slug(t)} class="py-5 scroll-mt-24">
+          <dt class="font-display font-bold text-navy text-lg">{t}</dt>
+          <dd class="mt-1.5 text-slate leading-relaxed">{d}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="mt-8 text-slate">Want the longer version? Read the <a class="underline text-navy" href={href('/blog/')}>blog</a> or the <a class="underline text-navy" href={href('/programs/')}>program pages</a>.</p>
+  </section>
+  <div class="mt-16"><CTABand /></div>
+</Base>

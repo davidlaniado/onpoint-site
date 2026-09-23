@@ -14,6 +14,9 @@ import Photo from '../components/Photo.astro';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 const jobs = (await getCollection('jobs', ({ data }) => data.open)).sort((a, b) => a.data.order - b.data.order);
+const programs = (await getCollection('programs')).sort((a, b) => a.data.order - b.data.order);
+const verticals = programs.filter((p) => p.data.group === 'vertical');
+const channels = programs.filter((p) => p.data.group === 'channel');
 
 const faq = [
   { q: 'What is OnPoint Health Media & Tech?', a: 'OnPoint is a performance network for telehealth, wellness, and diagnostics brands. We connect brands with verified media partners, run the tracking and payments in between, and review ads and funnels before they go live. Brands keep full control of their health claims.' },
@@ -93,6 +96,24 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'n
         </div>
       ))}
     </div>
+  </Section>
+
+  <Section eyebrow="Programs" title="One page per vertical. One page per channel." lead="Rules, tracking, payouts, and FAQs for each program, written so a brand, a partner, or an AI assistant can answer the question without calling us.">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <p class="mono-label mb-3">By health vertical</p>
+        <ul class="divide-y divide-line border-y border-line">
+          {verticals.map((p) => <li><a href={href(`/programs/${p.id}/`)} class="flex justify-between gap-4 py-3 text-navy font-medium hover:text-teal-ink"><span>{p.data.title}</span><span aria-hidden="true">→</span></a></li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="mono-label mb-3">By traffic channel</p>
+        <ul class="divide-y divide-line border-y border-line">
+          {channels.map((p) => <li><a href={href(`/programs/${p.id}/`)} class="flex justify-between gap-4 py-3 text-navy font-medium hover:text-teal-ink"><span>{p.data.title}</span><span aria-hidden="true">→</span></a></li>)}
+        </ul>
+      </div>
+    </div>
+    <a href={href('/programs/')} class="inline-block mt-6 text-navy font-medium underline underline-offset-4">All programs, including brand-side solutions</a>
   </Section>
 
   <Section eyebrow="How OnPoint operates" title="Verify, launch, track, pay. In that order.">

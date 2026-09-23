@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import CTABand from '../../components/CTABand.astro';
+import { getCollection } from 'astro:content';
+import { href } from '../../lib/site';
+const all = (await getCollection('programs')).sort((a, b) => a.data.order - b.data.order);
+const groups = [
+  ['vertical', 'By health vertical', 'Offers and rules for each regulated health category we run.'],
+  ['channel', 'By traffic channel', 'What we accept, what converts, and what is off limits for each channel.'],
+  ['brand', 'For brands', 'How the network works from the advertiser side.'],
+] as const;
+---
+<Base title="Programs" description="Every OnPoint program in one place: telehealth affiliate programs by health vertical, by traffic channel, and brand-side solutions. Rules, tracking, payouts, and FAQs.">
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-8 md:pt-24 md:pb-10 max-w-3xl">
+      <p class="eyebrow">Programs</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Every program, <span class="text-teal-ink">one page each.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">Pick your vertical or your channel. Each page says what the offer is, who can run it, what the rules are, and how you get paid.</p>
+    </div>
+  </section>
+  {groups.map(([g, title, lead]) => (
+    <Section eyebrow={title} title={title} lead={lead} class="!py-10 md:!py-14">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {all.filter((p) => p.data.group === g).map((p) => (
+          <a href={href(`/programs/${p.id}/`)} class="card card-hover p-6 block reveal">
+            <h3 class="text-lg font-bold leading-snug">{p.data.title}</h3>
+            <p class="mt-2 text-sm text-slate leading-relaxed">{p.data.description}</p>
+            <p class="mt-4 text-sm font-medium text-teal-ink">Read →</p>
+          </a>
+        ))}
+      </div>
+    </Section>
+  ))}
+  <CTABand />
+</Base>

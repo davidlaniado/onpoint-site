@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABand from '../../components/CTABand.astro';
+import Photo from '../../components/Photo.astro';
+import { getCollection, render } from 'astro:content';
+import { href, SITE } from '../../lib/site';
+export async function getStaticPaths() {
+  const all = await getCollection('programs');
+  return all.map((p) => ({ params: { slug: p.id }, props: { page: p } }));
+}
+const { page } = Astro.props;
+const { Content } = await render(page);
+const d = page.data;
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const all = await getCollection('programs');
+const related = d.related.length ? all.filter((p) => d.related.includes(p.id)) : all.filter((p) => p.id !== page.id && p.data.group === d.group).slice(0, 4);
+const posts = (await getCollection('blog', ({ data }) => !data.draft && data.related.includes(page.id))).slice(0, 3);
+const audienceLabel = { brands: 'For brands', partners: 'For media partners', both: 'For brands and partners' }[d.audience];
+const ld = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: d.title,
+    description: d.description,
+    url,
+    dateModified: d.updated.toISOString().slice(0, 10),
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+    about: { '@type': 'Service', name: d.title, provider: { '@type': 'Organization', name: SITE.name, url: SITE.url }, serviceType: d.group === 'channel' ? 'Affiliate program for media partners' : 'Telehealth performance marketing', areaServed: 'US', audience: { '@type': 'Audience', audienceType: audienceLabel } },
+  },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Programs', item: SITE.url + '/programs/' },
+    { '@type': 'ListItem', position: 3, name: d.title, item: url },
+  ] },
+  ...(d.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
+];
+---
+<Base title={d.title} description={d.description} jsonLd={ld} ogImage={d.cover ? href(`/img/photos/${d.cover}.webp`) : undefined}>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="container-x relative pt-8 md:pt-14 pb-10 md:pb-14">
+      <nav class="text-sm text-mist" aria-label="Breadcrumb"><a href={href('/')} class="hover:text-navy">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-navy">Programs</a> <span aria-hidden="true">/</span> <span class="text-navy">{d.title}</span></nav>
+      <div class="mt-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
+        <div>
+          <p class="eyebrow">{audienceLabel}</p>
+          <h1 class="mt-4 text-[34px] sm:text-[44px] lg:text-[50px] leading-[1.08] font-extrabold" set:html={d.h1} />
+          <div class="mt-6 rounded-2xl bg-teal-soft border border-teal-line p-5 md:p-6"><p class="mono-label text-teal-ink mb-2">Quick answer</p><p class="text-navy text-[17px] leading-relaxed font-medium">{d.quickAnswer}</p></div>
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a href={href(`/contact/?as=${d.audience === 'brands' ? 'brand' : 'partner'}`)} class="btn btn-primary">{d.audience === 'brands' ? 'Apply as a brand' : 'Apply as a partner'} →</a>
+            <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
+          </div>
+        </div>
+        {d.cover && <div class="reveal rounded-3xl overflow-hidden aspect-[4/3]"><Photo name={d.cover} alt="" width="2000" height="1344" eager /></div>}
+      </div>
+    </div>
+  </section>
+  <article class="container-x mt-4 md:mt-8">
+    <div class="max-w-3xl">
+      <div class="prose-op"><Content /></div>
+      {d.faq.length > 0 && (
+        <section id="faq" class="mt-12 scroll-mt-24">
+          <h2 class="text-2xl font-extrabold mb-5">Frequently asked questions</h2>
+          <FAQ items={d.faq} />
+        </section>
+      )}
+      <p class="mt-8 text-xs text-mist">Last updated {d.updated.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}. {SITE.shortName} is a marketing platform, not a medical provider.</p>
+    </div>
+  </article>
+  {(related.length > 0 || posts.length > 0) && (
+    <section class="container-x mt-16">
+      <p class="eyebrow">Related</p>
+      <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {related.map((p) => <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block"><p class="mono-label mb-2">Program</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
+        {posts.map((p) => <a href={href(`/blog/${p.id}/`)} class="card card-hover p-5 block"><p class="mono-label mb-2">Article</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
+      </div>
+    </section>
+  )}
+  <div class="mt-16"><CTABand /></div>
+</Base>

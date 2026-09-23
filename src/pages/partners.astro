@@ -7,6 +7,9 @@ import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 import { href } from '../lib/site';
 import Photo from '../components/Photo.astro';
+import { getCollection } from 'astro:content';
+const programs = (await getCollection('programs')).filter((p) => p.data.group === 'channel').sort((a, b) => a.data.order - b.data.order);
+const verticalPrograms = (await getCollection('programs')).filter((p) => p.data.group === 'vertical').sort((a, b) => a.data.order - b.data.order);
 const faq = [
   { q: 'Who can join OnPoint as a partner?', a: 'Partners with verified identities, approved traffic sources, and a commitment to advertising standards. If you run clean traffic and want offers that last, you will like it here.' },
   { q: 'What types of offers are available?', a: 'Vetted telehealth, wellness, and diagnostics offers with clear claim rules, category standards, and defined operating requirements per offer.' },
@@ -78,6 +81,14 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
           <li>• Anyone looking for an open network with instant links. That is not what this is.</li>
         </ul>
       </div>
+    </div>
+  </Section>
+
+  <Section eyebrow="Programs" title="Programs by channel" lead="Each page has the rules, the tracking setup, the payout structure, and an FAQ.">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {[...programs, ...verticalPrograms].map((p) => (
+        <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">{p.data.group === 'vertical' ? 'Vertical' : p.data.group === 'channel' ? 'Channel' : 'For brands'}</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>
+      ))}
     </div>
   </Section>
 

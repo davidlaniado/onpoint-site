@@ -3,6 +3,8 @@ title: "Why telehealth brands should own every health claim in their affiliate p
 description: "The single rule that separates networks that last from networks that get brands shut down: the brand approves the claims, and nobody else writes them."
 pubDate: 2026-09-08
 cover: blog-claims
+quickAnswer: "The brand, not the network or the affiliate, is held responsible for every health claim made under its offer. So the brand should write and approve the claim set, partners should build inside it, and the network should enforce it without adding or changing claims."
+related: [compliant-traffic-for-telehealth-brands, telehealth-affiliate-network-for-brands]
 audience: brands
 tags: [claims, compliance, brand safety]
 faq:

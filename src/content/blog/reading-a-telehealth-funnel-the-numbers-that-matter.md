@@ -3,6 +3,8 @@ title: "Reading a telehealth funnel: the five numbers that actually matter"
 description: "Cost per click is noise. Here are the five metrics we watch daily on GLP-1, ED, and TRT funnels, the rough ranges we expect, and what each one tells you to fix."
 pubDate: 2026-09-03
 cover: blog-funnel
+quickAnswer: "The five numbers that matter in a telehealth funnel are quiz start rate, cost per quiz start, checkout rate, cost per approved sale, and checkout-to-sale rate. Cost per approved sale tracked server-side is the one that decides whether a campaign works; the rest tell you where it is leaking."
+related: [meta-media-buyers-telehealth-offers, everflow-tracking-for-telehealth-offers]
 audience: both
 tags: [media buying, funnel, metrics, optimization]
 faq:

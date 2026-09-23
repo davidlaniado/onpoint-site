@@ -3,6 +3,8 @@ title: "Server-to-server postback tracking, explained for telehealth offers"
 description: "Why browser pixels miss telehealth conversions, what a server-to-server postback does differently, and how to set one up so brands and partners see the same sale."
 pubDate: 2026-09-12
 cover: blog-postback
+quickAnswer: "A server-to-server postback is a conversion signal sent from the brand's server to the tracking platform when an order is charged, carrying the click ID from the original click. It credits sales that happen days later on another device, which browser pixels miss. It is how OnPoint attributes every telehealth conversion."
+related: [everflow-tracking-for-telehealth-offers, google-search-affiliates-telehealth-offers]
 audience: both
 tags: [tracking, postback, Everflow, attribution]
 faq:

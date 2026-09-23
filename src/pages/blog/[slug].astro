@@ -27,6 +27,7 @@ const ld: Record<string, unknown>[] = [{
 }];
 if (d.faq.length) ld.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
 const related = (await getCollection('blog', ({ data, id }) => !data.draft && id !== post.id)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+const relatedPrograms = d.related.length ? (await getCollection('programs')).filter((p) => d.related.includes(p.id)) : [];
 ---
 <Base title={d.title} description={d.description} type="article" jsonLd={ld} ogImage={d.cover ? href(`/img/photos/${d.cover}.webp`) : undefined}>
   <article class="container-x pt-10 md:pt-16">
@@ -37,11 +38,20 @@ const related = (await getCollection('blog', ({ data, id }) => !data.draft && id
       <p class="mt-5 text-lg md:text-xl text-slate leading-relaxed">{d.description}</p>
       {d.tags.length > 0 && <div class="mt-5 flex flex-wrap gap-2">{d.tags.map((t) => <span class="text-xs font-medium text-navy bg-paper border border-line px-2.5 py-1 rounded-full">{t}</span>)}</div>}
       {d.cover ? <div class="my-8 rounded-3xl overflow-hidden aspect-[16/9]"><Photo name={d.cover} alt="" width="2000" height="1120" eager /></div> : <hr class="my-8 border-line" />}
+      {d.quickAnswer && <div class="mb-8 rounded-2xl bg-teal-soft border border-teal-line p-5 md:p-6"><p class="mono-label text-teal-ink mb-2">Quick answer</p><p class="text-navy text-[17px] leading-relaxed font-medium">{d.quickAnswer}</p></div>}
       <div class="prose-op"><Content /></div>
       {d.faq.length > 0 && (
         <section class="mt-12">
           <h2 class="text-2xl font-extrabold mb-5">Quick answers</h2>
           <FAQ items={d.faq} />
+        </section>
+      )}
+      {relatedPrograms.length > 0 && (
+        <section class="mt-12">
+          <p class="mono-label mb-3">Related programs</p>
+          <ul class="grid sm:grid-cols-2 gap-3">
+            {relatedPrograms.map((p) => <li><a href={href(`/programs/${p.id}/`)} class="block card card-hover p-4 text-navy font-medium text-[15px]">{p.data.title} →</a></li>)}
+          </ul>
         </section>
       )}
     </div>
