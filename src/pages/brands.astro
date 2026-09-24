@@ -1,17 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import Section from '../components/Section.astro';
-import Feature from '../components/Feature.astro';
-import Steps from '../components/Steps.astro';
+import PageHero from '../components/PageHero.astro';
 import FAQ from '../components/FAQ.astro';
-import CTABand from '../components/CTABand.astro';
+import CTASimple from '../components/CTASimple.astro';
 import { href } from '../lib/site';
-import Cover from '../components/viz/Cover.astro';
-const spMods = import.meta.glob('../components/viz/StagePipeline.astro', { eager: true }) as Record<string, { default: any }>;
-const StagePipeline = Object.values(spMods)[0]?.default;
-import { getCollection } from 'astro:content';
-const programs = (await getCollection('programs')).filter((p) => p.data.group === 'brand').sort((a, b) => a.data.order - b.data.order);
-const verticalPrograms = (await getCollection('programs')).filter((p) => p.data.group === 'vertical').sort((a, b) => a.data.order - b.data.order);
 const faq = [
   { q: 'Who approves the health claims in my ads?', a: 'You do. Brands retain full ownership and approval authority over all health and medical claims. OnPoint reviews ads and funnels for advertising standards but does not create, modify, or substantiate clinical claims.' },
   { q: 'Can I see which partners are running my offer?', a: 'Yes. Attribution is visible at the partner and channel level. Only verified partners on approved channels and placements can run your offer.' },
@@ -22,70 +14,56 @@ const faq = [
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <Base title="For Brands" description="Scale telehealth patient acquisition through verified partners with full control of your claims, your tracking, and your payouts." jsonLd={faqLd}>
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
-    <div>
-      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">For brands</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Predictable acquisition, <span class="text-teal-ink">full control.</span></h1>
-      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">You keep ownership of your claims. Only verified partners run your offer. Attribution, funnel events, and payments are visible end to end. That is the deal.</p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
-        <a href={href('/contact/?as=brand')} class="btn btn-primary">Apply as a brand →</a>
-        <a href="#how" class="btn btn-ghost">See how it works</a>
+  <PageHero kicker="For brands" title="Scale through partners <span class='text-teal'>without losing control.</span>" lead="You keep ownership of your claims, your funnel, and your providers. Only verified partners run your offer, on the channels you allow. Attribution and payments are visible end to end." primary={['Apply as a brand', '/contact/?as=brand']} secondary={['See how it works', '#how']} pills={['Your claim set, enforced', 'Verified partners only', 'Paid on approved performance']} />
+
+  <section class="container-x pt-20 md:pt-28">
+    <p class="kicker">What you get</p>
+    <h2 class="h2 mt-3 max-w-3xl">Compliant scale, with the controls in your hands.</h2>
+    <div class="mt-10 grid md:grid-cols-2 gap-5">
+      <div class="panel-mint reveal">
+        <h3 class="text-2xl font-extrabold">You control</h3>
+        <ul class="checks mt-6">
+          <li>Every health claim. Ads and funnels are checked against your approved set before a dollar runs.</li>
+          <li>Which channels, placements, and partners are allowed on your offer.</li>
+          <li>The cap, the structure (CPA, revenue share, or hybrid), and the terms, all agreed before launch.</li>
+          <li>Partner approvals. Approve or remove any partner at any time.</li>
+        </ul>
       </div>
-    </div>
-    <div class="reveal">{StagePipeline ? <StagePipeline audience="brands" /> : <Cover kind="offer-controls" ratio="4/3" eager />}</div>
+      <div class="panel-navy reveal">
+        <h3 class="text-2xl font-extrabold text-white">OnPoint handles</h3>
+        <ul class="checks checks-light mt-6">
+          <li>Partner verification: identity, KYC, channel, and traffic source before access.</li>
+          <li>Creative and funnel review against your claim set, before launch and as partners add angles.</li>
+          <li>Server-side tracking through Everflow and Google Tag Manager, so you and the partner see the same sale.</li>
+          <li>Payout reconciliation, reversals with a reason, and partner support so your team is not fielding tracking questions at 11pm.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <Section eyebrow="What you get" title="Compliant scale without losing control.">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <Feature icon="check" title="Claims reviewed before launch">Ad and funnel structures are checked against health advertising standards before a single dollar runs. You approve the claims. We enforce the standard.</Feature>
-      <Feature icon="users" title="Verified partners only">Every partner clears identity, KYC, channel, and traffic source verification before they can see your offer, let alone run it.</Feature>
-      <Feature icon="chart" title="Attribution you can act on">Everflow, Google Tag Manager, and server-side events give you clear attribution across channels, devices, and funnel steps.</Feature>
-      <Feature icon="eye" title="Real-time reporting">Traffic, conversion events, payments, and funnel performance in one view, so scaling decisions are made on numbers, not vibes.</Feature>
-      <Feature icon="card" title="Payments and reconciliation">Payment processing, card tracking, reconciliation, and portability, tied directly to performance.</Feature>
-      <Feature icon="bolt" title="Operational support as you grow">Conversion rate optimization on key funnel stages, creative and asset management, and support as you add offers, volume, and markets.</Feature>
-    </div>
-  </Section>
-
-  <Section id="how" eyebrow="How it works" title="Nine steps from intake to scale.">
-    <div class="grid lg:grid-cols-2 gap-6">
-      <Steps label="Before launch" steps={[
-        'Business, credential, and compliance verification.',
-        'Offer intake, health claims review, and commercial terms agreed (CPA, revenue share, or hybrid).',
-        'Funnel, creative, and conversion structure review.',
-        'Tracking, events, attribution, and payment logic set up.',
-      ]} />
-      <Steps label="After launch" steps={[
-        'Launch with verified partners on approved channels only.',
-        'Ongoing performance reporting and decision-grade analytics.',
-        'Conversion rate optimization on key funnel stages.',
-        'Content and asset management for active offers.',
-        'Payment processing, card tracking, and reconciliation.',
-      ]} />
-    </div>
-  </Section>
-
-  <Section eyebrow="Categories" title="Offers we support">
-    <div class="flex flex-wrap gap-3">
-      {['Metabolic and weight management', 'Hormone optimization', 'Men’s wellness and preventive health', 'Dermatology, hair, and skin', 'Diagnostics and wellness subscriptions'].map((c) => (
-        <span class="px-4 py-2 rounded-full border border-line text-navy font-medium text-sm reveal">{c}</span>
+  <section id="how" class="container-x pt-20 md:pt-28 text-center scroll-mt-24">
+    <h2 class="h2">From intake to scale.</h2>
+    <p class="lead mx-auto mt-4">Nothing runs before step four.</p>
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6">
+      {[
+        ['Verification', 'Business, credential, and compliance review.'],
+        ['Offer intake', 'Your claim set, allowed channels, landing pages, and commercial terms, agreed in writing.'],
+        ['Funnel and creative review', 'Entry points and approved creative structures checked against advertising standards.'],
+        ['Tracking setup', 'Click ID through your funnel, server-to-server postback on the charge, reversal events on refunds. Tested before spend.'],
+        ['Launch', 'Verified partners on approved channels only.'],
+        ['Report and optimize', 'Partner-level attribution, funnel events, conversion rate optimization, and support as you add offers and markets.'],
+      ].map(([t, d], i) => (
+        <div class="reveal"><span class="step-circle">{i + 1}</span><h3 class="mt-4 text-xl font-bold">{t}</h3><p class="mt-2 text-[15px] text-slate leading-relaxed max-w-xs mx-auto">{d}</p></div>
       ))}
     </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Programs" title="Brand-side programs" lead="Each page has the rules, the tracking setup, the payout structure, and an FAQ.">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {[...programs, ...verticalPrograms].map((p) => (
-        <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">{p.data.group === 'vertical' ? 'Vertical' : p.data.group === 'channel' ? 'Channel' : 'For brands'}</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>
-      ))}
+  <section class="container-x pt-20 md:pt-28">
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10">
+      <div><h2 class="h2">Questions brands ask first.</h2><p class="lead mt-4">Straight answers. The longer versions are on the program pages.</p></div>
+      <FAQ items={faq} />
     </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Brand FAQ" title="Questions brands ask first.">
-    <FAQ items={faq} />
-  </Section>
-
-  <CTABand title="Bring us your offer." lead="Tell us the category, the funnel, and where you are stuck. We will tell you honestly whether we can help." />
+  <CTASimple title="Bring us your program." lead="Tell us the category, the funnel, and where you are stuck. We will tell you honestly whether we can help." primary={['Book a call', '/contact/?as=brand']} secondary={undefined} />
 </Base>

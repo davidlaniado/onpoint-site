@@ -14,13 +14,17 @@ const faq = [
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 
-const verticals = [
-  ['glp-1-weight-loss-affiliate-program', 'GLP-1 weight loss', '<path d="M4 20h16"/><path d="M6 20V9a6 6 0 0112 0v11"/><path d="M9 20v-6h6v6"/>'],
-  ['trt-testosterone-affiliate-program', 'TRT', '<circle cx="9" cy="14" r="5"/><path d="M12.5 10.5L20 3"/><path d="M15 3h5v5"/>'],
-  ['ed-telehealth-affiliate-program', 'ED', '<path d="M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10z"/>'],
-  ['hair-loss-telehealth-affiliate-program', 'Hair loss', '<path d="M4 14c2-6 6-9 8-9s6 3 8 9"/><path d="M6 14v6M10 12v8M14 12v8M18 14v6"/>'],
-  ['womens-hormone-health-affiliate-program', "Women's hormone health", '<circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/>'],
-  ['at-home-diagnostics-affiliate-program', 'At-home diagnostics', '<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/>'],
+const categories = [
+  ['Weight management', '<path d="M4 20h16"/><path d="M6 20V9a6 6 0 0112 0v11"/><path d="M9 20v-6h6v6"/>'],
+  ['Hormones and TRT', '<circle cx="9" cy="14" r="5"/><path d="M12.5 10.5L20 3"/><path d="M15 3h5v5"/>'],
+  ['Sexual health', '<path d="M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10z"/>'],
+  ['Hair and skin', '<path d="M4 14c2-6 6-9 8-9s6 3 8 9"/><path d="M6 14v6M10 12v8M14 12v8M18 14v6"/>'],
+  ["Women's health", '<circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/>'],
+  ['Diagnostics and labs', '<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/>'],
+  ['Peptides and longevity', '<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>'],
+  ['Sleep and mental health', '<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/>'],
+  ['Supplements', '<rect x="4" y="7" width="16" height="10" rx="5" transform="rotate(-30 12 12)"/><path d="M8.5 15.5l7-7"/>'],
+  ['Preventive care', '<path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/>'],
 ];
 
 const compare = [
@@ -37,7 +41,7 @@ const compare = [
 <Base title="OnPoint Health Media & Tech | Built to take telehealth brands from $1M to $100M" description={SITE.description} jsonLd={faqLd}>
 
   <!-- HERO -->
-  <section class="hero-navy text-white">
+  <section id="contact" class="hero-navy text-white">
     <div class="container-x py-14 md:py-20 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
       <div>
         <p class="text-teal font-semibold text-sm md:text-[15px]" data-hero style="opacity:0;transform:translateY(16px)">Performance network with a compliance arm</p>
@@ -74,16 +78,17 @@ const compare = [
   <!-- CATEGORIES -->
   <section class="container-x pt-20 md:pt-28 text-center">
     <p class="kicker">Where we work</p>
-    <h2 class="h2 mt-3 max-w-3xl mx-auto">Six regulated categories. One standard.</h2>
-    <p class="lead mx-auto mt-4">Each program page has the payable event, the allowed channels, and the claim rules.</p>
-    <div class="mt-10 grid grid-cols-3 md:grid-cols-6 gap-5 md:gap-6 max-w-4xl mx-auto">
-      {verticals.map(([slug, name, icon]) => (
-        <a href={href(`/programs/${slug}/`)} class="group flex flex-col items-center gap-3 reveal">
+    <h2 class="h2 mt-3 max-w-3xl mx-auto">Every regulated health category.</h2>
+    <p class="lead mx-auto mt-4">If a licensed provider prescribes it or a lab tests it, we run it. These are the ones live today.</p>
+    <div class="mt-10 grid grid-cols-3 sm:grid-cols-5 gap-5 md:gap-6 max-w-5xl mx-auto">
+      {categories.map(([name, icon]) => (
+        <div class="flex flex-col items-center gap-3 reveal">
           <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icon} /></span>
-          <span class="text-[15px] font-semibold text-navy leading-tight text-center group-hover:text-teal-ink">{name}</span>
-        </a>
+          <span class="text-[15px] font-semibold text-navy leading-tight text-center">{name}</span>
+        </div>
       ))}
     </div>
+    <p class="mt-8 text-slate">Something else? <a href="#contact" class="text-teal-ink font-semibold underline underline-offset-4">Ask us.</a> If it is regulated and it converts, it probably fits.</p>
   </section>
 
   <!-- TWO SIDES -->

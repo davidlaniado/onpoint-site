@@ -1,17 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import Section from '../components/Section.astro';
-import Feature from '../components/Feature.astro';
-import Steps from '../components/Steps.astro';
+import PageHero from '../components/PageHero.astro';
 import FAQ from '../components/FAQ.astro';
-import CTABand from '../components/CTABand.astro';
+import CTASimple from '../components/CTASimple.astro';
 import { href } from '../lib/site';
-import Cover from '../components/viz/Cover.astro';
-const spMods = import.meta.glob('../components/viz/StagePipeline.astro', { eager: true }) as Record<string, { default: any }>;
-const StagePipeline = Object.values(spMods)[0]?.default;
-import { getCollection } from 'astro:content';
-const programs = (await getCollection('programs')).filter((p) => p.data.group === 'channel').sort((a, b) => a.data.order - b.data.order);
-const verticalPrograms = (await getCollection('programs')).filter((p) => p.data.group === 'vertical').sort((a, b) => a.data.order - b.data.order);
 const faq = [
   { q: 'Who can join OnPoint as a partner?', a: 'Partners with verified identities, approved traffic sources, and a commitment to advertising standards. If you run clean traffic and want offers that last, you will like it here.' },
   { q: 'What types of offers are available?', a: 'Vetted telehealth, wellness, and diagnostics offers with clear claim rules, category standards, and defined operating requirements per offer.' },
@@ -23,80 +15,69 @@ const faq = [
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <Base title="For Media Partners" description="Premium telehealth, wellness, and diagnostics offers with clear rules, full attribution, and payouts you can audit. Built for partners who run clean traffic." jsonLd={faqLd}>
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
-    <div>
-      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">For media partners</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Premium health offers <span class="text-teal-ink">built to last.</span></h1>
-      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">Exclusive telehealth offers with clear rules, real tracking, and payouts you can check. A governed environment built for regulated health categories, so the offers you scale today are still here next quarter.</p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
-        <a href={href('/contact/?as=partner')} class="btn btn-primary">Apply as a partner →</a>
-        <a href="#how" class="btn btn-ghost">See how it works</a>
+  <PageHero kicker="For media partners" title="Exclusive health offers that <span class='text-teal'>pay and stay.</span>" lead="Telehealth offers with clear claim rules, server-side tracking, and payouts you can check. A gated network, so the offer you scale today is still here next quarter." primary={['Apply as a partner', '/contact/?as=partner']} secondary={['See how it works', '#how']} pills={['Claim rules per offer', 'One tracking link, S2S postbacks', 'Reversals explained']} />
+
+  <section class="container-x pt-20 md:pt-28">
+    <p class="kicker">What you get</p>
+    <h2 class="h2 mt-3 max-w-3xl">Offers worth building on.</h2>
+    <div class="mt-10 grid md:grid-cols-2 gap-5">
+      <div class="panel-navy reveal">
+        <h3 class="text-2xl font-extrabold text-white">On every offer</h3>
+        <ul class="checks checks-light mt-6">
+          <li>A brand that has cleared business and compliance verification. No mystery advertisers.</li>
+          <li>The approved claim set and the off-limits list, before you build a single creative.</li>
+          <li>Approved landing pages, and pre-sell pages where the offer supports them.</li>
+          <li>Server-side postbacks on the charged order, funnel events in reporting, and sub IDs down to the ad.</li>
+        </ul>
       </div>
-    </div>
-    <div class="reveal">{StagePipeline ? <StagePipeline audience="partners" /> : <Cover kind="channel-rules" ratio="4/3" eager />}</div>
+      <div class="panel-mint reveal">
+        <h3 class="text-2xl font-extrabold">How you get paid</h3>
+        <ul class="checks mt-6">
+          <li>On approved performance, under terms agreed before launch. CPA, revenue share, or hybrid by offer.</li>
+          <li>Reversals shown with a reason: refund, chargeback, duplicate, or fraud.</li>
+          <li>The same conversion log the brand sees. No "our numbers do not match" conversation.</li>
+          <li>Caps that grow as quality holds, and a partner team that buys media itself.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <Section eyebrow="What you get" title="Offers worth building on.">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <Feature icon="shield" title="Vetted offers">Telehealth, wellness, and diagnostics brands that have cleared business and compliance verification. No mystery advertisers.</Feature>
-      <Feature icon="check" title="Clear claim rules">Category standards and claim rules defined per offer, so you know what you can say before you build a single creative.</Feature>
-      <Feature icon="chart" title="Accurate attribution">S2S tracking and platform-level reporting. Your numbers and the brand's numbers come from the same events.</Feature>
-      <Feature icon="card" title="Auditable payouts">Paid on approved performance under terms agreed before launch. CPA, revenue share, or hybrid depending on the offer.</Feature>
-      <Feature icon="bolt" title="Live launch support">Real answers on creative, tracking, or compliance questions, fast. Optimization guidance from people who buy media themselves.</Feature>
-      <Feature icon="route" title="Approved creative structures">Access to ad and funnel structures already reviewed for health categories, so you start from what works.</Feature>
-    </div>
-  </Section>
-
-  <Section id="how" eyebrow="How it works" title="Six steps from application to scale.">
-    <div class="grid lg:grid-cols-2 gap-6">
-      <Steps label="Getting in" steps={[
-        'Identity, KYC, and traffic source verification.',
-        'Channel and placement approval for quality and compliance.',
-        'Access to approved creative structures, offer rules, and defined CPA or revenue share terms.',
-      ]} />
-      <Steps label="Running" steps={[
-        'Launch support and ongoing optimization guidance.',
-        'Transparent tracking, reporting, and payouts on approved performance.',
-        'Continuous monitoring for quality, compliance, and performance.',
-      ]} />
-    </div>
-  </Section>
-
-  <Section eyebrow="Fit check" title="Is OnPoint right for you?">
-    <div class="grid md:grid-cols-2 gap-5">
-      <div class="card p-7 reveal">
-        <p class="mono-label text-teal-ink">Good fit</p>
-        <ul class="mt-4 space-y-2 text-[15px] text-slate">
-          <li>• You buy media on Meta, search, native, email, or SMS and can show where traffic comes from.</li>
-          <li>• You want health offers with long payout stability, not a cap that disappears next week.</li>
-          <li>• You are fine with claim rules because you would rather scale for a year than burn out in a month.</li>
-        </ul>
-      </div>
-      <div class="card p-7 reveal">
-        <p class="mono-label">Not a fit</p>
-        <ul class="mt-4 space-y-2 text-[15px] text-slate">
-          <li>• Undisclosed traffic sources or borrowed accounts.</li>
-          <li>• Creative that makes medical claims the brand has not approved.</li>
-          <li>• Anyone looking for an open network with instant links. That is not what this is.</li>
-        </ul>
-      </div>
-    </div>
-  </Section>
-
-  <Section eyebrow="Programs" title="Programs by channel" lead="Each page has the rules, the tracking setup, the payout structure, and an FAQ.">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {[...programs, ...verticalPrograms].map((p) => (
-        <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">{p.data.group === 'vertical' ? 'Vertical' : p.data.group === 'channel' ? 'Channel' : 'For brands'}</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>
+  <section id="how" class="container-x pt-20 md:pt-28 text-center scroll-mt-24">
+    <h2 class="h2">Live in four steps.</h2>
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
+      {[
+        ['Apply', 'Identity, KYC, and traffic source verification.'],
+        ['Get approved', 'Channels and placements approved for quality and compliance.'],
+        ['Go live', 'Tracking links, the claim set, and a test conversion confirmed before spend.'],
+        ['Scale', 'Optimization guidance, transparent reporting, and payouts on approved performance.'],
+      ].map(([t, d], i) => (
+        <div class="reveal"><span class="step-circle">{i + 1}</span><h3 class="mt-4 text-xl font-bold">{t}</h3><p class="mt-2 text-[15px] text-slate leading-relaxed max-w-xs mx-auto">{d}</p></div>
       ))}
     </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Partner FAQ" title="Questions partners ask first.">
-    <FAQ items={faq} />
-  </Section>
+  <section class="container-x pt-20 md:pt-28">
+    <h2 class="h2 text-center">Is OnPoint right for you?</h2>
+    <div class="mt-10 grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+      <div class="panel-mint reveal"><h3 class="text-xl font-extrabold">Good fit</h3><ul class="checks mt-5">
+        <li>You buy on Meta, search, native, email, or SMS and can show where the traffic comes from.</li>
+        <li>You want offers with stable payouts, not a cap that disappears next week.</li>
+        <li>You are fine with claim rules because you would rather scale for a year than burn out in a month.</li>
+      </ul></div>
+      <div class="rounded-[28px] border border-line p-8 md:p-11 reveal"><h3 class="text-xl font-extrabold">Not a fit</h3><ul class="mt-5 space-y-3 text-[16px] text-slate">
+        <li class="flex gap-3"><span class="text-mist">✕</span>Undisclosed traffic sources or borrowed accounts.</li>
+        <li class="flex gap-3"><span class="text-mist">✕</span>Creative that makes claims the brand has not approved.</li>
+        <li class="flex gap-3"><span class="text-mist">✕</span>Anyone looking for an open network with instant links.</li>
+      </ul></div>
+    </div>
+  </section>
 
-  <CTABand title="Run offers that last." lead="Tell us what you buy, where it comes from, and what you are looking for. We will reply with what we have." />
+  <section class="container-x pt-20 md:pt-28">
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10">
+      <div><h2 class="h2">Questions partners ask first.</h2><p class="lead mt-4">Straight answers. The longer versions are on the program pages.</p></div>
+      <FAQ items={faq} />
+    </div>
+  </section>
+
+  <CTASimple title="Run offers that last." lead="Tell us what you buy, where it comes from, and what you are looking for. We will reply with what we have." primary={['Apply as a partner', '/contact/?as=partner']} secondary={undefined} />
 </Base>

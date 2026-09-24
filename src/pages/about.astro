@@ -1,11 +1,8 @@
 ---
-import '../styles/pages.css';
 import Base from '../layouts/Base.astro';
-import Section from '../components/Section.astro';
-import CTABand from '../components/CTABand.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASimple from '../components/CTASimple.astro';
 import { href } from '../lib/site';
-import NetworkMap from '../components/viz/NetworkMap.astro';
-import TrackRecord from '../components/viz/TrackRecord.astro';
 const values = [
   ['Verify first', 'Nothing runs until both sides are checked. It is slower on day one and faster every day after.'],
   ['Numbers settle arguments', 'Same tracking, same events, same report for the brand and the partner. If it is not in the data, it did not happen.'],
@@ -16,85 +13,49 @@ const values = [
 ];
 ---
 <Base title="About" description="OnPoint is a founder-led performance network for telehealth brands, built by operators who have driven over $1 billion in revenue for the brands they have scaled.">
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 max-w-3xl">
-      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">About OnPoint</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Operators first. <span class="text-teal-ink">Network second.</span></h1>
-      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">OnPoint was built by people who buy media, build funnels, and read the numbers every morning. We started it because health acquisition needed a network that takes the rules as seriously as the results.</p>
-    </div>
-    <div class="container-x relative pb-4"><div class="reveal max-w-4xl"><NetworkMap /></div></div>
-  </section>
+  <PageHero kicker="About OnPoint" title="Operators first. <span class='text-teal'>Network second.</span>" lead="OnPoint was built by people who buy media, build funnels, and read the numbers every morning. We started it because health acquisition needed a network that takes the rules as seriously as the results." narrow />
 
-  <Section eyebrow="Who we are" title="A small team with a long track record.">
-    <div class="grid lg:grid-cols-[1.2fr_1fr] gap-8 items-start">
-      <div class="prose-op reveal">
-        <p>OnPoint Health Media & Tech is a performance platform for telehealth patient acquisition. We connect brands in metabolic health, hormone optimization, men's wellness, dermatology, and diagnostics with verified media partners, and we run the tracking, review, and payments in between.</p>
-        <p>Before OnPoint, our founders built one of the largest performance marketing companies in the world: hundreds of team members across seven global offices, and over $1 billion in revenue driven for the brands they scaled. OnPoint is their next chapter, and it runs the same way. Small, senior, founder-led, and measured on results.</p>
-        <p>We are also advertisers ourselves. We run our own telehealth campaigns every day, so when we tell a partner what converts or tell a brand what their funnel is leaking, it comes from live experience, not a slide deck.</p>
-        <p>Our founders are members of the American Telemedicine Association. OnPoint operates with the same expectation of responsibility, transparency, and advertiser control.</p>
-      </div>
-      <div class="grid gap-4">
-        {([
-          ['$1B+', 'revenue driven for brands our founders have scaled', 1, '$', 'B+'],
-          ['7', 'global offices built at their last company', 7, '', ''],
-          ['Hundreds', 'of team members led before OnPoint'],
-          ['5', 'regulated health categories supported today', 5, '', ''],
-        ] as [string, string, number?, string?, string?][]).map(([n, l, c, pre, suf]) => (
-          <div class="card card-hover p-5 reveal">
-            <p class="font-display text-3xl font-extrabold text-navy" data-count={c} data-prefix={pre} data-suffix={suf}>{n}</p>
-            <p class="mt-1 text-sm text-slate">{l}</p>
-          </div>
+  <section class="container-x -mt-8 md:-mt-10 relative z-10">
+    <div class="stat-band reveal">
+      <p class="stat-title">A small team with a long track record</p>
+      <div class="stat-grid">
+        {[['$1B+', 'revenue driven for the brands our founders scaled'], ['7', 'global offices built at their last company'], ['Hundreds', 'of team members led before OnPoint'], ['ATA', 'American Telemedicine Association members']].map(([n, l]) => (
+          <div><p class="stat-n">{n}</p><p class="stat-l">{l}</p></div>
         ))}
       </div>
     </div>
-    <div class="mt-8 reveal"><TrackRecord /></div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Leadership" title="Three founders. Three lanes.">
-    <div class="grid md:grid-cols-3 gap-5">
-      {[
-        ['Chief Executive Officer', 'Deal flow and advertiser relationships. Brings the offers in and keeps both sides aligned on terms.'],
-        ['President', 'Technology, payments, and marketing infrastructure. Owns tracking, processing, and the systems everything runs on.'],
-        ['Chief Growth Officer', 'Media buying and creative. Runs the campaigns, the creative engine, and the daily kill and scale calls.'],
-      ].map(([t, d]) => (
-        <div class="card card-hover p-6 reveal leader-card">
-          <div class="w-12 h-12 rounded-full bg-teal-soft flex items-center justify-center text-teal-ink font-display font-bold">OP</div>
-          <p class="mt-4 font-display font-bold text-navy">{t}</p>
-          <p class="mt-2 text-sm text-slate leading-relaxed">{d}</p>
-        </div>
-      ))}
+  <section class="container-x pt-20 md:pt-28">
+    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+      <div class="prose-op">
+        <p class="kicker not-prose">Who we are</p>
+        <h2 class="h2 mt-3 !mb-6">Built by people who run this every day.</h2>
+        <p>OnPoint Health Media & Tech is a performance platform for telehealth patient acquisition. We connect brands in metabolic health, hormone optimization, men's wellness, dermatology, and diagnostics with verified media partners, and we run the tracking, review, and payments in between.</p>
+        <p>Before OnPoint, our founders built one of the largest performance marketing companies in the world: hundreds of team members across seven global offices, and over $1 billion in revenue driven for the brands they scaled. OnPoint is their next chapter, and it runs the same way. Small, senior, founder-led, and measured on results.</p>
+        <p>We are also advertisers ourselves. We run our own telehealth campaigns every day, so when we tell a partner what converts or tell a brand what their funnel is leaking, it comes from live experience, not a slide deck.</p>
+      </div>
+      <div class="panel-navy reveal">
+        <h3 class="text-2xl font-extrabold text-white">Three founders. Three lanes.</h3>
+        <ul class="checks checks-light mt-6">
+          <li><b>Chief Executive Officer.</b> Deal flow and advertiser relationships. Brings the offers in and keeps both sides aligned on terms.</li>
+          <li><b>President.</b> Technology, payments, and marketing infrastructure. Owns tracking, processing, and the systems everything runs on.</li>
+          <li><b>Chief Growth Officer.</b> Media buying and creative. Runs the campaigns, the creative engine, and the daily kill and scale calls.</li>
+        </ul>
+        <a href="https://www.linkedin.com/company/onpoint-health-media" target="_blank" rel="noopener" class="btn btn-teal mt-8">Find us on LinkedIn</a>
+      </div>
     </div>
-    <p class="mt-5 text-sm text-mist">Find the team on <a class="underline" href="https://www.linkedin.com/company/onpoint-health-media" target="_blank" rel="noopener">LinkedIn</a>.</p>
-  </Section>
+  </section>
 
-  <Section eyebrow="How we work" title="Written for how we actually operate.">
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <section class="container-x pt-20 md:pt-28">
+    <p class="kicker text-center">How we work</p>
+    <h2 class="h2 mt-3 text-center">Written for how we actually operate.</h2>
+    <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {values.map(([t, d]) => (
-        <div class="card card-hover p-6 reveal">
-          <p class="font-display font-bold text-navy text-lg">{t}</p>
-          <p class="mt-2 text-[15px] text-slate leading-relaxed">{d}</p>
-        </div>
+        <div class="rounded-[24px] bg-paper p-7 reveal"><h3 class="text-lg font-bold">{t}</h3><p class="mt-2 text-[15px] text-slate leading-relaxed">{d}</p></div>
       ))}
     </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Reach us" title="Based in the New York metro. Partners everywhere.">
-    <div class="max-w-3xl">
-    <div class="card p-6 md:p-8 reveal grid sm:grid-cols-2 gap-6 content-center">
-      <div>
-        <p class="mono-label">Company</p>
-        <p class="mt-2 text-navy font-medium">OnPoint Health Media and Tech, Inc.</p>
-        <p class="text-slate">New York metro, United States</p>
-      </div>
-      <div>
-        <p class="mono-label">Reach us</p>
-        <p class="mt-2 text-slate">Brands, partners, and candidates: <a class="underline text-navy" href={href('/contact/')}>contact page</a>.</p>
-        <p class="mt-1 text-slate">Legal: <a class="underline text-navy" href="mailto:accounts@onpointhealthmedia.com">accounts@onpointhealthmedia.com</a></p>
-      </div>
-    </div>
-    </div>
-  </Section>
-
-  <CTABand />
+  <CTASimple />
 </Base>

@@ -1,9 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import FAQ from '../../components/FAQ.astro';
-import CTABand from '../../components/CTABand.astro';
-import Cover from '../../components/viz/Cover.astro';
-import AfterYouApply from '../../components/viz/AfterYouApply.astro';
+import CTASimple from '../../components/CTASimple.astro';
 import { getCollection, render } from 'astro:content';
 import { href, SITE } from '../../lib/site';
 export async function getStaticPaths() {
@@ -39,48 +37,38 @@ const ld = [
 ];
 ---
 <Base title={d.title} description={d.description} jsonLd={ld}>
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="container-x relative pt-8 md:pt-14 pb-10 md:pb-14">
-      <nav class="text-sm text-mist" aria-label="Breadcrumb" data-hero style="opacity:0;transform:translateY(16px)"><a href={href('/')} class="hover:text-navy">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-navy">Programs</a> <span aria-hidden="true">/</span> <span class="text-navy">{d.title}</span></nav>
-      <div class="mt-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
-        <div>
-          <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">{audienceLabel}</p>
-          <h1 class="mt-4 text-[34px] sm:text-[44px] lg:text-[50px] leading-[1.08] font-extrabold" data-split data-hero-title set:html={d.h1} />
-          <div class="mt-6 rounded-2xl bg-teal-soft border border-teal-line p-5 md:p-6 quick-answer" data-hero style="opacity:0;transform:translateY(16px)"><p class="mono-label text-teal-ink mb-2">Quick answer</p><p class="text-navy text-[17px] leading-relaxed font-medium">{d.quickAnswer}</p></div>
-          <div class="mt-6 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
-            <a href={href(`/contact/?as=${d.audience === 'brands' ? 'brand' : 'partner'}`)} class="btn btn-primary">{d.audience === 'brands' ? 'Apply as a brand' : 'Apply as a partner'} →</a>
-            <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
-          </div>
-        </div>
-        {d.cover && <div data-hero style="opacity:0;transform:translateY(16px)"><Cover kind={d.cover as any} ratio="4/3" subject={subject} eager /></div>}
+  <section class="hero-navy text-white">
+    <div class="container-x py-12 md:py-16">
+      <nav class="text-sm text-white/60" aria-label="Breadcrumb"><a href={href('/')} class="hover:text-white">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-white">Programs</a> <span aria-hidden="true">/</span> <span class="text-white">{d.title}</span></nav>
+      <p class="mt-6 text-teal font-semibold text-sm md:text-[15px]">{audienceLabel}</p>
+      <h1 class="mt-3 text-white text-[34px] sm:text-[44px] lg:text-[52px] leading-[1.06] font-extrabold tracking-[-0.02em] max-w-4xl" set:html={d.h1.replace(/text-teal-ink/g, 'text-teal')} />
+      <div class="mt-8 max-w-3xl rounded-[20px] bg-white/10 border border-white/15 p-5 md:p-6"><p class="text-teal font-semibold text-sm mb-1">Quick answer</p><p class="text-white/90 text-[17px] leading-relaxed">{d.quickAnswer}</p></div>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <a href={href(`/contact/?as=${d.audience === 'brands' ? 'brand' : 'partner'}`)} class="btn btn-teal">{d.audience === 'brands' ? 'Apply as a brand' : 'Apply as a partner'}</a>
+        <a href="#faq" class="btn bg-white/10 text-white border border-white/25 hover:bg-white/15">Read the FAQ</a>
       </div>
     </div>
   </section>
-  <article class="container-x mt-4 md:mt-8">
+  <article class="container-x pt-14 md:pt-20">
     <div class="max-w-3xl">
       <div class="prose-op"><Content /></div>
       {d.faq.length > 0 && (
-        <section id="faq" class="mt-12 scroll-mt-24 reveal">
-          <h2 class="text-2xl font-extrabold mb-5">Frequently asked questions</h2>
+        <section id="faq" class="mt-14 scroll-mt-24">
+          <h2 class="h2 !text-[30px] mb-5">Frequently asked questions</h2>
           <FAQ items={d.faq} />
         </section>
       )}
       <p class="mt-8 text-xs text-mist">Last updated {d.updated.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}. {SITE.shortName} is a marketing platform, not a medical provider.</p>
     </div>
   </article>
-  <section class="container-x mt-16">
-    <p class="eyebrow reveal">What happens after you apply</p>
-    <div class="mt-5"><AfterYouApply audience={d.audience} /></div>
-  </section>
   {(related.length > 0 || posts.length > 0) && (
-    <section class="container-x mt-16">
-      <p class="eyebrow reveal">Related</p>
+    <section class="container-x pt-16 md:pt-20">
+      <p class="kicker">Related</p>
       <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {related.map((p) => <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">Program</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
-        {posts.map((p) => <a href={href(`/blog/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">Article</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
+        {related.map((p) => <a href={href(`/programs/${p.id}/`)} class="rounded-[20px] border border-line p-5 block hover:border-teal transition-colors"><p class="text-xs text-mist mb-2">Program</p><p class="font-bold text-navy leading-snug">{p.data.title}</p></a>)}
+        {posts.map((p) => <a href={href(`/blog/${p.id}/`)} class="rounded-[20px] border border-line p-5 block hover:border-teal transition-colors"><p class="text-xs text-mist mb-2">Article</p><p class="font-bold text-navy leading-snug">{p.data.title}</p></a>)}
       </div>
     </section>
   )}
-  <div class="mt-16"><CTABand /></div>
+  <CTASimple />
 </Base>

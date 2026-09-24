@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import CTABand from '../components/CTABand.astro';
+import CTASimple from '../components/CTASimple.astro';
+import PageHero from '../components/PageHero.astro';
 import { SITE, href } from '../lib/site';
 const terms: [string, string][] = [
   ['Affiliate network', 'A company that sits between advertisers (brands) and media partners (affiliates), providing offers, tracking, and payouts. OnPoint is a gated network built for regulated health categories.'],
@@ -37,15 +38,8 @@ const ld = {
 const slug = (t: string) => t.toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
 <Base title="Glossary: telehealth performance marketing terms" description="Plain-English definitions of the terms used in telehealth affiliate marketing: CPA, revenue share, RPA, EPC, S2S postback, click ID, claim set, compliant traffic, and more." jsonLd={ld}>
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="container-x relative pt-14 pb-8 md:pt-24 md:pb-10 max-w-3xl">
-      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">Glossary</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>The words, <span class="text-teal-ink">defined plainly.</span></h1>
-      <p class="mt-6 text-lg text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">Every term we use on this site and in our offer docs, in one place. If a network cannot define these for you, that tells you something.</p>
-    </div>
-  </section>
-  <section class="container-x mt-6">
+  <PageHero kicker="Glossary" title="The words, <span class='text-teal'>defined plainly.</span>" lead="Every term we use on this site and in our offer docs, in one place. If a network cannot define these for you, that tells you something." narrow />
+  <section class="container-x pt-14 md:pt-20">
     <dl class="max-w-3xl divide-y divide-line border-y border-line">
       {terms.map(([t, d]) => (
         <div id={slug(t)} class="py-5 scroll-mt-24 reveal">
@@ -56,5 +50,5 @@ const slug = (t: string) => t.toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a
     </dl>
     <p class="mt-8 text-slate">Want the longer version? Read the <a class="underline text-navy" href={href('/blog/')}>blog</a> or the <a class="underline text-navy" href={href('/programs/')}>program pages</a>.</p>
   </section>
-  <div class="mt-16"><CTABand /></div>
+  <CTASimple />
 </Base>

@@ -1,12 +1,8 @@
 @import "tailwindcss";
 @import "./micro.css";
 @import "./nav.css";
-@import "./pages.css";
 @import "./viz.css";
-@import "./viz-covers.css";
 @import "./viz-dark.css";
-@import "./viz-controls.css";
-@import "./viz-flow.css";
 @import "./home.css";
 
 @theme {

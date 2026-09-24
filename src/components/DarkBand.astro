@@ -1,7 +1,0 @@
----
-interface Props { class?: string }
-const { class: cls = '' } = Astro.props;
----
-<div class:list={['band-dark my-16 md:my-24 py-6 md:py-10', cls]}>
-  <slot />
-</div>

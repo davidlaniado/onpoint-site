@@ -1,0 +1,16 @@
+---
+import { href } from '../lib/site';
+interface Props { title?: string; lead?: string; primary?: [string, string]; secondary?: [string, string] }
+const { title = 'Already past $1M a month? Let’s talk.', lead = 'One call. We tell you honestly whether your program fits the network, and what it would take to scale it.', primary = ['Book a call', '/contact/?as=brand'], secondary = ['Apply as a partner', '/contact/?as=partner'] } = Astro.props;
+---
+<section class="container-x pt-20 md:pt-28 pb-6">
+  <div class="cta-simple reveal">
+    <h2 class="text-white text-3xl md:text-[40px] font-extrabold leading-tight">{title}</h2>
+    <p class="text-white/75 text-lg mt-3 max-w-xl">{lead}</p>
+    <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:items-center">
+      <a href={href(primary[1])} class="btn btn-teal">{primary[0]}</a>
+      {secondary && <a href={href(secondary[1])} class="btn bg-white/10 text-white border border-white/25 hover:bg-white/15">{secondary[0]}</a>}
+      <span class="text-white/60 text-sm sm:ml-2">Free · 30 minutes · no obligation</span>
+    </div>
+  </div>
+</section>
