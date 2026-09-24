@@ -5,7 +5,7 @@ description: "How OnPoint works with TikTok media buyers on telehealth offers: p
 quickAnswer: "OnPoint works with TikTok media buyers on telehealth offers where the brand allows the channel. TikTok's health advertising rules are stricter than Meta's in several categories, so approved creative structures and bridge pages matter more. Tracking is server-side and payouts are CPA on approved orders."
 audience: partners
 group: channel
-cover: careers-hero
+cover: channel-rules
 order: 15
 updated: 2026-09-23
 related: [meta-media-buyers-telehealth-offers, glp-1-weight-loss-affiliate-program, hair-loss-telehealth-affiliate-program]

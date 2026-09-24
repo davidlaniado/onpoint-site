@@ -5,7 +5,7 @@ description: "What compliant traffic means on OnPoint and how it is enforced for
 quickAnswer: "On OnPoint, traffic is compliant only when four things are true: the source is disclosed and verified, the creative uses only the brand's approved claims, the patient lands on a brand-controlled funnel, and the conversion is tracked in a way the brand can audit. Partners are verified before access and monitored after launch, and sources that fall below standard are removed."
 audience: brands
 group: brand
-cover: blog-compliant
+cover: compliant
 order: 21
 updated: 2026-09-23
 related: [telehealth-affiliate-network-for-brands, everflow-tracking-for-telehealth-offers, glp-1-weight-loss-affiliate-program]

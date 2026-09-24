@@ -2,7 +2,7 @@
 title: "What \"compliant traffic\" actually means for GLP-1 and telehealth offers"
 description: "Brands say it, networks promise it, and almost nobody defines it. Here is the working definition we use for compliant traffic in regulated health categories, and the checklist behind it."
 pubDate: 2026-09-20
-cover: blog-compliant
+cover: compliant
 quickAnswer: "Compliant traffic means four things at once: a disclosed and verified source, creative that uses only the brand's approved claims, a landing page the brand controls, and tracking the brand can audit. If any one is missing, the traffic is not compliant no matter how well it converts."
 related: [compliant-traffic-for-telehealth-brands, glp-1-weight-loss-affiliate-program]
 audience: both

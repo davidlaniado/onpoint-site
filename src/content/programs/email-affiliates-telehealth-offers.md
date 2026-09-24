@@ -5,7 +5,7 @@ description: "How OnPoint works with email affiliates and newsletter publishers:
 quickAnswer: "OnPoint works with email affiliates and newsletter publishers on telehealth offers across GLP-1, hair loss, women's hormone health, diagnostics, TRT, and ED. Partners use approved creative and claim sets, send to opted-in lists that meet CAN-SPAM requirements, and are paid CPA on approved orders, with revenue share available on some offers for owned-audience partners."
 audience: partners
 group: channel
-cover: blog-payouts
+cover: channel-rules
 order: 13
 updated: 2026-09-23
 related: [hair-loss-telehealth-affiliate-program, womens-hormone-health-affiliate-program, cpa-vs-revenue-share-for-telehealth-offers]

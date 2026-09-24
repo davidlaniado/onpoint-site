@@ -5,7 +5,7 @@ description: "How OnPoint structures telehealth offer payouts: CPA on approved f
 quickAnswer: "OnPoint supports three payout structures. CPA pays a fixed amount per approved first order and is how most offers launch. Revenue share pays a percentage of what the patient pays over time and requires tracking that covers renewals and refunds. Hybrid combines a smaller CPA with a share of later payments. Terms are agreed per offer before launch."
 audience: both
 group: brand
-cover: blog-payouts
+cover: payouts
 order: 23
 updated: 2026-09-23
 related: [telehealth-affiliate-network-for-brands, email-affiliates-telehealth-offers, everflow-tracking-for-telehealth-offers]

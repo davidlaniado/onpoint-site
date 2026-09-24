@@ -5,7 +5,7 @@ description: "Promote hair loss treatment telehealth offers (finasteride, minoxi
 quickAnswer: "OnPoint runs hair loss telehealth offers, typically finasteride, minoxidil, and combination programs for men and women, for verified media partners. Payouts are CPA on approved, charged first orders. Claims are limited to the brand's approved set; regrowth promises and timelines are not allowed unless the brand has approved that language."
 audience: both
 group: vertical
-cover: cat-derm
+cover: offer-sheet
 order: 4
 updated: 2026-09-23
 related: [meta-media-buyers-telehealth-offers, email-affiliates-telehealth-offers, womens-hormone-health-affiliate-program]

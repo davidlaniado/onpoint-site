@@ -5,7 +5,7 @@ description: "Run compounded GLP-1 telehealth offers (semaglutide and tirzepatid
 quickAnswer: "OnPoint runs GLP-1 weight loss telehealth offers for verified media partners. Payouts are CPA on approved, charged first orders, with revenue share available on select offers. Every offer ships with a brand-approved claim set, and traffic runs only on approved channels. English and Spanish-language programs are available."
 audience: both
 group: vertical
-cover: cat-weight
+cover: offer-sheet
 order: 1
 updated: 2026-09-23
 related: [meta-media-buyers-telehealth-offers, sms-affiliates-telehealth-offers, compliant-traffic-for-telehealth-brands]

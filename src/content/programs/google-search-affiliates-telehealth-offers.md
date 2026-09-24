@@ -5,7 +5,7 @@ description: "How OnPoint works with Google Search affiliates: high-intent healt
 quickAnswer: "OnPoint works with Google Search affiliates on telehealth offers where intent is explicit: GLP-1, TRT, hair loss, ED, and diagnostics. Partners get direct tracking links, a keyword and brand-term policy per offer, S2S postbacks, and CPA payouts on approved orders. Google's healthcare and pharmaceutical advertising policies apply at the advertiser level and the offer sheet says what each brand requires."
 audience: partners
 group: channel
-cover: blog-vet
+cover: channel-rules
 order: 11
 updated: 2026-09-23
 related: [at-home-diagnostics-affiliate-program, trt-testosterone-affiliate-program, everflow-tracking-for-telehealth-offers]

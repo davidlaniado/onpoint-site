@@ -2,7 +2,7 @@
 title: "How telehealth affiliate payouts work: CPA vs revenue share vs hybrid"
 description: "The three ways telehealth brands pay media partners, what each one means for cash flow and risk, and how to pick the structure that will not blow up in month three."
 pubDate: 2026-09-23
-cover: blog-payouts
+cover: payouts
 quickAnswer: "Telehealth affiliates are paid one of three ways: CPA (a fixed amount per approved first order), revenue share (a percentage of what the patient pays over time), or a hybrid of both. New offers almost always launch on CPA. Revenue share only works when tracking covers renewals and refunds."
 related: [cpa-vs-revenue-share-for-telehealth-offers, email-affiliates-telehealth-offers]
 audience: both

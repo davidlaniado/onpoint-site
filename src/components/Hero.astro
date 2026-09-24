@@ -1,5 +1,5 @@
 ---
-import Hero3D from './Hero3D.astro';
+import OfferFlow from './viz/OfferFlow.astro';
 import { href } from '../lib/site';
 ---
 <section class="relative overflow-hidden">
@@ -8,17 +8,22 @@ import { href } from '../lib/site';
     <div>
       <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">Performance network for regulated health</p>
       <h1 class="mt-5 text-[38px] leading-[1.06] sm:text-[48px] lg:text-[58px] font-extrabold" data-split data-hero-title>
-        Compliant scale for <span class="text-teal-ink">telehealth</span> brands.
+        Compliant scale for <span class="accent">telehealth</span> brands.
       </h1>
       <p class="mt-6 text-lg md:text-xl text-slate max-w-xl leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">
         Verified partners. Clear tracking. Payouts you can audit. OnPoint connects health brands with media partners who play by the rules, and gives both sides the numbers to prove it.
       </p>
+      <ul class="proof mt-6" data-hero style="opacity:0;transform:translateY(16px)">
+        <li>Every partner KYC and traffic-source verified before access</li>
+        <li>Server-to-server tracking; brand and partner see the same sale</li>
+        <li>Payouts on approved performance, reversals visible with a reason</li>
+      </ul>
       <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
         <a href={href('/brands/')} class="btn btn-primary">For brands <span aria-hidden="true">→</span></a>
         <a href={href('/partners/')} class="btn btn-ghost">For media partners <span aria-hidden="true">→</span></a>
       </div>
       <p class="mt-5 text-sm text-mist" data-hero style="opacity:0;transform:translateY(16px)">Not an open network. Every brand and partner is verified before anything goes live.</p>
     </div>
-    <div class="lg:pl-4 min-w-0"><Hero3D /></div>
+    <div class="lg:pl-4 min-w-0" data-hero style="opacity:0;transform:translateY(24px)"><OfferFlow /></div>
   </div>
 </section>

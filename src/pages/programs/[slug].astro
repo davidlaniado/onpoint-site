@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import FAQ from '../../components/FAQ.astro';
 import CTABand from '../../components/CTABand.astro';
-import Photo from '../../components/Photo.astro';
+import Cover from '../../components/viz/Cover.astro';
+import AfterYouApply from '../../components/viz/AfterYouApply.astro';
 import { getCollection, render } from 'astro:content';
 import { href, SITE } from '../../lib/site';
 export async function getStaticPaths() {
@@ -16,6 +17,7 @@ const url = new URL(Astro.url.pathname, Astro.site).toString();
 const all = await getCollection('programs');
 const related = d.related.length ? all.filter((p) => d.related.includes(p.id)) : all.filter((p) => p.id !== page.id && p.data.group === d.group).slice(0, 4);
 const posts = (await getCollection('blog', ({ data }) => !data.draft && data.related.includes(page.id))).slice(0, 3);
+const subject = d.group === 'vertical' ? d.title.replace(/\s+(Telehealth\s+)?Affiliate Program$/i, '').replace(/^At-Home Diagnostics and Lab Testing$/, 'At-Home Diagnostics') : d.group === 'channel' ? d.title.replace(/^Telehealth Offers for\s+/i, '').replace(/\s+(Media Buyers|Affiliates)$/i, '') : undefined;
 const audienceLabel = { brands: 'For brands', partners: 'For media partners', both: 'For brands and partners' }[d.audience];
 const ld = [
   {
@@ -36,7 +38,7 @@ const ld = [
   ...(d.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
 ];
 ---
-<Base title={d.title} description={d.description} jsonLd={ld} ogImage={d.cover ? href(`/img/photos/${d.cover}.webp`) : undefined}>
+<Base title={d.title} description={d.description} jsonLd={ld}>
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-8 md:pt-14 pb-10 md:pb-14">
@@ -51,7 +53,7 @@ const ld = [
             <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
           </div>
         </div>
-        {d.cover && <div class="rounded-3xl overflow-hidden aspect-[4/3]" data-hero style="opacity:0;transform:translateY(16px)"><div class="h-full w-full" data-parallax="0.16"><Photo name={d.cover} alt="" width="2000" height="1344" eager class="!h-[118%] !-mt-[9%]" /></div></div>}
+        {d.cover && <div data-hero style="opacity:0;transform:translateY(16px)"><Cover kind={d.cover as any} ratio="4/3" subject={subject} eager /></div>}
       </div>
     </div>
   </section>
@@ -67,6 +69,10 @@ const ld = [
       <p class="mt-8 text-xs text-mist">Last updated {d.updated.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}. {SITE.shortName} is a marketing platform, not a medical provider.</p>
     </div>
   </article>
+  <section class="container-x mt-16">
+    <p class="eyebrow reveal">What happens after you apply</p>
+    <div class="mt-5"><AfterYouApply audience={d.audience} /></div>
+  </section>
   {(related.length > 0 || posts.length > 0) && (
     <section class="container-x mt-16">
       <p class="eyebrow reveal">Related</p>

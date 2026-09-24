@@ -1,0 +1,112 @@
+---
+// ReviewPass: a creative is scanned row by row against the brand's claim set.
+// Pass 1 is sent back (one claim not in set); the line is revised; pass 2 is cleared for launch.
+import VizFrame from './VizFrame.astro';
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+const rows = [
+  { k: 'claim', label: 'claim: “provider-reviewed program”', v1: 'in set', s1: 'ok', v2: 'in set', s2: 'ok' },
+  { k: 'claim', label: 'claim: “lose 20 lbs in 30 days”', v1: 'not in claim set', s1: 'bad', v2: 'in set', s2: 'ok', revisedLabel: 'claim: “monthly program with ongoing care”' },
+  { k: 'landing', label: 'landing page · brand.com/start', v1: 'brand-controlled', s1: 'ok', v2: 'brand-controlled', s2: 'ok' },
+  { k: 'source', label: 'traffic source', v1: 'Meta · disclosed', s1: 'ok', v2: 'Meta · disclosed', s2: 'ok' },
+  { k: 'placement', label: 'placement · feed, reels', v1: 'approved', s1: 'ok', v2: 'approved', s2: 'ok' },
+];
+---
+<VizFrame label="review.pass" right="CR-2291" class={cls}>
+  <div class="rp" data-viz="review-pass">
+    <div class="rp-creative">
+      <div class="rp-cr-head">
+        <span class="mono rp-cr-id">creative · CR-2291</span>
+        <span class="chip">Meta · P-0412</span>
+      </div>
+      <p class="rp-cr-headline">Provider-reviewed weight program, from home.</p>
+      <p class="rp-cr-line" data-line="0">Complete a short intake. A licensed provider reviews your case.</p>
+      <p class="rp-cr-line rp-cr-claim" data-line="1"><span class="rp-old">Lose 20 lbs in 30 days, guaranteed.</span><span class="rp-new">Monthly program with ongoing care.</span></p>
+      <p class="rp-cr-line" data-line="2">Clear monthly price. Cancel any time.</p>
+      <p class="rp-cr-url mono">brand.com/start</p>
+    </div>
+    <div class="rp-checks">
+      <p class="mono rp-checks-head">checking against claim set · OFR-118</p>
+      <ul class="rp-rows">
+        {rows.map((r, i) => (
+          <li class="rp-row" data-row={i} data-v1={r.v1} data-s1={r.s1} data-v2={r.v2} data-s2={r.s2} data-label={r.label} data-revised={r.revisedLabel ?? r.label}>
+            <span class="mark wait rp-mark">·</span>
+            <span class="rp-row-label">{r.label}</span>
+            <span class="mono rp-row-verdict"></span>
+          </li>
+        ))}
+      </ul>
+      <p class="mono rp-verdict" data-verdict>running checks — claim set, landing page, source, placement</p>
+    </div>
+  </div>
+</VizFrame>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CHECK = '✓', FLAG = '✕';
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  document.querySelectorAll<HTMLElement>('[data-viz="review-pass"]').forEach((root) => {
+    const rows = [...root.querySelectorAll<HTMLElement>('.rp-row')];
+    const verdict = root.querySelector<HTMLElement>('[data-verdict]')!;
+    const claimLine = root.querySelector<HTMLElement>('.rp-cr-claim')!;
+
+    const reset = () => {
+      rows.forEach((r) => {
+        r.classList.remove('scan', 'ok', 'bad');
+        const m = r.querySelector('.rp-mark')!; m.className = 'mark wait rp-mark'; m.textContent = '·';
+        r.querySelector('.rp-row-verdict')!.textContent = '';
+      });
+      root.classList.remove('flagged', 'revised', 'cleared', 'sentback');
+      verdict.className = 'mono rp-verdict';
+      verdict.textContent = 'running checks — claim set, landing page, source, placement';
+      rows[1].querySelector('.rp-row-label')!.textContent = rows[1].dataset.label!;
+    };
+
+    const settle = (r: HTMLElement, status: string, text: string) => {
+      r.classList.remove('scan'); r.classList.add(status);
+      const m = r.querySelector('.rp-mark')!; m.className = `mark ${status} rp-mark`; m.textContent = status === 'ok' ? CHECK : FLAG;
+      r.querySelector('.rp-row-verdict')!.textContent = text;
+    };
+
+    const finalState = () => {
+      reset();
+      root.classList.add('revised', 'cleared');
+      rows[1].querySelector('.rp-row-label')!.textContent = rows[1].dataset.revised!;
+      rows.forEach((r) => settle(r, r.dataset.s2!, r.dataset.v2!));
+      verdict.classList.add('ok'); verdict.textContent = `${CHECK} action: cleared for launch · reviewer OP · 14:02:11 · 38ms`;
+    };
+
+    if (reduce) { finalState(); return; }
+
+    const run = async () => {
+      while (true) {
+        reset();
+        await wait(600);
+        // pass 1
+        for (const r of rows) {
+          r.classList.add('scan'); await wait(520);
+          settle(r, r.dataset.s1!, r.dataset.v1!);
+          if (r.dataset.s1 === 'bad') root.classList.add('flagged');
+          await wait(180);
+        }
+        await wait(300);
+        root.classList.add('sentback'); verdict.classList.add('bad');
+        verdict.textContent = `${FLAG} action: sent back · claim not in set · 41ms`;
+        await wait(1700);
+        // revision: clear the checks first, then swap the claim, then re-run
+        rows.forEach((r) => { r.classList.remove('ok', 'bad', 'scan'); const m = r.querySelector('.rp-mark')!; m.className = 'mark wait rp-mark'; m.textContent = '·'; r.querySelector('.rp-row-verdict')!.textContent = ''; });
+        root.classList.remove('sentback', 'flagged'); verdict.className = 'mono rp-verdict'; verdict.textContent = 'creative revised by partner · re-checking';
+        root.classList.add('revised');
+        rows[1].querySelector('.rp-row-label')!.textContent = rows[1].dataset.revised!;
+        await wait(1100);
+        for (const r of rows) { r.classList.add('scan'); await wait(380); settle(r, r.dataset.s2!, r.dataset.v2!); await wait(120); }
+        await wait(300);
+        root.classList.add('cleared'); verdict.classList.add('ok');
+        verdict.textContent = `${CHECK} action: cleared for launch · reviewer OP · 14:02:11 · 38ms`;
+        await wait(2600);
+      }
+    };
+    run();
+  });
+</script>

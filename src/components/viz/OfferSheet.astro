@@ -1,0 +1,27 @@
+---
+// One offer sheet per vertical: what it pays on, which channels, one approved claim, one off-limits claim.
+import VizFrame from './VizFrame.astro';
+export const sheets: Record<string, { name: string; event: string; channels: string[]; approved: string; offLimits: string }> = {
+  glp1: { name: 'GLP-1 weight loss', event: 'charged first order', channels: ['meta', 'search', 'sms', 'email'], approved: 'provider-reviewed program', offLimits: 'lose 20 lbs in 30 days' },
+  trt: { name: 'TRT and testosterone', event: 'charged first order', channels: ['meta', 'search', 'native'], approved: 'labs reviewed by a licensed provider', offLimits: 'guaranteed muscle gain' },
+  ed: { name: 'ED', event: 'charged first order', channels: ['meta', 'native', 'search'], approved: 'discreet, provider-approved', offLimits: 'lasts all night' },
+  hair: { name: 'Hair loss', event: 'charged first order', channels: ['meta', 'search', 'email'], approved: 'prescription treatment if approved', offLimits: 'full regrowth in 90 days' },
+  hrt: { name: 'Women’s hormone health', event: 'charged first order', channels: ['meta', 'email'], approved: 'care from a licensed provider', offLimits: 'cures menopause' },
+  dx: { name: 'At-home diagnostics', event: 'charged order', channels: ['search', 'email', 'meta'], approved: 'results reviewed by a provider', offLimits: 'diagnoses your condition' },
+};
+interface Props { vertical?: keyof typeof sheets; event?: string; channels?: string[]; approved?: string; offLimits?: string; name?: string; compact?: boolean; class?: string; live?: boolean }
+const { vertical = 'glp1', compact = false, class: cls = '', live = false } = Astro.props;
+const base = sheets[vertical] ?? sheets.glp1;
+const d = { name: Astro.props.name ?? base.name, event: Astro.props.event ?? base.event, channels: Astro.props.channels ?? base.channels, approved: Astro.props.approved ?? base.approved, offLimits: Astro.props.offLimits ?? base.offLimits };
+---
+<VizFrame label={compact ? 'offer.sheet' : `offer.sheet · ${d.name.toLowerCase()}`} live={live} class={cls}>
+  <div class:list={['os', compact && 'os-compact']}>
+    <p class="os-name">{d.name}</p>
+    <div class="os-row"><span class="os-k">pays on</span><span class="os-v">{d.event}</span></div>
+    <div class="os-row"><span class="os-k">channels</span><span class="os-chips">{d.channels.map((c) => <span class="chip">{c}</span>)}</span></div>
+    <div class="os-claims">
+      <div class="os-claim"><span class="mark ok">✓</span><span><span class="os-k">approved</span><span class="os-q">“{d.approved}”</span></span></div>
+      <div class="os-claim"><span class="mark bad">!</span><span><span class="os-k">off limits</span><span class="os-q os-q-bad">“{d.offLimits}”</span></span></div>
+    </div>
+  </div>
+</VizFrame>

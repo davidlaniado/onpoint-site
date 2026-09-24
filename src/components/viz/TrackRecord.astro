@@ -1,0 +1,27 @@
+---
+// Founders' track record as a timeline strip (no names).
+import VizFrame from './VizFrame.astro';
+const nodes = [
+  ['01', 'Built one of the largest performance marketing companies in the world'],
+  ['02', 'Hundreds of team members · 7 offices'],
+  ['03', '$1B+ revenue driven for the brands they scaled'],
+  ['04', 'American Telemedicine Association members'],
+  ['05', 'OnPoint · 2026'],
+];
+---
+<VizFrame label="track.record" live={false} right="founders" class="trackrecord">
+  <ol class="tr-list">
+    {nodes.map(([n, t], i) => (
+      <li class:list={['tr-node', i === nodes.length - 1 && 'tr-last']} style={`--d:${i * 140}ms`}>
+        <span class="tr-n mono">{n}</span>
+        <span class="tr-t">{t}</span>
+      </li>
+    ))}
+  </ol>
+</VizFrame>
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = document.querySelectorAll('.trackrecord');
+  if (reduce) els.forEach((e) => e.classList.add('in'));
+  else { const io = new IntersectionObserver((en) => { for (const e of en) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { rootMargin: '0px 0px -10% 0px' }); els.forEach((e) => io.observe(e)); }
+</script>

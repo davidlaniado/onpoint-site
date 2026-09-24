@@ -5,7 +5,7 @@ description: "Promote testosterone replacement therapy and hormone optimization 
 quickAnswer: "OnPoint runs testosterone replacement therapy (TRT) and hormone optimization telehealth offers, including FDA-approved oral testosterone programs, for verified media partners. Payouts are CPA on approved first orders. Claims about symptoms and outcomes are limited to the brand's approved set, and the offer never promises what a prescription will do for an individual."
 audience: both
 group: vertical
-cover: cat-hormone
+cover: offer-sheet
 order: 2
 updated: 2026-09-23
 related: [meta-media-buyers-telehealth-offers, google-search-affiliates-telehealth-offers, ed-telehealth-affiliate-program]

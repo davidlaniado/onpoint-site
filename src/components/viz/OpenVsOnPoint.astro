@@ -1,0 +1,53 @@
+---
+// Why-section instrument: the same traffic through an open network vs through OnPoint's gate.
+import VizFrame from './VizFrame.astro';
+import '../../styles/viz-flow.css';
+---
+<VizFrame label="open.network vs onpoint" right="same click, two outcomes" class="ovo">
+  <div class="ovo-wrap" id="ovo">
+    <div class="ovo-panel ovo-open" data-panel="open">
+      <p class="ovo-title mono">open network</p>
+      <ol class="ovo-steps">
+        <li class="ovo-step node" data-step="0"><span class="ovo-k mono">partner</span><span class="ovo-v mono"><span class="ovo-q">?</span> unknown</span></li>
+        <li class="ovo-step node" data-step="1"><span class="ovo-k mono">source</span><span class="ovo-v mono">undisclosed</span></li>
+        <li class="ovo-step node" data-step="2"><span class="ovo-k mono">creative</span><span class="ovo-v">“lose 20 lbs in 30 days”</span><span class="chip bad ovo-flag" data-flag>claim not approved</span></li>
+        <li class="ovo-step node ovo-gate ovo-nogate" data-step="3"><span class="ovo-k mono">review</span><span class="ovo-v mono">none · runs immediately</span></li>
+        <li class="ovo-step ovo-outcome" data-step="4"><span class="chip bad">brand ad account restricted</span></li>
+      </ol>
+    </div>
+    <div class="ovo-panel ovo-onpoint" data-panel="onpoint">
+      <p class="ovo-title mono">onpoint</p>
+      <ol class="ovo-steps">
+        <li class="ovo-step node" data-step="0"><span class="ovo-k mono">partner</span><span class="ovo-v mono"><span class="mark ok" aria-hidden="true">✓</span> P-0412 · verified</span></li>
+        <li class="ovo-step node" data-step="1"><span class="ovo-k mono">source</span><span class="ovo-v mono">Meta · disclosed</span></li>
+        <li class="ovo-step node" data-step="2"><span class="ovo-k mono">creative</span><span class="ovo-v">“provider-reviewed program”</span><span class="chip ok ovo-flag" data-flag>approved · claim set</span></li>
+        <li class="ovo-step node ovo-gate" data-step="3"><span class="ovo-k mono">gate</span><span class="ovo-v mono">KYC ✓ · claims ✓ · tracking ✓</span></li>
+        <li class="ovo-step ovo-outcome" data-step="4"><span class="chip ok">sale attributed · payout cleared</span></li>
+      </ol>
+    </div>
+  </div>
+</VizFrame>
+
+<script>
+  const root = document.getElementById('ovo');
+  if (root) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    const sleep = (t: number) => new Promise((r) => setTimeout(r, t));
+    const finish = (p: HTMLElement) => { p.querySelectorAll('[data-step]').forEach((s) => s.classList.add('on')); p.classList.add('done'); };
+    const reset = (p: HTMLElement) => { p.querySelectorAll('[data-step]').forEach((s) => s.classList.remove('on')); p.classList.remove('done', 'playing'); };
+    async function play(p: HTMLElement) {
+      reset(p); p.classList.add('playing');
+      for (const s of p.querySelectorAll<HTMLElement>('[data-step]')) { s.classList.add('on'); await sleep(s.dataset.step === '2' ? 900 : 550); }
+      p.classList.add('done');
+    }
+    async function loop() {
+      while (true) {
+        for (const p of panels) { await play(p); await sleep(900); }
+        await sleep(1600);
+        panels.forEach(reset); await sleep(400);
+      }
+    }
+    if (reduce) panels.forEach(finish); else loop();
+  }
+</script>

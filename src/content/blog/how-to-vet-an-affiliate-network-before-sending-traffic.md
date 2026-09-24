@@ -2,7 +2,7 @@
 title: "How to vet an affiliate network before you send it traffic"
 description: "A media buyer's checklist for deciding whether a health affiliate network is worth building on. Nine questions to ask, and the answers that should make you walk away."
 pubDate: 2026-09-16
-cover: blog-vet
+cover: vet
 quickAnswer: "Before sending traffic to a health affiliate network, confirm the legal entity and named people, how you were approved, who the advertiser is, that terms are in writing, that you can fire a test conversion, how reversals work, when you get paid, what the claim rules are, and who answers when something breaks. Instant approval and anonymous networks are the biggest red flags."
 related: [telehealth-affiliate-network-for-brands, everflow-tracking-for-telehealth-offers]
 audience: partners

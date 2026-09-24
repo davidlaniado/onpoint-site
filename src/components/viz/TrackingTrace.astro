@@ -1,0 +1,106 @@
+---
+// TrackingTrace: one click followed end to end. Click ID survives device changes and a two-day delay,
+// the S2S postback lands in Everflow, both dashboards show the same count, then a refund reverses it on both.
+import VizFrame from './VizFrame.astro';
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+const nodes = [
+  { id: 'click', label: 'click', sub: 'id 8f2a…', ts: '14:02:11' },
+  { id: 'landing', label: 'landing', sub: 'brand.com', ts: '14:02:12' },
+  { id: 'intake', label: 'intake', sub: 'phone', ts: '14:02:40' },
+  { id: 'checkout', label: 'checkout', sub: 'laptop · +2d', ts: '09:12:58' },
+  { id: 'approval', label: 'provider approval', sub: 'licensed', ts: '09:14:02' },
+  { id: 'charged', label: 'charged', sub: 'first order', ts: '09:14:05' },
+  { id: 'postback', label: 'S2S postback', sub: 'server → server', ts: '09:14:06' },
+  { id: 'everflow', label: 'Everflow', sub: 'attributed', ts: '09:14:06' },
+];
+const readouts = [
+  { k: 'click id', v: 'matched', at: 1 },
+  { k: 'device', v: 'changed · kept', at: 3 },
+  { k: 'delay', v: '2 days · kept', at: 4 },
+  { k: 'postback', v: 'received', at: 6 },
+  { k: 'attribution', v: 'P-0412', at: 7 },
+  { k: 'reversal', v: 'refund', at: 9 },
+];
+---
+<VizFrame label="tracking.trace" right="one click, end to end" class={cls}>
+  <div class="tt" data-viz="tracking-trace">
+    <ol class="tt-line">
+      {nodes.map((n, i) => (
+        <li class="tt-node" data-node={i}>
+          <span class="tt-dot"><span class="tt-ring"></span></span>
+          <span class="tt-label">{n.label}</span>
+          <span class="mono tt-sub">{n.sub}</span>
+          <span class="mono tt-ts">{n.ts}</span>
+        </li>
+      ))}
+    </ol>
+    <div class="tt-bottom">
+      <div class="tt-dash">
+        <div class="tt-dash-card" data-dash="brand">
+          <p class="mono tt-dash-head">BRAND · dashboard</p>
+          <p class="tt-count"><span data-tt-count>2</span><span class="mono tt-count-label">approved sales · today</span></p>
+        </div>
+        <div class="tt-sync mono" data-sync>= same event</div>
+        <div class="tt-dash-card" data-dash="partner">
+          <p class="mono tt-dash-head">PARTNER · P-0412</p>
+          <p class="tt-count"><span data-tt-count>2</span><span class="mono tt-count-label">approved sales · today</span></p>
+        </div>
+      </div>
+      <ul class="tt-readouts mono">
+        {readouts.map((r) => <li class="tt-readout" data-at={r.at}><span>{r.k}</span><span class="tt-readout-v">{r.v}</span></li>)}
+      </ul>
+    </div>
+    <p class="mono tt-status" data-status>packet · waiting for click</p>
+    <span class="chip tt-reversal" data-reversal>reversal · reason: refund</span>
+  </div>
+</VizFrame>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  document.querySelectorAll<HTMLElement>('[data-viz="tracking-trace"]').forEach((root) => {
+    const nodes = [...root.querySelectorAll<HTMLElement>('.tt-node')];
+    const reads = [...root.querySelectorAll<HTMLElement>('.tt-readout')];
+    const counts = [...root.querySelectorAll<HTMLElement>('[data-tt-count]')];
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const sync = root.querySelector<HTMLElement>('[data-sync]')!;
+    const rev = root.querySelector<HTMLElement>('[data-reversal]')!;
+    const msgs = ['click received · id 8f2a…', 'landing page · click id captured', 'intake started · phone', 'checkout · different device, same click id', 'licensed provider approved', 'first order charged', 'server-to-server postback sent', 'attributed to P-0412 · both sides updated'];
+
+    const setCount = (v: number, pop = true) => counts.forEach((c) => { c.textContent = String(v); if (pop) { c.classList.remove('pop'); void c.offsetWidth; c.classList.add('pop'); } });
+    const reset = () => {
+      nodes.forEach((n) => n.classList.remove('done', 'active', 'rev'));
+      reads.forEach((r) => r.classList.remove('on'));
+      root.classList.remove('synced', 'reversed');
+      setCount(2, false); status.textContent = 'packet · waiting for click';
+    };
+    const finalState = () => {
+      reset(); nodes.forEach((n) => n.classList.add('done')); reads.forEach((r) => { if (Number(r.dataset.at) < 9) r.classList.add('on'); });
+      root.classList.add('synced'); setCount(3, false); status.textContent = 'attributed to P-0412 · both sides updated';
+    };
+    if (reduce) { finalState(); return; }
+
+    const run = async () => {
+      while (true) {
+        reset(); await wait(700);
+        for (let i = 0; i < nodes.length; i++) {
+          nodes.forEach((n, k) => { n.classList.toggle('active', k === i); if (k < i) n.classList.add('done'); });
+          status.textContent = msgs[i];
+          reads.forEach((r) => { if (Number(r.dataset.at) === i) r.classList.add('on'); });
+          await wait(i === 3 ? 1300 : 800);
+        }
+        nodes[nodes.length - 1].classList.add('done');
+        root.classList.add('synced'); setCount(3);
+        await wait(2200);
+        // reversal runs back along the line
+        root.classList.add('reversed'); status.textContent = 'reversal · refund · sent to both sides';
+        reads.forEach((r) => { if (Number(r.dataset.at) === 9) r.classList.add('on'); });
+        for (let i = nodes.length - 1; i >= 5; i--) { nodes[i].classList.add('rev'); await wait(260); }
+        setCount(2); root.classList.remove('synced'); root.classList.add('synced-rev');
+        await wait(2400); root.classList.remove('synced-rev');
+      }
+    };
+    run();
+  });
+</script>

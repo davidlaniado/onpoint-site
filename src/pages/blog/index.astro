@@ -3,7 +3,7 @@ import '../../styles/pages.css';
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { href } from '../../lib/site';
-import Photo from '../../components/Photo.astro';
+import Cover from '../../components/viz/Cover.astro';
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 const aud: Record<string, string> = { brands: 'For brands', partners: 'For partners', both: 'Brands + partners' };
@@ -21,7 +21,7 @@ const aud: Record<string, string> = { brands: 'For brands', partners: 'For partn
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
       {posts.map((p) => (
         <a href={href(`/blog/${p.id}/`)} class="card card-hover overflow-hidden reveal block cover-card">
-          {p.data.cover && <div class="aspect-[16/9] cover-wrap"><Photo name={p.data.cover} alt="" width="2000" height="1120" /></div>}
+          {p.data.cover && <div class="cover-wrap p-3 pb-0"><Cover kind={p.data.cover as any} /></div>}
           <div class="p-6">
           <div class="flex items-center justify-between gap-3">
             <p class="mono-label">{fmt(p.data.pubDate)}</p>

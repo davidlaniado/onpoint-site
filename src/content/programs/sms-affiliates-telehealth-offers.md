@@ -5,7 +5,7 @@ description: "How OnPoint works with SMS and text-message affiliates: consent st
 quickAnswer: "OnPoint works with SMS affiliates on telehealth offers that explicitly allow the channel. Partners must document opt-in consent that meets TCPA requirements, use only approved copy, and send to approved landing pages. Tracking is server-side and payouts are CPA on approved orders. Not every offer allows SMS; the offer sheet says which do."
 audience: partners
 group: channel
-cover: home-why
+cover: channel-rules
 order: 12
 updated: 2026-09-23
 related: [glp-1-weight-loss-affiliate-program, email-affiliates-telehealth-offers, compliant-traffic-for-telehealth-brands]

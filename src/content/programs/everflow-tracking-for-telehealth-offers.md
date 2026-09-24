@@ -5,7 +5,7 @@ description: "How OnPoint sets up Everflow tracking, click IDs, and server-to-se
 quickAnswer: "OnPoint runs partner tracking on Everflow. Every partner click gets a click ID that is passed into the brand's funnel and stored with the order. When the order is charged, the brand's system sends a server-to-server postback to Everflow, which credits the partner, ad, and channel. Refunds and chargebacks are sent as reversals. Brands and partners see the same events."
 audience: both
 group: brand
-cover: blog-postback
+cover: postback
 order: 22
 updated: 2026-09-23
 related: [telehealth-affiliate-network-for-brands, google-search-affiliates-telehealth-offers, compliant-traffic-for-telehealth-brands]

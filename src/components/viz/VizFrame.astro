@@ -1,0 +1,13 @@
+---
+// Shared frame for every code-drawn "instrument": mono header label, optional live dot, optional footer log.
+interface Props { label: string; live?: boolean; class?: string; footer?: string; right?: string }
+const { label, live = true, class: cls = '', footer, right } = Astro.props;
+---
+<div class:list={['viz card overflow-hidden', cls]}>
+  <div class="viz-head flex items-center justify-between px-4 py-2.5 border-b border-line">
+    <span class="mono-label">{label}</span>
+    <span class="mono-label flex items-center gap-2">{right && <span>{right}</span>}{live && <><span class="inline-block w-1.5 h-1.5 rounded-full bg-teal live-dot"></span><span class="text-teal-ink">live</span></>}</span>
+  </div>
+  <div class="viz-body relative"><slot /></div>
+  {footer && <div class="viz-foot px-4 py-2.5 border-t border-line bg-paper font-mono text-[11px] text-slate truncate">{footer}</div>}
+</div>

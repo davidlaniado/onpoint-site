@@ -6,7 +6,9 @@ import Steps from '../components/Steps.astro';
 import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 import { href } from '../lib/site';
-import Photo from '../components/Photo.astro';
+import Cover from '../components/viz/Cover.astro';
+const spMods = import.meta.glob('../components/viz/StagePipeline.astro', { eager: true }) as Record<string, { default: any }>;
+const StagePipeline = Object.values(spMods)[0]?.default;
 import { getCollection } from 'astro:content';
 const programs = (await getCollection('programs')).filter((p) => p.data.group === 'channel').sort((a, b) => a.data.order - b.data.order);
 const verticalPrograms = (await getCollection('programs')).filter((p) => p.data.group === 'vertical').sort((a, b) => a.data.order - b.data.order);
@@ -33,7 +35,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
     </div>
-    <div class="reveal rounded-3xl overflow-hidden aspect-[4/5] max-h-[560px] lg:max-h-none"><div class="h-full w-full" data-parallax="0.18"><Photo name="partners-hero" alt="A media buyer at his desk with analytics on screen" width="1344" height="2000" eager class="!h-[118%] !-mt-[9%]" /></div></div>
+    <div class="reveal">{StagePipeline ? <StagePipeline audience="partners" /> : <Cover kind="channel-rules" ratio="4/3" eager />}</div>
     </div>
   </section>
 

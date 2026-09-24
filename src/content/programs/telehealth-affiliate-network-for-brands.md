@@ -5,7 +5,7 @@ description: "How OnPoint works as an affiliate network for telehealth brands: g
 quickAnswer: "OnPoint is a gated affiliate network for telehealth, wellness, and diagnostics brands. Brands clear business and compliance verification, define their claim set and commercial terms, and OnPoint distributes the offer to identity-verified media partners on approved channels only. Tracking is server-side through Everflow, and the brand sees every partner, channel, and conversion."
 audience: brands
 group: brand
-cover: home-brands
+cover: offer-controls
 order: 20
 updated: 2026-09-23
 related: [compliant-traffic-for-telehealth-brands, everflow-tracking-for-telehealth-offers, cpa-vs-revenue-share-for-telehealth-offers]

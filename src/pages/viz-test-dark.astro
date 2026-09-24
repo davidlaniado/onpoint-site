@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import ReviewPass from '../components/viz/ReviewPass.astro';
+import TrackingTrace from '../components/viz/TrackingTrace.astro';
+import OpsLog from '../components/viz/OpsLog.astro';
+import '../styles/viz-dark.css';
+---
+<Base title="viz test dark" noindex>
+  <div class="band-dark py-10 md:py-16">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="container-x grid gap-10">
+      <section id="rp"><p class="eyebrow mb-4">Standards</p><ReviewPass /></section>
+      <section id="tt"><p class="eyebrow mb-4">Technology</p><TrackingTrace /></section>
+      <section id="ol"><p class="eyebrow mb-4">Careers (dark)</p><OpsLog /></section>
+    </div>
+  </div>
+  <div class="container-x py-16"><section id="ol-light"><p class="eyebrow mb-4">Careers (light)</p><OpsLog light /></section></div>
+</Base>

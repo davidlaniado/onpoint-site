@@ -5,7 +5,7 @@ description: "Promote women's hormone replacement and menopause care telehealth 
 quickAnswer: "OnPoint runs women's hormone health telehealth offers, including menopause and perimenopause care with hormone replacement therapy, for verified media partners. Payouts are CPA on approved first orders, with introductory pricing on some programs to lower the first-order barrier. Claims are limited to the brand's approved set."
 audience: both
 group: vertical
-cover: cat-hormone
+cover: offer-sheet
 order: 5
 updated: 2026-09-23
 related: [meta-media-buyers-telehealth-offers, email-affiliates-telehealth-offers, glp-1-weight-loss-affiliate-program]

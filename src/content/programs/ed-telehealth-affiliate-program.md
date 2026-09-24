@@ -5,7 +5,7 @@ description: "Run ED telehealth offers (sildenafil and tadalafil programs, inclu
 quickAnswer: "OnPoint runs erectile dysfunction telehealth offers, including generic sildenafil and tadalafil programs and newer chewable and fast-dissolve formats, for verified partners. Payouts are CPA on approved first orders. Because ED creative is heavily policed by ad platforms, every offer ships with a platform-safe claim set and approved landing pages."
 audience: both
 group: vertical
-cover: cat-mens
+cover: offer-sheet
 order: 3
 updated: 2026-09-23
 related: [meta-media-buyers-telehealth-offers, native-ads-affiliates-telehealth-offers, trt-testosterone-affiliate-program]

@@ -5,7 +5,7 @@ description: "How OnPoint works with native advertising affiliates (Taboola, Out
 quickAnswer: "OnPoint works with native advertising buyers on telehealth offers that support the pre-sell format, primarily ED, GLP-1, and TRT. Partners get approved pre-sell and advertorial pages, a claim set for headlines and thumbnails, server-side tracking, and CPA payouts on approved orders. Native platform health policies apply at the account level."
 audience: partners
 group: channel
-cover: blog-funnel
+cover: channel-rules
 order: 14
 updated: 2026-09-23
 related: [ed-telehealth-affiliate-program, glp-1-weight-loss-affiliate-program, meta-media-buyers-telehealth-offers]

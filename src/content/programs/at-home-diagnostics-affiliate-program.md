@@ -5,7 +5,7 @@ description: "Promote at-home lab testing, diagnostics, and wellness subscriptio
 quickAnswer: "OnPoint runs at-home diagnostics and lab testing offers, such as hormone panels, metabolic panels, and wellness subscriptions, for verified media partners. Payouts are CPA on completed, charged orders. Diagnostics offers are often the entry point to a larger treatment program, and some brands pay on the follow-on treatment as well."
 audience: both
 group: vertical
-cover: cat-diagnostics
+cover: offer-sheet
 order: 6
 updated: 2026-09-23
 related: [google-search-affiliates-telehealth-offers, email-affiliates-telehealth-offers, trt-testosterone-affiliate-program]

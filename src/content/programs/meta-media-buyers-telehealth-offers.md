@@ -5,7 +5,7 @@ description: "What OnPoint offers Facebook and Instagram media buyers: health of
 quickAnswer: "OnPoint gives Meta (Facebook and Instagram) media buyers access to telehealth offers in GLP-1 weight loss, ED, TRT, hair loss, women's hormone health, and diagnostics. Each offer includes a platform-safe claim set, approved landing pages, server-side postbacks, and CPA payouts on approved first orders. Buyers must run from their own disclosed ad accounts."
 audience: partners
 group: channel
-cover: home-partners
+cover: channel-rules
 order: 10
 updated: 2026-09-23
 related: [glp-1-weight-loss-affiliate-program, ed-telehealth-affiliate-program, tiktok-media-buyers-telehealth-offers]

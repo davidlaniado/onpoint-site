@@ -3,6 +3,11 @@
 @import "./micro.css";
 @import "./nav.css";
 @import "./pages.css";
+@import "./viz.css";
+@import "./viz-covers.css";
+@import "./viz-dark.css";
+@import "./viz-controls.css";
+@import "./viz-flow.css";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -198,3 +203,11 @@ header[data-nav].nav-scrolled { box-shadow: 0 10px 30px -20px rgba(24,40,88,.35)
   mask-image: radial-gradient(ellipse 90% 110% at 50% 45%, #000 45%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 90% 110% at 50% 45%, #000 45%, transparent 100%); }
 .band-dark .dark-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,23,52,0) 55%, rgba(13,23,52,.85) 100%); pointer-events: none; }
+
+/* ===================== v2 typography + base (from telehealth audit) ===================== */
+body { background: #fbfcfd; }
+.accent { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; font-size: 1.12em; line-height: 1; color: var(--color-teal-ink); }
+.band-dark .accent { color: var(--color-teal); }
+.proof { display: grid; gap: 8px; }
+.proof li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--color-slate); }
+.proof li::before { content: ""; width: 18px; height: 18px; flex: none; margin-top: 1px; border-radius: 50%; background: var(--color-teal-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314867a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/11px no-repeat; }

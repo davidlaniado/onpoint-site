@@ -1,0 +1,27 @@
+/* ===================== code-drawn instruments (viz) ===================== */
+.viz { font-family: var(--font-sans); }
+.viz .mono { font-family: var(--font-mono); }
+.viz-body { background: #fff; }
+.band-dark .viz-body { background: transparent; }
+.band-dark .viz-foot { background: rgba(255,255,255,.05); }
+/* status chips */
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--color-line); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .04em; color: var(--color-navy); background: #fff; white-space: nowrap; }
+.chip.ok { border-color: var(--color-teal-line); background: var(--color-teal-soft); color: var(--color-teal-ink); }
+.chip.bad { border-color: #f3c2c2; background: #fdecec; color: #b42323; }
+.chip.wait { color: var(--color-mist); }
+.band-dark .chip { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #fff; }
+.band-dark .chip.ok { background: rgba(96,216,200,.14); border-color: rgba(96,216,200,.45); color: var(--color-teal); }
+.band-dark .chip.bad { background: rgba(255,90,90,.12); border-color: rgba(255,120,120,.4); color: #ff9a9a; }
+/* check / flag marks */
+.mark { width: 16px; height: 16px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; font-weight: 700; flex: none; }
+.mark.ok { background: var(--color-teal); color: var(--color-navy-deep); }
+.mark.bad { background: #e5484d; color: #fff; }
+.mark.wait { background: #e4e8f0; color: var(--color-mist); }
+/* animated packet dot for flows */
+.packet { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--color-teal-ink); box-shadow: 0 0 0 4px rgba(96,216,200,.25); will-change: transform, opacity; }
+/* generic node box */
+.node { border: 1px solid var(--color-line); border-radius: 10px; background: #fff; padding: 8px 10px; transition: border-color .35s, box-shadow .35s, background .35s; }
+.node.active { border-color: var(--color-teal); background: var(--color-teal-soft); box-shadow: 0 8px 24px -14px rgba(96,216,200,.6); }
+.band-dark .node { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.12); }
+.band-dark .node.active { background: rgba(96,216,200,.12); border-color: rgba(96,216,200,.55); }
+@media (prefers-reduced-motion: reduce) { .packet { display: none; } }

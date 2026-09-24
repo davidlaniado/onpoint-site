@@ -1,0 +1,56 @@
+---
+// The brand's control panel. WorkOS-style toggle stack: what the brand owns and sets.
+import VizFrame from './VizFrame.astro';
+interface Props { compact?: boolean; class?: string }
+const { compact = false, class: cls = '' } = Astro.props;
+const rows = [
+  { id: 'claims', on: true, label: 'Claim set', value: '12 approved', chip: 'approved', state: 'ok' },
+  { id: 'channels', on: true, label: 'Channels', value: 'meta, search, email', chip: 'allowed', state: 'ok' },
+  { id: 'cap', on: true, label: 'Cap', value: 'daily', chip: 'set', state: 'ok' },
+  { id: 'structure', on: true, label: 'Structure', value: 'CPA', chip: 'locked', state: 'navy' },
+  { id: 'creative', on: true, label: 'Creative approval', value: 'required', chip: 'enforced', state: 'ok' },
+  { id: 'partner', on: false, label: 'Partner P-0207', value: 'pending review', chip: null, state: 'wait' },
+];
+---
+<VizFrame label="offer.controls" right="OFR-118 · brand" class={cls} footer={compact ? undefined : 'you approve claims, channels, caps, structure, and every partner'}>
+  <div class:list={['oc', compact && 'oc-compact']} data-offer-controls>
+    <ul class="oc-list">
+      {rows.map((r) => (
+        <li class="oc-row" data-row={r.id} data-on={r.on ? '1' : '0'}>
+          <span class="oc-toggle" aria-hidden="true"><span class="oc-knob"></span></span>
+          <span class="oc-text"><span class="oc-label">{r.label}</span><span class="oc-sep"> · </span><span class="oc-value">{r.value}</span></span>
+          {r.chip ? (
+            <span class:list={['chip', r.state === 'ok' && 'ok', r.state === 'navy' && 'navy']}>{r.chip}</span>
+          ) : (
+            <span class="oc-actions"><button type="button" class="oc-btn oc-approve" tabindex="-1">approve</button><button type="button" class="oc-btn" tabindex="-1">remove</button></span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</VizFrame>
+<script>
+  // one row changes state at a time: the pending partner gets approved, then a new pending partner arrives
+  document.querySelectorAll<HTMLElement>('[data-offer-controls]').forEach((root) => {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const row = root.querySelector<HTMLElement>('[data-row="partner"]');
+    if (!row || reduce) return;
+    const label = row.querySelector('.oc-label')!, value = row.querySelector('.oc-value')!, actions = row.querySelector<HTMLElement>('.oc-actions')!;
+    const ids = ['P-0207', 'P-0412', 'P-0388', 'P-0519'];
+    let i = 0;
+    const cycle = () => {
+      // approve
+      row.dataset.on = '1'; actions.innerHTML = '<span class="chip ok">approved</span>'; value.textContent = 'verified · live';
+      setTimeout(() => {
+        // next partner arrives pending
+        i = (i + 1) % ids.length; row.classList.add('oc-swap');
+        setTimeout(() => {
+          row.dataset.on = '0'; label.textContent = `Partner ${ids[i]}`; value.textContent = 'pending review';
+          actions.innerHTML = '<button type="button" class="oc-btn oc-approve" tabindex="-1">approve</button><button type="button" class="oc-btn" tabindex="-1">remove</button>';
+          row.classList.remove('oc-swap');
+        }, 350);
+      }, 2400);
+    };
+    setTimeout(cycle, 1800); setInterval(cycle, 5400);
+  });
+</script>
