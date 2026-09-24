@@ -1,100 +1,197 @@
 ---
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import StatStrip from '../components/StatStrip.astro';
-import Section from '../components/Section.astro';
+import ContactForm from '../components/ContactForm.astro';
 import FAQ from '../components/FAQ.astro';
-import CTABand from '../components/CTABand.astro';
-import DarkBand from '../components/DarkBand.astro';
-import OfferControls from '../components/viz/OfferControls.astro';
-import PartnerDesk from '../components/viz/PartnerDesk.astro';
 import ReviewPass from '../components/viz/ReviewPass.astro';
 import { href, SITE } from '../lib/site';
-import { getCollection } from 'astro:content';
 
-const verticals = (await getCollection('programs')).filter((p) => p.data.group === 'vertical').sort((a, b) => a.data.order - b.data.order);
 const faq = [
   { q: 'What is OnPoint?', a: 'A gated performance network for telehealth, wellness, and diagnostics brands. We connect brands with identity-verified media partners, run server-side tracking and payouts between them, and review ads and funnels before launch. Brands keep full control of their health claims.' },
-  { q: 'Who owns the health claims?', a: 'The brand. OnPoint reviews creative against the brand’s approved claim set for advertising standards. We never write, change, or substantiate a medical claim.' },
+  { q: 'How is that different from an agency?', a: 'An agency runs your ads with its own team and bills a retainer. OnPoint brings verified outside partners who are paid only on approved performance, and adds the compliance review, tracking, and payout layer between you and them.' },
+  { q: 'Who owns the health claims?', a: 'The brand. OnPoint reviews creative against your approved claim set for advertising standards. We never write, change, or substantiate a medical claim.' },
+  { q: 'What does a brand need to join?', a: 'A program that already converts, usually past $1M a month, a working funnel, LegitScript where required, and a claim set you stand behind. We scale what works. We do not build from zero.' },
   { q: 'How are partners paid?', a: 'On approved performance under terms agreed before launch: CPA, revenue share, or hybrid depending on the offer. Reversals show up with a reason.' },
-  { q: 'How do I get started?', a: 'Apply through the contact page as a brand or a partner. Every application is reviewed for compliance readiness and fit before anything goes live.' },
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
----
-<Base title="OnPoint Health Media & Tech | Compliant scale for telehealth brands" description={SITE.description} jsonLd={faqLd}>
-  <Hero />
-  <StatStrip />
 
-  <Section eyebrow="Two sides, one standard" title="Not an agency. A network with a compliance arm." lead="Brands bring a program that already converts. Partners bring verified traffic. OnPoint is the gate, the tracking, and the payout between them.">
-    <div class="grid lg:grid-cols-2 gap-6">
-      <div class="card overflow-hidden reveal">
-        <div class="p-5 pb-0 bg-paper"><OfferControls compact /></div>
-        <div class="p-6 md:p-8">
-          <p class="mono-label">For brands</p>
-          <h3 class="mt-2 text-2xl font-extrabold leading-tight">Scale through partners without losing control.</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-slate">
-            <li class="flex gap-3"><span class="text-teal-ink">✓</span>Your claim set. Ads and funnels reviewed against it before launch.</li>
-            <li class="flex gap-3"><span class="text-teal-ink">✓</span>Only verified partners on the channels you allow.</li>
-            <li class="flex gap-3"><span class="text-teal-ink">✓</span>Attribution and payments visible end to end.</li>
-          </ul>
-          <a href={href('/brands/')} class="btn btn-primary mt-6">For brands →</a>
+const verticals = [
+  ['glp-1-weight-loss-affiliate-program', 'GLP-1 weight loss', '<path d="M4 20h16"/><path d="M6 20V9a6 6 0 0112 0v11"/><path d="M9 20v-6h6v6"/>'],
+  ['trt-testosterone-affiliate-program', 'TRT', '<circle cx="9" cy="14" r="5"/><path d="M12.5 10.5L20 3"/><path d="M15 3h5v5"/>'],
+  ['ed-telehealth-affiliate-program', 'ED', '<path d="M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10z"/>'],
+  ['hair-loss-telehealth-affiliate-program', 'Hair loss', '<path d="M4 14c2-6 6-9 8-9s6 3 8 9"/><path d="M6 14v6M10 12v8M14 12v8M18 14v6"/>'],
+  ['womens-hormone-health-affiliate-program', "Women's hormone health", '<circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/>'],
+  ['at-home-diagnostics-affiliate-program', 'At-home diagnostics', '<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/>'],
+];
+
+const compare = [
+  ['Who sends the traffic', 'Verified outside media partners', 'The agency’s own buyers', 'Anyone who signs up'],
+  ['Partner verification', 'Identity, KYC, and traffic source, before access', 'Not applicable', 'Rarely'],
+  ['Creative reviewed before launch', 'Every ad, against your claim set', 'Sometimes', 'No'],
+  ['Who owns the health claims', 'You do', 'Often unclear', 'Nobody'],
+  ['Tracking', 'Server-side. Brand and partner see the same sale', 'Their dashboard', 'A pixel, if that'],
+  ['How you pay', 'Approved performance only', 'Retainer plus a percentage of spend', 'Per lead, often unaudited'],
+  ['Reversals explained', 'Yes, with a reason', 'No', 'No'],
+  ['Built for', 'Brands past $1M a month', 'Brands starting out', 'Volume at any cost'],
+];
+---
+<Base title="OnPoint Health Media & Tech | Built to take telehealth brands from $1M to $100M" description={SITE.description} jsonLd={faqLd}>
+
+  <!-- HERO -->
+  <section class="hero-navy text-white">
+    <div class="container-x py-14 md:py-20 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
+      <div>
+        <p class="text-teal font-semibold text-sm md:text-[15px]" data-hero style="opacity:0;transform:translateY(16px)">Performance network with a compliance arm</p>
+        <h1 class="mt-4 text-white text-[40px] leading-[1.05] sm:text-[52px] lg:text-[64px] font-extrabold tracking-[-0.02em]" data-hero style="opacity:0;transform:translateY(16px)">Built to take telehealth brands from <span class="text-teal">$1M to $100M.</span></h1>
+        <p class="mt-6 text-lg md:text-xl text-white/80 max-w-xl leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">Not an agency. OnPoint brings verified media partners, server-side tracking, audited payouts, and a review of every claim before it runs. You keep the brand and the numbers.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
+          <a href={href('/brands/')} class="btn btn-teal">For brands</a>
+          <a href={href('/partners/')} class="btn bg-white/10 text-white border border-white/25 hover:bg-white/15">For media partners</a>
         </div>
+        <ul class="mt-7 flex flex-wrap gap-2" data-hero style="opacity:0;transform:translateY(16px)">
+          {['Verified partners only', 'Every claim reviewed', 'Paid on approved performance'].map((t) => <li class="pill-outline">{t}</li>)}
+        </ul>
       </div>
-      <div class="card overflow-hidden reveal">
-        <div class="band-dark p-5 rounded-t-[12px]"><PartnerDesk compact /></div>
-        <div class="p-6 md:p-8">
-          <p class="mono-label">For media partners</p>
-          <h3 class="mt-2 text-2xl font-extrabold leading-tight">Exclusive offers that pay and stay.</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-slate">
-            <li class="flex gap-3"><span class="text-teal-ink">✓</span>Exclusive telehealth offers with clear claim rules per offer.</li>
-            <li class="flex gap-3"><span class="text-teal-ink">✓</span>One tracking link, server-side postbacks, sub IDs to the ad.</li>
-            <li class="flex gap-3"><span class="text-teal-ink">✓</span>Paid on approved performance. Reversals explained.</li>
-          </ul>
-          <a href={href('/partners/')} class="btn btn-ghost mt-6">For partners →</a>
-        </div>
+      <div class="hero-form" data-hero style="opacity:0;transform:translateY(16px)">
+        <p class="text-navy font-bold text-lg mb-1">Talk to us</p>
+        <p class="text-slate text-sm mb-4">Brands past $1M a month and partners with verified traffic. A real person replies within one business day.</p>
+        <ContactForm bare />
       </div>
     </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="How it works" title="Apply, verify, live, cleared." lead="Both sides go through the gate. Nothing runs before verification.">
-    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <!-- STAT BAND -->
+  <section class="container-x -mt-8 md:-mt-10 relative z-10">
+    <div class="stat-band reveal">
+      <p class="stat-title">The track record behind the network</p>
+      <div class="stat-grid">
+        {[['$1B+', 'revenue driven for brands our founders scaled'], ['$1M+', 'monthly revenue is where a brand should be before it joins'], ['6', 'regulated health categories'], ['ATA', 'American Telemedicine Association members']].map(([n, l]) => (
+          <div><p class="stat-n">{n}</p><p class="stat-l">{l}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="container-x pt-20 md:pt-28 text-center">
+    <p class="kicker">Where we work</p>
+    <h2 class="h2 mt-3 max-w-3xl mx-auto">Six regulated categories. One standard.</h2>
+    <p class="lead mx-auto mt-4">Each program page has the payable event, the allowed channels, and the claim rules.</p>
+    <div class="mt-10 grid grid-cols-3 md:grid-cols-6 gap-5 md:gap-6 max-w-4xl mx-auto">
+      {verticals.map(([slug, name, icon]) => (
+        <a href={href(`/programs/${slug}/`)} class="group flex flex-col items-center gap-3 reveal">
+          <span class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icon} /></span>
+          <span class="text-[15px] font-semibold text-navy leading-tight text-center group-hover:text-teal-ink">{name}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- TWO SIDES -->
+  <section class="container-x pt-20 md:pt-28">
+    <p class="kicker">A clear operating model</p>
+    <h2 class="h2 mt-3 max-w-3xl">You bring the program. We run the network.</h2>
+    <p class="lead mt-4">Brands keep their claims, their funnel, and their providers. Partners bring verified traffic. OnPoint is the gate, the tracking, and the payout between them.</p>
+    <div class="mt-10 grid lg:grid-cols-2 gap-5">
+      <div class="panel-mint reveal">
+        <h3 class="text-2xl font-extrabold">Your brand</h3>
+        <ul class="checks mt-6">
+          <li>Own and approve every health claim</li>
+          <li>Choose the channels and the partners allowed on your offer</li>
+          <li>Set the cap, the structure, and the terms before launch</li>
+          <li>See attribution and payments end to end</li>
+        </ul>
+        <a href={href('/brands/')} class="btn btn-primary mt-8">How it works for brands</a>
+      </div>
+      <div class="panel-navy reveal">
+        <h3 class="text-2xl font-extrabold text-white">OnPoint</h3>
+        <ul class="checks checks-light mt-6">
+          <li>Verify every partner: identity, KYC, and traffic source</li>
+          <li>Review ads and funnels against your claim set before they run</li>
+          <li>Run server-side tracking so both sides see the same sale</li>
+          <li>Pay partners on approved performance, with reversals explained</li>
+        </ul>
+        <a href={href('/partners/')} class="btn btn-teal mt-8">How it works for partners</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="container-x pt-20 md:pt-28 text-center">
+    <h2 class="h2">Live in four steps.</h2>
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6">
       {[
         ['Apply', 'Brands: business and compliance review. Partners: identity, KYC, and traffic source.'],
         ['Verify', 'Claim set and terms locked for the brand. Channels and placements approved for the partner.'],
-        ['Go live', 'Verified partners only, on approved channels, with a tracking test passed first.'],
-        ['Get paid', 'Payouts on approved performance. Reversals shown with a reason. Same numbers on both sides.'],
+        ['Go live', 'Verified partners only, on approved channels, after a tracking test passes.'],
+        ['Get paid', 'Payouts on approved performance. Reversals with a reason. Same numbers on both sides.'],
       ].map(([t, d], i) => (
-        <li class="card p-6 reveal">
-          <p class="text-sm font-semibold text-teal-ink">{i + 1}</p>
-          <h3 class="mt-1 text-lg font-bold">{t}</h3>
-          <p class="mt-2 text-[15px] text-slate leading-relaxed">{d}</p>
-        </li>
-      ))}
-    </ol>
-  </Section>
-
-  <DarkBand class="!my-12 md:!my-16">
-    <Section eyebrow="Compliance" title="Reviewed before it runs. Every time." lead="Creative is checked against the brand’s claim set. What fails goes back to the partner. What passes is logged with a reviewer and a time." class="!py-10 md:!py-14">
-      <div class="reveal"><ReviewPass /></div>
-      <ul class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[14px]">
-        {['Brand-owned, brand-approved claims', 'Identity, KYC, and traffic-source verification', 'Server-side tracking through Everflow', 'Sources removed when quality drops'].map((t) => (
-          <li class="flex items-start gap-2 text-white/85 reveal"><span class="mt-2 w-1.5 h-1.5 rounded-full bg-teal shrink-0"></span>{t}</li>
-        ))}
-      </ul>
-    </Section>
-  </DarkBand>
-
-  <Section eyebrow="Where we work" title="Six regulated categories." lead="Each program page has the payable event, allowed channels, and the claim rules." class="!py-10 md:!py-14">
-    <div class="flex flex-wrap gap-3">
-      {verticals.map((p) => (
-        <a href={href(`/programs/${p.id}/`)} class="reveal card card-hover px-4 py-3 font-display font-bold text-navy text-[15px] flex items-center gap-2">{p.data.title.replace(' Affiliate Program', '').replace(' and Lab Testing', '')} <span class="text-teal-ink" aria-hidden="true">→</span></a>
+        <div class="reveal">
+          <span class="step-circle">{i + 1}</span>
+          <h3 class="mt-4 text-xl font-bold">{t}</h3>
+          <p class="mt-2 text-[15px] text-slate leading-relaxed max-w-xs mx-auto">{d}</p>
+        </div>
       ))}
     </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Questions" title="Straight answers." class="!py-10 md:!py-14">
-    <div class="max-w-3xl"><FAQ items={faq} /></div>
-  </Section>
+  <!-- COMPLIANCE (dark) -->
+  <section class="mt-20 md:mt-28 bg-navy-deep text-white">
+    <div class="container-x py-16 md:py-24">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="kicker kicker-light">The compliance arm</p>
+        <h2 class="h2 text-white mt-3">Every ad is checked against your claim set before it runs.</h2>
+        <p class="text-white/75 text-lg mt-4 leading-relaxed">What fails goes back to the partner with the reason. What passes is logged with a reviewer and a time. Sources that slip are removed.</p>
+      </div>
+      <div class="mt-12 review-shell reveal"><ReviewPass /></div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          ['Claims', 'Brand-owned and brand-approved. We review, we never write.'],
+          ['Sources', 'Identity, KYC, and traffic source verified before access.'],
+          ['Tracking', 'Server-side through Everflow. Both sides see one number.'],
+          ['Payouts', 'Approved performance only. Reversals shown with a reason.'],
+        ].map(([t, d]) => (
+          <div class="dark-tile reveal"><h3 class="text-white text-lg font-bold">{t}</h3><p class="mt-2 text-white/70 text-[15px] leading-relaxed">{d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <CTABand />
+  <!-- COMPARE -->
+  <section class="container-x pt-20 md:pt-28">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="h2">How OnPoint compares.</h2>
+      <p class="lead mx-auto mt-4">Agencies sell hands. Open networks sell volume. OnPoint sells verified scale with the compliance layer built in.</p>
+    </div>
+    <div class="mt-10 overflow-x-auto">
+      <table class="compare">
+        <thead><tr><th></th><th class="is-us">OnPoint</th><th>An agency</th><th>An open network</th></tr></thead>
+        <tbody>
+          {compare.map(([k, a, b, c]) => (
+            <tr><th scope="row">{k}</th><td class="is-us">{a}</td><td>{b}</td><td>{c}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-x pt-20 md:pt-28">
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10">
+      <div><h2 class="h2">Questions, answered.</h2><p class="lead mt-4">Short answers. Longer ones live on the program pages and the blog.</p></div>
+      <FAQ items={faq} />
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container-x pt-20 md:pt-28 pb-6">
+    <div class="cta-simple reveal">
+      <h2 class="text-white text-3xl md:text-[40px] font-extrabold leading-tight">Already past $1M a month? Let’s talk.</h2>
+      <p class="text-white/75 text-lg mt-3 max-w-xl">One call. We tell you honestly whether your program fits the network, and what it would take to scale it.</p>
+      <div class="mt-7 flex flex-col sm:flex-row gap-3 sm:items-center">
+        <a href={href('/contact/?as=brand')} class="btn btn-teal">Book a call</a>
+        <a href={href('/contact/?as=partner')} class="btn bg-white/10 text-white border border-white/25 hover:bg-white/15">Apply as a partner</a>
+        <span class="text-white/60 text-sm sm:ml-2">Free · 30 minutes · no obligation</span>
+      </div>
+    </div>
+  </section>
 </Base>

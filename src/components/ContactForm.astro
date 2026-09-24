@@ -3,8 +3,10 @@ import { SITE } from '../lib/site';
 // Static-site form: FormSubmit relays to SITE.email. First submission triggers a one-time
 // activation email to that inbox. Swap the action for any other form endpoint later.
 const action = `https://formsubmit.co/ajax/${SITE.email}`;
+interface Props { bare?: boolean }
+const { bare = false } = Astro.props;
 ---
-<form id="contact-form" action={action} method="POST" class="card p-6 md:p-8 relative" novalidate>
+<form id="contact-form" action={action} method="POST" class:list={[bare ? 'relative' : 'card p-6 md:p-8 relative']} novalidate>
   <div class="form-fields grid gap-4">
     <input type="hidden" name="_subject" value="New inquiry from onpointhealthmedia.com" />
     <input type="hidden" name="_template" value="table" />

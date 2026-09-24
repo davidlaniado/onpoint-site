@@ -13,7 +13,7 @@ const isActive = (p: string) => current.startsWith(href(p).replace(/\/$/, ''));
       {NAV.map((n) => (
         <a href={href(n.path)} class:list={['nav-link', isActive(n.path) && 'text-teal-ink']}>{n.label}</a>
       ))}
-      <a href={href('/contact/')} class="btn btn-teal !py-2.5 !px-4 text-sm">Contact us</a>
+      <a href={href('/contact/')} class="btn btn-teal !py-2.5 !px-5 text-sm">Book a call</a>
     </nav>
     <button id="nav-toggle" class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border text-navy" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="nav-open" d="M3 5h14M3 10h14M3 15h14"/><path class="nav-close hidden" d="M5 5l10 10M15 5L5 15"/></svg>
@@ -25,7 +25,7 @@ const isActive = (p: string) => current.startsWith(href(p).replace(/\/$/, ''));
         {NAV.map((n) => (
           <a href={href(n.path)} class="py-3 text-[17px] font-medium text-navy border-b last:border-0">{n.label}</a>
         ))}
-        <a href={href('/contact/')} class="btn btn-teal mt-3">Contact us</a>
+        <a href={href('/contact/')} class="btn btn-teal mt-3">Book a call</a>
       </div>
     </nav>
   </div>
