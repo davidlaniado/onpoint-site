@@ -4,8 +4,7 @@
 <div class="pep-wrap" data-hero style="opacity:0;transform:translateY(16px)">
   <div class="pep-glow" aria-hidden="true"></div>
   <canvas id="pep-canvas" class="pep-canvas" aria-label="3D peptide vial"></canvas>
-  <div class="pep-caption" aria-hidden="true"><span>Peptides · GLP-1 · Hormones · Longevity</span></div>
-</div>
+  </div>
 <script>
   import * as THREE from 'three';
   import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
@@ -21,56 +20,47 @@
     renderer.setPixelRatio(Math.min(devicePixelRatio, fine ? 2 : 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100); camera.position.set(0, 0.2, 9);
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100); camera.position.set(0, 0.1, 8.2);
     scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
 
     const group = new THREE.Group(); scene.add(group);
 
-    // vial body: frosted glass capsule
-    const glass = new THREE.MeshPhysicalMaterial({ color: 0xeafaf8, transmission: 0.95, roughness: 0.05, thickness: 0.9, ior: 1.4, clearcoat: 1, clearcoatRoughness: 0.05, transparent: true, opacity: 0.75, envMapIntensity: 1.2 });
-    const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.9, 2.6, 24, 48), glass); group.add(body);
-    // cap
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.55, 48), new THREE.MeshStandardMaterial({ color: 0x60d8c8, metalness: 0.7, roughness: 0.25 }));
-    cap.position.y = 2.3; group.add(cap);
-    const capRing = new THREE.Mesh(new THREE.TorusGeometry(0.66, 0.05, 16, 64), new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.2 }));
-    capRing.rotation.x = Math.PI / 2; capRing.position.y = 2.02; group.add(capRing);
-    // inner liquid
-    const liquid = new THREE.Mesh(new THREE.CapsuleGeometry(0.72, 2.2, 16, 32), new THREE.MeshPhysicalMaterial({ color: 0x60d8c8, transmission: 0.6, roughness: 0.3, thickness: 0.8, transparent: true, opacity: 0.35, emissive: 0x14867a, emissiveIntensity: 0.25 }));
-    liquid.position.y = -0.2; group.add(liquid);
+    // one slim capsule, horizontal-ish: left half matte white, right half clear glass with the peptide chain inside
+    const L = 3.4, R = 0.62;
+    const white = new THREE.Mesh(new THREE.CapsuleGeometry(R, L / 2, 24, 48), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.32, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.25 }));
+    white.rotation.z = Math.PI / 2;
+    // clip the white half so it ends flat at the seam
+    const seamPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0); // keep x < 0
+    (white.material as THREE.Material).clippingPlanes = [seamPlane]; (white.material as THREE.Material).clipShadows = true;
+    group.add(white);
+    const glass = new THREE.Mesh(new THREE.CapsuleGeometry(R, L / 2, 24, 48), new THREE.MeshPhysicalMaterial({ color: 0xeafffc, transmission: 0.96, roughness: 0.04, thickness: 0.8, ior: 1.42, clearcoat: 1, clearcoatRoughness: 0.04, transparent: true, opacity: 0.7 }));
+    glass.rotation.z = Math.PI / 2;
+    (glass.material as THREE.Material).clippingPlanes = [new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)]; // keep x > 0
+    group.add(glass);
+    renderer.localClippingEnabled = true;
+    // seam ring
+    const seam = new THREE.Mesh(new THREE.TorusGeometry(R + 0.005, 0.03, 16, 96), new THREE.MeshStandardMaterial({ color: 0x60d8c8, metalness: 0.8, roughness: 0.2, emissive: 0x14867a, emissiveIntensity: 0.4 }));
+    seam.rotation.y = Math.PI / 2; group.add(seam);
 
-    // peptide helix: glowing beads on a double helix with rungs
+    // peptide chain inside the glass half: a single helix of small glowing beads
     const helix = new THREE.Group(); group.add(helix);
-    const beadGeo = new THREE.SphereGeometry(0.07, 16, 16);
-    const beadA = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x60d8c8, emissiveIntensity: 2.4, roughness: 0.3 });
-    const beadB = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x3890b0, emissiveIntensity: 2.0, roughness: 0.3 });
-    const rungMat = new THREE.MeshStandardMaterial({ color: 0xbff3ec, emissive: 0x60d8c8, emissiveIntensity: 0.5, transparent: true, opacity: 0.8 });
-    const N = 26, R = 0.36, H = 2.6;
+    const beadGeo = new THREE.SphereGeometry(0.055, 16, 16);
+    const beadMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x60d8c8, emissiveIntensity: 2.4, roughness: 0.3 });
+    const linkMat = new THREE.MeshStandardMaterial({ color: 0xbff3ec, emissive: 0x60d8c8, emissiveIntensity: 0.9, transparent: true, opacity: 0.85 });
+    const N = 14, hr = 0.26, span = L / 4 + 0.2;
+    let prev: THREE.Vector3 | null = null;
     for (let i = 0; i < N; i++) {
-      const t = i / (N - 1), y = -H / 2 + t * H, a = t * Math.PI * 4;
-      const p1 = new THREE.Vector3(Math.cos(a) * R, y, Math.sin(a) * R), p2 = new THREE.Vector3(Math.cos(a + Math.PI) * R, y, Math.sin(a + Math.PI) * R);
-      const b1 = new THREE.Mesh(beadGeo, beadA); b1.position.copy(p1); helix.add(b1);
-      const b2 = new THREE.Mesh(beadGeo, beadB); b2.position.copy(p2); helix.add(b2);
-      if (i % 2 === 0) {
-        const rung = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, R * 2, 8), rungMat);
-        rung.position.copy(p1).lerp(p2, 0.5); rung.lookAt(p2); rung.rotateX(Math.PI / 2); helix.add(rung);
-      }
+      const t = i / (N - 1), x = 0.15 + t * span, a = t * Math.PI * 3;
+      const pt = new THREE.Vector3(x, Math.cos(a) * hr, Math.sin(a) * hr);
+      const b = new THREE.Mesh(beadGeo, beadMat); b.position.copy(pt); helix.add(b);
+      if (prev) { const d = pt.clone().sub(prev); const link = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, d.length(), 8), linkMat); link.position.copy(prev).add(d.clone().multiplyScalar(0.5)); link.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.clone().normalize()); helix.add(link); }
+      prev = pt;
     }
-    helix.position.y = -0.2;
-
-    // particles
-    const pc = 160, pos = new Float32Array(pc * 3);
-    for (let i = 0; i < pc; i++) { pos[i * 3] = (Math.random() - 0.5) * 6; pos[i * 3 + 1] = (Math.random() - 0.5) * 6; pos[i * 3 + 2] = (Math.random() - 0.5) * 4 - 1; }
-    const particles = new THREE.Points(new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(pos, 3)), new THREE.PointsMaterial({ color: 0x60d8c8, size: 0.035, transparent: true, opacity: 0.7, sizeAttenuation: true }));
-    scene.add(particles);
-
-    // rings
-    const ringMat = new THREE.MeshBasicMaterial({ color: 0x60d8c8, transparent: true, opacity: 0.25 });
-    const ring1 = new THREE.Mesh(new THREE.TorusGeometry(2.1, 0.008, 8, 128), ringMat); ring1.rotation.x = Math.PI / 2.4; scene.add(ring1);
-    const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.7, 0.006, 8, 128), ringMat); ring2.rotation.x = Math.PI / 1.8; ring2.rotation.y = 0.5; scene.add(ring2);
-
+    const particles = new THREE.Group(); const ring1 = new THREE.Group(); const ring2 = new THREE.Group(); const beadA = beadMat;
+    group.rotation.set(0.25, -0.35, -0.5); group.scale.setScalar(0.78);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x182858, 0.8));
     const key = new THREE.DirectionalLight(0xffffff, 1.8); key.position.set(-3, 5, 4); scene.add(key);
-    const rim = new THREE.PointLight(0x60d8c8, 6, 12); rim.position.set(3, 1, -2); scene.add(rim);
+    const rim = new THREE.PointLight(0x60d8c8, 4, 12); rim.position.set(3, 1, -2); scene.add(rim);
 
     group.rotation.z = 0.35; group.rotation.x = 0.15;
 
@@ -87,12 +77,11 @@
       timer.update(); const t = timer.getElapsed();
       cur.x += (target.x - cur.x) * 0.05; cur.y += (target.y - cur.y) * 0.05;
       if (!reduce) {
-        group.rotation.y = t * 0.35 + cur.x * 0.5;
-        group.rotation.x = 0.15 + cur.y * 0.25 + Math.sin(t * 0.6) * 0.05;
-        group.position.y = Math.sin(t * 0.9) * 0.12;
-        helix.rotation.y = -t * 0.9;
-        particles.rotation.y = t * 0.05; particles.rotation.x = Math.sin(t * 0.2) * 0.1;
-        ring1.rotation.z = t * 0.15; ring2.rotation.z = -t * 0.1;
+        group.rotation.y = -0.35 + Math.sin(t * 0.25) * 0.35 + cur.x * 0.35;
+        group.rotation.x = 0.25 + cur.y * 0.2 + Math.sin(t * 0.4) * 0.06;
+        group.rotation.z = -0.5 + Math.sin(t * 0.3) * 0.04;
+        group.position.y = Math.sin(t * 0.8) * 0.08;
+        helix.rotation.x = t * 0.8;
         (beadA as any).emissiveIntensity = 2.2 + Math.sin(t * 3) * 0.7;
       }
       renderer.render(scene, camera);
