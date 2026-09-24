@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ContactForm from '../components/ContactForm.astro';
+import PeptideHero from '../components/PeptideHero.astro';
 import FAQ from '../components/FAQ.astro';
 import ReviewPass from '../components/viz/ReviewPass.astro';
 import { href, SITE } from '../lib/site';
@@ -41,8 +42,8 @@ const compare = [
 <Base title="OnPoint Health Media & Tech | Built to take telehealth brands from $1M to $100M" description={SITE.description} jsonLd={faqLd}>
 
   <!-- HERO -->
-  <section id="contact" class="hero-navy text-white">
-    <div class="container-x py-14 md:py-20 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
+  <section class="hero-navy text-white">
+    <div class="container-x py-14 md:py-20 grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-center">
       <div>
         <p class="text-teal font-semibold text-sm md:text-[15px]" data-hero style="opacity:0;transform:translateY(16px)">Performance network with a compliance arm</p>
         <h1 class="mt-4 text-white text-[40px] leading-[1.05] sm:text-[52px] lg:text-[64px] font-extrabold tracking-[-0.02em]" data-hero style="opacity:0;transform:translateY(16px)">Built to take telehealth brands from <span class="text-teal">$1M to $100M.</span></h1>
@@ -55,11 +56,7 @@ const compare = [
           {['Verified partners only', 'Every claim reviewed', 'Paid on approved performance'].map((t) => <li class="pill-outline">{t}</li>)}
         </ul>
       </div>
-      <div class="hero-form" data-hero style="opacity:0;transform:translateY(16px)">
-        <p class="text-navy font-bold text-lg mb-1">Talk to us</p>
-        <p class="text-slate text-sm mb-4">Brands past $1M a month and partners with verified traffic. A real person replies within one business day.</p>
-        <ContactForm bare />
-      </div>
+      <PeptideHero />
     </div>
   </section>
 
@@ -72,6 +69,18 @@ const compare = [
           <div><p class="stat-n">{n}</p><p class="stat-l">{l}</p></div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- TALK TO US -->
+  <section id="contact" class="container-x pt-20 md:pt-28 scroll-mt-24">
+    <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+      <div>
+        <p class="kicker">Talk to us</p>
+        <h2 class="h2 mt-3">Already past $1M a month? Let’s talk.</h2>
+        <p class="lead mt-4">Brands with a program that converts, and partners with verified traffic. A real person replies within one business day. Free, 30 minutes, no obligation.</p>
+      </div>
+      <div class="rounded-[24px] border border-line p-6 md:p-8"><ContactForm bare /></div>
     </div>
   </section>
 
