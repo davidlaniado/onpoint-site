@@ -1,14 +1,14 @@
 ---
 // Shared frame for every code-drawn "instrument": mono header label, optional live dot, optional footer log.
-interface Props { label: string; live?: boolean; class?: string; footer?: string; right?: string }
-const { label, live = false, class: cls = '', footer, right } = Astro.props;
+interface Props { label: string; live?: boolean; class?: string; footer?: string; right?: string; bare?: boolean; tone?: 'white' | 'tint' | 'paper' | 'navy' | 'none' }
+const { label, live = false, class: cls = '', footer, right, bare = false, tone = 'white' } = Astro.props;
 const nice = label.replace(/\./g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 ---
-<div class:list={['viz card overflow-hidden', cls]}>
-  <div class="viz-head flex items-center justify-between px-4 py-2.5 border-b border-line">
+<div class:list={['viz overflow-hidden', !bare && 'card', `tone-${tone}`, bare && 'viz-bare', cls]}>
+  {!bare && <div class="viz-head flex items-center justify-between px-4 py-2.5 border-b border-line">
     <span class="viz-title">{nice}</span>
     <span class="viz-right flex items-center gap-2">{right && <span>{right}</span>}{live && <span class="inline-block w-1.5 h-1.5 rounded-full bg-teal"></span>}</span>
-  </div>
+  </div>}
   <div class="viz-body relative"><slot /></div>
-  {footer && <div class="viz-foot px-4 py-2.5 border-t border-line bg-paper text-[12px] text-slate truncate">{footer}</div>}
+  {footer && !bare && <div class="viz-foot px-4 py-2.5 border-t border-line bg-paper text-[12px] text-slate truncate">{footer}</div>}
 </div>

@@ -21,7 +21,7 @@ const label = title ?? `fig. ${m.n} — ${m.name}`;
 const vertical = subject ?? 'GLP-1 program';
 const channel = subject ?? 'Meta';
 ---
-<VizFrame label={label} live={false} right={`OFR-118`} footer={m.foot} class={`cover cover-${kind} ${cls}`}>
+<VizFrame label={label} bare tone={({ payouts: 'tint', compliant: 'navy', vet: 'paper', postback: 'white', claims: 'paper', funnel: 'tint', 'offer-sheet': 'white', 'channel-rules': 'navy', 'offer-controls': 'paper' } as Record<string, any>)[kind] ?? 'white'} class={`cover cover-${kind} ${cls}`}>
   <div class:list={['cover-body', ratio === '4/3' ? 'aspect-[4/3]' : 'aspect-[16/9]', (isStatic || eager) && 'in']} data-cover={isStatic ? 'static' : ''}>
     {kind === 'payouts' && (
       <div class="cv-payouts">

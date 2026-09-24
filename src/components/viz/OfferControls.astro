@@ -12,7 +12,7 @@ const rows = [
   { id: 'partner', on: false, label: 'Partner P-0207', value: 'pending review', chip: null, state: 'wait' },
 ];
 ---
-<VizFrame label="offer.controls" right="OFR-118 · brand" class={cls} footer={compact ? undefined : 'you approve claims, channels, caps, structure, and every partner'}>
+<VizFrame label="offer.controls" right="OFR-118 · brand" tone="paper" class={cls} footer={compact ? undefined : 'you approve claims, channels, caps, structure, and every partner'}>
   <div class:list={['oc', compact && 'oc-compact']} data-offer-controls>
     <ul class="oc-list">
       {rows.map((r) => (

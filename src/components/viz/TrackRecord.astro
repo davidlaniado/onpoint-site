@@ -10,7 +10,7 @@ const nodes = [
   ['05', 'OnPoint · 2026'],
 ];
 ---
-<VizFrame label="track.record" live={false} right="founders" class="trackrecord">
+<VizFrame label="track.record" bare tone="none" class="trackrecord">
   <ol class="tr-list">
     {nodes.map(([n, t], i) => (
       <li class:list={['tr-node', i === nodes.length - 1 && 'tr-last']} style={`--d:${i * 140}ms`}>
