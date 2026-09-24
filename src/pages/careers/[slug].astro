@@ -18,7 +18,7 @@ const ld = {
   datePosted: d.datePosted.toISOString().slice(0, 10),
   employmentType: d.type.toUpperCase().includes('CONTRACT') ? ['FULL_TIME', 'CONTRACTOR'] : 'FULL_TIME',
   hiringOrganization: { '@type': 'Organization', name: SITE.name, sameAs: SITE.url },
-  jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: SITE.address.city, addressRegion: SITE.address.region, addressCountry: 'US' } },
+  jobLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressRegion: SITE.address.region, addressCountry: 'US' } },
   jobLocationType: 'TELECOMMUTE',
   applicantLocationRequirements: { '@type': 'Country', name: 'USA' },
   directApply: true,

@@ -1,6 +1,6 @@
 ---
 interface Props { eyebrow?: string; title: string; lead?: string; id?: string; class?: string; center?: boolean; split?: boolean }
-const { eyebrow, title, lead, id, class: cls = '', center = false, split = true } = Astro.props;
+const { eyebrow, title, lead, id, class: cls = '', center = false, split = false } = Astro.props;
 ---
 <section id={id} class:list={['container-x py-16 md:py-24', cls]}>
   <div class:list={['reveal max-w-2xl', center && 'mx-auto text-center']}>

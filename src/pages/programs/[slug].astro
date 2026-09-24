@@ -40,7 +40,7 @@ const ld = [
 ---
 <Base title={d.title} description={d.description} jsonLd={ld}>
   <section class="relative overflow-hidden">
-    <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-8 md:pt-14 pb-10 md:pb-14">
       <nav class="text-sm text-mist" aria-label="Breadcrumb" data-hero style="opacity:0;transform:translateY(16px)"><a href={href('/')} class="hover:text-navy">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-navy">Programs</a> <span aria-hidden="true">/</span> <span class="text-navy">{d.title}</span></nav>
       <div class="mt-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">

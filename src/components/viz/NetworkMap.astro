@@ -1,6 +1,6 @@
 ---
 import '../../styles/viz-covers.css';
-// Dotted US map: HQ pin at Wyckoff NJ, partner/brand nodes light up one at a time with a line to the hub.
+// Dotted US map: HQ pin at New York metro, partner/brand nodes light up one at a time with a line to the hub.
 import VizFrame from './VizFrame.astro';
 const HUB = { x: 868, y: 258 };
 const nodes = [
@@ -19,9 +19,9 @@ const nodes = [
 ];
 const US = 'M110,60 L430,45 L560,80 L620,120 L700,70 L800,80 L880,100 L930,90 L915,150 L890,210 L868,250 L840,300 L805,395 L760,450 L730,520 L705,600 L690,560 L640,500 L560,540 L520,470 L440,505 L400,480 L300,480 L250,470 L200,430 L140,400 L95,300 L100,150 Z';
 ---
-<VizFrame label="network.map" right="hq · wyckoff, nj" class="netmap">
+<VizFrame label="network.map" right="New York metro" class="netmap">
   <div class="nm-wrap">
-    <svg viewBox="0 0 1000 640" class="nm-svg" role="img" aria-label="Map of the United States with OnPoint headquarters in Wyckoff, New Jersey and partner and brand nodes across the country">
+    <svg viewBox="0 0 1000 640" class="nm-svg" role="img" aria-label="Map of the United States with OnPoint headquarters in New York, New Jersey and partner and brand nodes across the country">
       <defs>
         <pattern id="nm-dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="1.6" fill="#c9d2e3" /></pattern>
         <clipPath id="nm-clip"><path d={US} /></clipPath>

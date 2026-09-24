@@ -17,7 +17,7 @@
 /* payouts */
 .cv-payouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .cv-card { background: #fff; border: 1px solid var(--color-line); border-radius: 10px; padding: 10px 10px 8px; min-width: 0; }
-.cv-t { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-navy); }
+.cv-t { font-size: 10.5px; letter-spacing: .02em; text-transform: none; color: var(--color-navy); }
 .cv-bars { display: flex; align-items: flex-end; gap: 4px; height: 56px; margin: 10px 0 8px; }
 .cv-bar { flex: 1; background: var(--color-teal); border-radius: 3px 3px 0 0; height: calc(var(--h) * 100%); transform: scaleY(0); transform-origin: bottom; transition: transform .6s cubic-bezier(.2,.7,.2,1) var(--d, 0ms); }
 .cv-card:first-child .cv-bar { background: var(--color-navy); }
@@ -52,14 +52,14 @@
 @container (max-width: 520px) { .cv-ss { display: none; } .cv-st { font-size: 10px; } }
 /* document cards (claims, offer sheet, channel rules) */
 .cv-doc { background: #fff; border: 1px solid var(--color-line); border-radius: 10px; padding: 8px 12px 6px; box-shadow: 0 10px 30px -18px rgba(24,40,88,.35); }
-.cv-dochead { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--color-line); font-size: 10.5px; color: var(--color-mist); letter-spacing: .06em; }
+.cv-dochead { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--color-line); font-size: 10.5px; color: var(--color-mist); letter-spacing: .02em; }
 .cv-strike .cv-s-text { position: relative; color: var(--color-mist); }
 .cv-strike .cv-s-text::after { content: ""; position: absolute; left: 0; top: 55%; height: 1.5px; width: 0; background: #b42323; transition: width .5s ease calc(var(--d, 0ms) + 200ms); }
 .in .cv-strike .cv-s-text::after { width: 100%; }
 .cv-kv { display: grid; grid-template-columns: 72px 1fr; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--color-line); font-size: 12px; color: var(--color-navy); opacity: 0; transform: translateY(6px); transition: opacity .4s ease var(--d, 0ms), transform .4s ease var(--d, 0ms); }
 .cv-kv:last-child { border-bottom: 0; }
 .in .cv-kv { opacity: 1; transform: none; }
-.cv-k { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--color-mist); }
+.cv-k { font-size: 10.5px; letter-spacing: .02em; text-transform: none; color: var(--color-mist); }
 .cv-v { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
 .cv-chips { flex-wrap: wrap; }
 /* funnel */

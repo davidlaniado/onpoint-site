@@ -23,7 +23,7 @@ export async function GET({ site }: APIContext) {
     '## Key facts',
     '',
     `- Legal name: ${SITE.legalName}`,
-    `- Headquarters: ${SITE.address.street}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postal}, USA`,
+    '- Location: New York metro area, United States',
     `- Contact: ${SITE.email}`,
     '- Access model: gated on both sides. Brands clear business and compliance verification. Partners clear identity, KYC, channel, and traffic source verification.',
     '- Tracking: server-to-server postbacks and platform reporting through Everflow and Google Tag Manager.',

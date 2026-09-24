@@ -8,7 +8,6 @@ import CTABand from '../components/CTABand.astro';
 import DarkBand from '../components/DarkBand.astro';
 import OfferControls from '../components/viz/OfferControls.astro';
 import PartnerDesk from '../components/viz/PartnerDesk.astro';
-import StagePipeline from '../components/viz/StagePipeline.astro';
 import ReviewPass from '../components/viz/ReviewPass.astro';
 import { href, SITE } from '../lib/site';
 import { getCollection } from 'astro:content';
@@ -26,7 +25,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   <Hero />
   <StatStrip />
 
-  <Section eyebrow="Two sides, one standard" title="Not an agency. A network with a <span class='accent'>compliance arm</span>." lead="Brands bring a program that already converts. Partners bring verified traffic. OnPoint is the gate, the tracking, and the payout between them.">
+  <Section eyebrow="Two sides, one standard" title="Not an agency. A network with a compliance arm." lead="Brands bring a program that already converts. Partners bring verified traffic. OnPoint is the gate, the tracking, and the payout between them.">
     <div class="grid lg:grid-cols-2 gap-6">
       <div class="card overflow-hidden reveal">
         <div class="p-5 pb-0"><OfferControls compact /></div>
@@ -58,11 +57,24 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   </Section>
 
   <Section eyebrow="How it works" title="Apply, verify, live, cleared." lead="Both sides go through the gate. Nothing runs before verification.">
-    <div class="reveal"><StagePipeline /></div>
+    <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {[
+        ['Apply', 'Brands: business and compliance review. Partners: identity, KYC, and traffic source.'],
+        ['Verify', 'Claim set and terms locked for the brand. Channels and placements approved for the partner.'],
+        ['Go live', 'Verified partners only, on approved channels, with a tracking test passed first.'],
+        ['Get paid', 'Payouts on approved performance. Reversals shown with a reason. Same numbers on both sides.'],
+      ].map(([t, d], i) => (
+        <li class="card p-6 reveal">
+          <p class="text-sm font-semibold text-teal-ink">{i + 1}</p>
+          <h3 class="mt-1 text-lg font-bold">{t}</h3>
+          <p class="mt-2 text-[15px] text-slate leading-relaxed">{d}</p>
+        </li>
+      ))}
+    </ol>
   </Section>
 
   <DarkBand class="!my-12 md:!my-16">
-    <Section eyebrow="Compliance" title="Reviewed before it runs. <span class='accent'>Every</span> time." lead="Creative is checked against the brand’s claim set. What fails goes back to the partner. What passes is logged with a reviewer and a time." class="!py-10 md:!py-14">
+    <Section eyebrow="Compliance" title="Reviewed before it runs. Every time." lead="Creative is checked against the brand’s claim set. What fails goes back to the partner. What passes is logged with a reviewer and a time." class="!py-10 md:!py-14">
       <div class="reveal"><ReviewPass /></div>
       <ul class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-[14px]">
         {['Brand-owned, brand-approved claims', 'Identity, KYC, and traffic-source verification', 'Server-side tracking through Everflow', 'Sources removed when quality drops'].map((t) => (

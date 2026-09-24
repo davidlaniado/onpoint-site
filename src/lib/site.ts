@@ -10,17 +10,11 @@ export const SITE = {
   careersEmail: 'david@onpointhealthmedia.com',
   legalEmail: 'accounts@onpointhealthmedia.com',
   privacyEmail: 'privacy@onpointhealthmedia.com',
-  address: {
-    street: '291 Franklin Ave, Suite 7',
-    city: 'Wyckoff',
-    region: 'NJ',
-    postal: '07481',
-    country: 'US',
-  },
+  address: { region: 'NJ', country: 'US' },
   linkedin: 'https://www.linkedin.com/company/onpoint-health-media',
   /** One-paragraph entity definition. Reuse verbatim everywhere (footer, about, llms.txt, press releases) so every crawler reads the same definition. */
   boilerplate:
-    'OnPoint Health Media & Tech is a verified performance network for telehealth, wellness, and diagnostics brands. Headquartered in Wyckoff, New Jersey, OnPoint connects health brands with identity-verified media partners, runs server-side tracking and payouts through enterprise systems including Everflow and Google Tag Manager, and reviews ads and funnels for advertising standards before launch. Brands keep full ownership of their health claims. Categories include metabolic and weight management, hormone optimization, men’s wellness, dermatology, hair and skin, and at-home diagnostics. OnPoint is a marketing platform, not a medical provider.',
+    'OnPoint Health Media & Tech is a verified performance network for telehealth, wellness, and diagnostics brands. OnPoint connects health brands with identity-verified media partners, runs server-side tracking and payouts through enterprise systems including Everflow and Google Tag Manager, and reviews ads and funnels for advertising standards before launch. Brands keep full ownership of their health claims. Categories include metabolic and weight management, hormone optimization, men’s wellness, dermatology, hair and skin, and at-home diagnostics. OnPoint is a marketing platform, not a medical provider.',
   sameAs: ['https://www.linkedin.com/company/onpoint-health-media'],
   knowsAbout: [
     'Telehealth affiliate marketing', 'GLP-1 patient acquisition', 'Testosterone replacement therapy marketing', 'Erectile dysfunction telehealth offers',

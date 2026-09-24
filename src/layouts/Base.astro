@@ -25,17 +25,8 @@ const orgLd = {
   url: SITE.url,
   logo: new URL(href('/img/logo-2x.png'), Astro.site).toString(),
   email: SITE.email,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: SITE.address.street,
-    addressLocality: SITE.address.city,
-    addressRegion: SITE.address.region,
-    postalCode: SITE.address.postal,
-    addressCountry: SITE.address.country,
-  },
   sameAs: SITE.sameAs,
   description: SITE.boilerplate,
-  foundingLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Wyckoff', addressRegion: 'NJ', addressCountry: 'US' } },
   areaServed: 'US',
   knowsAbout: SITE.knowsAbout,
   contactPoint: [{ '@type': 'ContactPoint', contactType: 'sales', email: SITE.email, availableLanguage: ['English', 'Spanish'] }],
@@ -75,8 +66,6 @@ const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] 
   </head>
   <body class="min-h-screen flex flex-col">
     <div id="scroll-progress" aria-hidden="true"></div>
-    <div id="cursor-glow" aria-hidden="true"></div>
-    <div class="grain" aria-hidden="true"></div>
     <Nav />
     <main class="flex-1">
       <slot />

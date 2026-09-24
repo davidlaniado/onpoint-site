@@ -7,14 +7,14 @@
 .of-packet { fill: var(--color-teal-ink); opacity: 0; filter: drop-shadow(0 0 4px rgba(96,216,200,.9)); }
 .of-packet-b { fill: var(--color-navy); }
 .of-col { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.of-colhead { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-mist); margin-bottom: 2px; }
+.of-colhead { font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--color-mist); margin-bottom: 2px; }
 .of-chip { display: flex; align-items: center; gap: 8px; padding: 7px 9px; font-size: 11px; }
 .of-chip .of-chan { color: var(--color-navy); font-weight: 500; }
 .of-chip .of-id { color: var(--color-mist); margin-left: auto; }
 .of-chip.active .of-id { color: var(--color-teal-ink); }
 .of-center { align-items: center; }
 .of-gate { width: 168px; padding: 10px 12px 12px; }
-.of-gatehead { display: flex; align-items: center; gap: 8px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--color-navy); padding-bottom: 8px; border-bottom: 1px solid var(--color-line); margin-bottom: 8px; }
+.of-gatehead { display: flex; align-items: center; gap: 8px; font-size: 10.5px; letter-spacing: .02em; text-transform: none; color: var(--color-navy); padding-bottom: 8px; border-bottom: 1px solid var(--color-line); margin-bottom: 8px; }
 .of-gatelogo { width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, var(--color-navy) 45%, var(--color-teal) 46%); }
 .of-checks { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .of-check { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-mist); transition: color .3s; }
@@ -46,7 +46,7 @@
 .ovo-wrap { display: grid; grid-template-columns: 1fr 1fr; }
 .ovo-panel { padding: 16px 16px 18px; }
 .ovo-open { border-right: 1px solid var(--color-line); }
-.ovo-title { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-mist); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.ovo-title { font-size: 10.5px; letter-spacing: .02em; text-transform: none; color: var(--color-mist); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .ovo-onpoint .ovo-title { color: var(--color-teal-ink); }
 .ovo-onpoint .ovo-title::before { content: ""; width: 14px; height: 14px; border-radius: 4px; background: linear-gradient(135deg, var(--color-navy) 45%, var(--color-teal) 46%); }
 .ovo-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
@@ -55,7 +55,7 @@
 .ovo-step:not(.ovo-outcome)::after { content: ""; position: absolute; left: 22px; bottom: -14px; height: 14px; border-left: 1.5px dashed #cfd6e4; }
 .ovo-onpoint .ovo-step:not(.ovo-outcome)::after { border-left: 1.5px solid var(--color-teal); }
 .ovo-step:last-child::after { display: none; }
-.ovo-k { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-mist); }
+.ovo-k { font-size: 10px; letter-spacing: .02em; text-transform: none; color: var(--color-mist); }
 .ovo-v { font-size: 12px; color: var(--color-navy); display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
 .ovo-q { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: #e4e8f0; color: var(--color-mist); font-size: 10px; font-weight: 700; }
 .ovo-flag { grid-column: 2; justify-self: start; opacity: 0; transform: translateY(-2px); transition: opacity .3s .35s, transform .3s .35s; }

@@ -3,12 +3,10 @@ import { SITE, NAV, href } from '../lib/site';
 const year = new Date().getFullYear();
 ---
 <footer class="border-t border-line bg-paper mt-24 overflow-hidden">
-  <div class="footer-mark container-x pt-8 md:pt-10" aria-hidden="true"><span data-parallax="0.1">OnPoint</span></div>
   <div class="container-x py-12 md:py-16 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
     <div class="reveal">
       <img src={href('/img/logo.png')} srcset={`${href('/img/logo-2x.png')} 2x`} alt="OnPoint Health Media & Tech" class="h-8 w-auto" width="720" height="195" loading="lazy" />
       <p class="mt-4 text-[14px] text-slate max-w-md leading-relaxed">{SITE.boilerplate}</p>
-      <p class="mt-4 text-sm text-mist">{SITE.address.street}<br />{SITE.address.city}, {SITE.address.region} {SITE.address.postal}</p>
     </div>
     <div class="reveal">
       <p class="mono-label mb-3">Company</p>

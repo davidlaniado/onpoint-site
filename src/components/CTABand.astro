@@ -7,13 +7,8 @@ const words = ['Verified', 'Tracked', 'Paid', 'Reviewed', 'Audited', 'Approved']
 const seq = [...words, ...words];
 ---
 <section class="container-x">
-  <div class="cta-band reveal relative overflow-hidden rounded-[28px] bg-navy-deep text-white px-6 py-16 md:px-16 md:py-24 isolate">
+  <div class="cta-band reveal relative overflow-hidden rounded-[28px] bg-navy-deep text-white px-6 py-12 md:px-14 md:py-16 isolate">
     <div class="cta-grid absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-    <div class="cta-blob cta-blob-a" aria-hidden="true"></div>
-    <div class="cta-blob cta-blob-b" aria-hidden="true"></div>
-    <div class="cta-marquee absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none select-none" aria-hidden="true">
-      <div class="track">{seq.map((w) => <span>{w}<i>·</i></span>)}</div>
-    </div>
     <div class="relative grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
       <div>
         <p class="eyebrow !text-teal">Next step</p>
