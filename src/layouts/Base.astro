@@ -44,6 +44,7 @@ const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] 
 ---
 <!doctype html>
 <html lang="en">
+  <script is:inline>document.documentElement.classList.add('js');</script>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -73,16 +74,17 @@ const ldBlocks = [orgLd, ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] 
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <div id="cursor-glow" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
     <Nav />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
     <script>
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      }, { rootMargin: '0px 0px -8% 0px' });
-      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      import '../scripts/motion.ts';
     </script>
+    <noscript><style>.reveal,[data-hero],[data-split] .w > span{opacity:1!important;transform:none!important}</style></noscript>
   </body>
 </html>

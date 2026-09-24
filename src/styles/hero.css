@@ -1,0 +1,7 @@
+/* hero 3D refinements (imported by global.css) */
+#hero3d-canvas { opacity: 0; transition: opacity .6s ease; }
+#hero3d-canvas.is-live { opacity: 1; }
+#hero3d-fallback { z-index: 2; opacity: .95; }
+.hero3d-ring { left: 0; right: 0; top: 50%; height: 40%; transform: translateY(-30%); border-color: rgba(24,40,88,.14); }
+.hero3d-stage { overflow: visible; }
+@media (max-width: 640px) { .hero3d-stage { max-width: 340px; } }

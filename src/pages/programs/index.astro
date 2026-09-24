@@ -15,9 +15,9 @@ const groups = [
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-14 pb-8 md:pt-24 md:pb-10 max-w-3xl">
-      <p class="eyebrow">Programs</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Every program, <span class="text-teal-ink">one page each.</span></h1>
-      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">Pick your vertical or your channel. Each page says what the offer is, who can run it, what the rules are, and how you get paid.</p>
+      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">Programs</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Every program, <span class="text-teal-ink">one page each.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">Pick your vertical or your channel. Each page says what the offer is, who can run it, what the rules are, and how you get paid.</p>
     </div>
   </section>
   {groups.map(([g, title, lead]) => (

@@ -25,15 +25,15 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
     <div>
-      <p class="eyebrow">For media partners</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Premium health offers <span class="text-teal-ink">built to last.</span></h1>
-      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">Exclusive telehealth offers with clear rules, real tracking, and payouts you can check. A governed environment built for regulated health categories, so the offers you scale today are still here next quarter.</p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">For media partners</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Premium health offers <span class="text-teal-ink">built to last.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">Exclusive telehealth offers with clear rules, real tracking, and payouts you can check. A governed environment built for regulated health categories, so the offers you scale today are still here next quarter.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
         <a href={href('/contact/?as=partner')} class="btn btn-primary">Apply as a partner →</a>
         <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
     </div>
-    <div class="reveal rounded-3xl overflow-hidden aspect-[4/5] max-h-[560px] lg:max-h-none"><Photo name="partners-hero" alt="A media buyer at his desk with analytics on screen" width="1344" height="2000" eager /></div>
+    <div class="reveal rounded-3xl overflow-hidden aspect-[4/5] max-h-[560px] lg:max-h-none"><div class="h-full w-full" data-parallax="0.18"><Photo name="partners-hero" alt="A media buyer at his desk with analytics on screen" width="1344" height="2000" eager class="!h-[118%] !-mt-[9%]" /></div></div>
     </div>
   </section>
 

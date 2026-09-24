@@ -1,4 +1,5 @@
 ---
+import '../styles/pages.css';
 interface Props { title: string; icon?: 'shield' | 'chart' | 'check' | 'lock' | 'route' | 'eye' | 'card' | 'users' | 'bolt' }
 const { title, icon = 'check' } = Astro.props;
 const icons: Record<string, string> = {
@@ -13,8 +14,8 @@ const icons: Record<string, string> = {
   bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/>',
 };
 ---
-<div class="card card-hover p-6 reveal">
-  <span class="inline-flex w-10 h-10 rounded-xl bg-teal-soft text-teal-ink items-center justify-center">
+<div class="card card-hover feature-card p-6 reveal">
+  <span class="feature-icon inline-flex w-10 h-10 rounded-xl bg-teal-soft text-teal-ink items-center justify-center">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={icons[icon]} />
   </span>
   <h3 class="mt-4 text-lg font-bold">{title}</h3>

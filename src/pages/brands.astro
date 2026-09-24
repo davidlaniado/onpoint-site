@@ -24,15 +24,15 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-20 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
     <div>
-      <p class="eyebrow">For brands</p>
-      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Predictable acquisition, <span class="text-teal-ink">full control.</span></h1>
-      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed">You keep ownership of your claims. Only verified partners run your offer. Attribution, funnel events, and payments are visible end to end. That is the deal.</p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-3">
+      <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">For brands</p>
+      <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Predictable acquisition, <span class="text-teal-ink">full control.</span></h1>
+      <p class="mt-6 text-lg md:text-xl text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">You keep ownership of your claims. Only verified partners run your offer. Attribution, funnel events, and payments are visible end to end. That is the deal.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
         <a href={href('/contact/?as=brand')} class="btn btn-primary">Apply as a brand →</a>
         <a href="#how" class="btn btn-ghost">See how it works</a>
       </div>
     </div>
-    <div class="reveal rounded-3xl overflow-hidden aspect-[4/5] max-h-[560px] lg:max-h-none"><Photo name="brands-hero" alt="A telehealth brand operator reviews her funnel on a tablet" width="1344" height="2000" eager /></div>
+    <div class="reveal rounded-3xl overflow-hidden aspect-[4/5] max-h-[560px] lg:max-h-none"><div class="h-full w-full" data-parallax="0.18"><Photo name="brands-hero" alt="A telehealth brand operator reviews her funnel on a tablet" width="1344" height="2000" eager class="!h-[118%] !-mt-[9%]" /></div></div>
     </div>
   </section>
 

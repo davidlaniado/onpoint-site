@@ -14,11 +14,11 @@ const cols = [
 ---
 <Base title="Sitemap" description="Every page on onpointhealthmedia.com.">
   <section class="container-x pt-14 md:pt-20">
-    <p class="eyebrow">Sitemap</p>
-    <h1 class="mt-4 text-4xl font-extrabold">Every page on this site.</h1>
+    <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">Sitemap</p>
+    <h1 class="mt-4 text-4xl font-extrabold" data-split data-hero-title>Every page on this site.</h1>
     <div class="mt-10 grid md:grid-cols-2 gap-10">
       {cols.map(([title, items]) => (
-        <div>
+        <div class="reveal">
           <p class="mono-label mb-3">{title}</p>
           <ul class="space-y-2">{items.map(([t, p]) => <li><a class="text-navy hover:text-teal-ink" href={href(p)}>{t}</a></li>)}</ul>
         </div>

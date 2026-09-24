@@ -1,0 +1,49 @@
+/* ===================== sub-page motion polish (imported by global.css) ===================== */
+
+/* cover cards: image lifts on hover */
+.cover-card .cover-wrap { overflow: hidden; }
+.cover-card .cover-wrap img { transition: transform .7s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+.cover-card:hover .cover-wrap img { transform: scale(1.04); }
+
+/* feature cards: icon pops and tints on hover */
+.feature-icon { transition: transform .35s cubic-bezier(.2,.7,.2,1), background .35s, color .35s; }
+.feature-card:hover .feature-icon { transform: translateY(-2px) scale(1.08); background: var(--color-teal); color: var(--color-navy-deep); }
+
+/* steps: badge fills teal when the card is hovered */
+.step-badge { transition: background .3s, color .3s, transform .3s; }
+.card:hover .step-item:hover .step-badge { background: var(--color-teal); color: var(--color-navy-deep); transform: scale(1.08); }
+
+/* leadership cards */
+.leader-card .rounded-full { transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; }
+.leader-card:hover .rounded-full { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(96,216,200,.2); }
+
+/* role rows: underline sweep on hover */
+.role-row { position: relative; }
+.role-row::after { content: ""; position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--color-teal); transition: width .5s cubic-bezier(.2,.7,.2,1); }
+.role-row:hover::after { width: 100%; }
+
+/* quick answer: soft pulse of the teal border once visible */
+.quick-answer { position: relative; }
+.quick-answer::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; box-shadow: 0 0 0 0 rgba(96,216,200,.45); animation: qaPulse 2.4s ease-out 1; }
+@keyframes qaPulse { 0% { box-shadow: 0 0 0 0 rgba(96,216,200,.45); } 100% { box-shadow: 0 0 0 18px rgba(96,216,200,0); } }
+
+/* ===================== CTA band ===================== */
+.cta-band { box-shadow: 0 40px 80px -40px rgba(24,40,88,.6); }
+.cta-grid { z-index: -1;
+  background-image: linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 70% at 60% 50%, #000 20%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 50%, #000 20%, transparent 100%); }
+.cta-blob { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: -1; }
+.cta-blob-a { width: 520px; height: 520px; right: -160px; top: -200px; background: rgba(96,216,200,.28); animation: ctaBlobA 14s ease-in-out infinite alternate; }
+.cta-blob-b { width: 460px; height: 460px; left: -180px; bottom: -220px; background: rgba(56,144,176,.32); animation: ctaBlobB 18s ease-in-out infinite alternate; }
+@keyframes ctaBlobA { to { transform: translate(-120px, 90px) scale(1.15); } }
+@keyframes ctaBlobB { to { transform: translate(140px, -70px) scale(1.1); } }
+.cta-marquee { z-index: -1; overflow: hidden; white-space: nowrap; opacity: .9; }
+.cta-marquee .track { display: inline-flex; animation: ticker 44s linear infinite; }
+.cta-marquee span { font-family: var(--font-display); font-weight: 800; font-size: clamp(72px, 14vw, 190px); line-height: 1; letter-spacing: -0.03em; padding-right: .3em;
+  color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.09); }
+.cta-marquee span i { font-style: normal; color: rgba(96,216,200,.12); -webkit-text-stroke: 0; padding-left: .3em; }
+@media (prefers-reduced-motion: reduce) { .cta-marquee .track, .cta-blob-a, .cta-blob-b { animation: none; } .quick-answer::before { animation: none; } }
+
+/* global.css sets h1-h4 color unlayered, which beats Tailwind's layered .text-white; force white inside the band */
+.cta-band h2 { color: #fff; }

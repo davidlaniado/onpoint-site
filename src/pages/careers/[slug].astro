@@ -29,12 +29,12 @@ const ld = {
     <a href={href('/careers/')} class="text-sm text-mist hover:text-navy">← All roles</a>
     <div class="mt-6 grid lg:grid-cols-[1fr_320px] gap-10 items-start">
       <article>
-        <p class="eyebrow">{d.department}</p>
-        <h1 class="mt-4 text-[32px] md:text-[44px] leading-[1.1] font-extrabold">{d.title}</h1>
-        <p class="mt-4 text-lg text-slate leading-relaxed">{d.summary}</p>
+        <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">{d.department}</p>
+        <h1 class="mt-4 text-[32px] md:text-[44px] leading-[1.1] font-extrabold" data-split data-hero-title>{d.title}</h1>
+        <p class="mt-4 text-lg text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">{d.summary}</p>
         <div class="prose-op mt-8"><Content /></div>
       </article>
-      <aside class="card p-6 lg:sticky lg:top-24">
+      <aside class="card p-6 lg:sticky lg:top-24" data-hero style="opacity:0;transform:translateY(16px)">
         <p class="mono-label">Details</p>
         <dl class="mt-3 space-y-3 text-sm">
           <div><dt class="text-mist">Location</dt><dd class="text-navy font-medium">{d.location}</dd></div>

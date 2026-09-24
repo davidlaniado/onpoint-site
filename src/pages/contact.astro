@@ -9,16 +9,16 @@ import Photo from '../components/Photo.astro';
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-14 pb-12 md:pt-24 md:pb-16 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-start">
       <div>
-        <p class="eyebrow">Contact</p>
-        <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold">Tell us what you are <span class="text-teal-ink">trying to grow.</span></h1>
-        <p class="mt-6 text-lg text-slate leading-relaxed">Brands, media partners, and future teammates. A real person reads every message and replies, usually within one to two business days.</p>
-        <dl class="mt-8 space-y-4 font-mono text-[13px]">
+        <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">Contact</p>
+        <h1 class="mt-5 text-[36px] sm:text-[46px] lg:text-[54px] leading-[1.08] font-extrabold" data-split data-hero-title>Tell us what you are <span class="text-teal-ink">trying to grow.</span></h1>
+        <p class="mt-6 text-lg text-slate leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">Brands, media partners, and future teammates. A real person reads every message and replies, usually within one to two business days.</p>
+        <dl class="mt-8 space-y-4 font-mono text-[13px]" data-hero style="opacity:0;transform:translateY(16px)">
           <div class="flex gap-4"><dt class="text-mist w-24">hq</dt><dd class="text-navy">Wyckoff, New Jersey</dd></div>
           <div class="flex gap-4"><dt class="text-mist w-24">status</dt><dd class="text-navy">accepting new brands and partners</dd></div>
           <div class="flex gap-4"><dt class="text-mist w-24">email</dt><dd><a class="text-navy underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
           <div class="flex gap-4"><dt class="text-mist w-24">legal</dt><dd><a class="text-navy underline" href={`mailto:${SITE.legalEmail}`}>{SITE.legalEmail}</a></dd></div>
         </dl>
-        <div class="hidden lg:block mt-10 rounded-3xl overflow-hidden aspect-[4/3]"><Photo name="contact" alt="A team member on a call by a bright window" width="1344" height="2000" /></div>
+        <div class="hidden lg:block mt-10 rounded-3xl overflow-hidden aspect-[4/3] reveal"><div class="h-full w-full" data-parallax="0.14"><Photo name="contact" alt="A team member on a call by a bright window" width="1344" height="2000" class="!h-[118%] !-mt-[9%]" /></div></div>
       </div>
       <ContactForm />
     </div>

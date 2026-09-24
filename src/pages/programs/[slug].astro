@@ -40,18 +40,18 @@ const ld = [
   <section class="relative overflow-hidden">
     <div class="absolute inset-0 grid-bg pointer-events-none" aria-hidden="true"></div>
     <div class="container-x relative pt-8 md:pt-14 pb-10 md:pb-14">
-      <nav class="text-sm text-mist" aria-label="Breadcrumb"><a href={href('/')} class="hover:text-navy">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-navy">Programs</a> <span aria-hidden="true">/</span> <span class="text-navy">{d.title}</span></nav>
+      <nav class="text-sm text-mist" aria-label="Breadcrumb" data-hero style="opacity:0;transform:translateY(16px)"><a href={href('/')} class="hover:text-navy">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-navy">Programs</a> <span aria-hidden="true">/</span> <span class="text-navy">{d.title}</span></nav>
       <div class="mt-6 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
         <div>
-          <p class="eyebrow">{audienceLabel}</p>
-          <h1 class="mt-4 text-[34px] sm:text-[44px] lg:text-[50px] leading-[1.08] font-extrabold" set:html={d.h1} />
-          <div class="mt-6 rounded-2xl bg-teal-soft border border-teal-line p-5 md:p-6"><p class="mono-label text-teal-ink mb-2">Quick answer</p><p class="text-navy text-[17px] leading-relaxed font-medium">{d.quickAnswer}</p></div>
-          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <p class="eyebrow" data-hero style="opacity:0;transform:translateY(16px)">{audienceLabel}</p>
+          <h1 class="mt-4 text-[34px] sm:text-[44px] lg:text-[50px] leading-[1.08] font-extrabold" data-split data-hero-title set:html={d.h1} />
+          <div class="mt-6 rounded-2xl bg-teal-soft border border-teal-line p-5 md:p-6 quick-answer" data-hero style="opacity:0;transform:translateY(16px)"><p class="mono-label text-teal-ink mb-2">Quick answer</p><p class="text-navy text-[17px] leading-relaxed font-medium">{d.quickAnswer}</p></div>
+          <div class="mt-6 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
             <a href={href(`/contact/?as=${d.audience === 'brands' ? 'brand' : 'partner'}`)} class="btn btn-primary">{d.audience === 'brands' ? 'Apply as a brand' : 'Apply as a partner'} →</a>
             <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
           </div>
         </div>
-        {d.cover && <div class="reveal rounded-3xl overflow-hidden aspect-[4/3]"><Photo name={d.cover} alt="" width="2000" height="1344" eager /></div>}
+        {d.cover && <div class="rounded-3xl overflow-hidden aspect-[4/3]" data-hero style="opacity:0;transform:translateY(16px)"><div class="h-full w-full" data-parallax="0.16"><Photo name={d.cover} alt="" width="2000" height="1344" eager class="!h-[118%] !-mt-[9%]" /></div></div>}
       </div>
     </div>
   </section>
@@ -59,7 +59,7 @@ const ld = [
     <div class="max-w-3xl">
       <div class="prose-op"><Content /></div>
       {d.faq.length > 0 && (
-        <section id="faq" class="mt-12 scroll-mt-24">
+        <section id="faq" class="mt-12 scroll-mt-24 reveal">
           <h2 class="text-2xl font-extrabold mb-5">Frequently asked questions</h2>
           <FAQ items={d.faq} />
         </section>
@@ -69,10 +69,10 @@ const ld = [
   </article>
   {(related.length > 0 || posts.length > 0) && (
     <section class="container-x mt-16">
-      <p class="eyebrow">Related</p>
+      <p class="eyebrow reveal">Related</p>
       <div class="mt-5 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {related.map((p) => <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block"><p class="mono-label mb-2">Program</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
-        {posts.map((p) => <a href={href(`/blog/${p.id}/`)} class="card card-hover p-5 block"><p class="mono-label mb-2">Article</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
+        {related.map((p) => <a href={href(`/programs/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">Program</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
+        {posts.map((p) => <a href={href(`/blog/${p.id}/`)} class="card card-hover p-5 block reveal"><p class="mono-label mb-2">Article</p><p class="font-display font-bold text-navy leading-snug">{p.data.title}</p></a>)}
       </div>
     </section>
   )}

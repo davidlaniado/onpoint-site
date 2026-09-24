@@ -16,9 +16,27 @@ const doubled = [...items, ...items];
 <div class="ticker mt-10 border-y border-line bg-paper overflow-hidden" aria-hidden="true">
   <div class="ticker-track py-3">
     {doubled.map(([k, v]) => (
-      <span class="font-mono text-[11px] text-mist whitespace-nowrap px-6 border-r border-line">
+      <span class="ticker-item font-mono text-[11px] text-mist whitespace-nowrap px-6 border-r border-line">
+        <span class="ticker-dot"></span>
         <span class="text-teal-ink">{k}</span> <span class="text-slate">→ {v}</span>
       </span>
     ))}
   </div>
 </div>
+<script>
+  // Desktop only: the strip speeds up briefly with scroll velocity, then settles.
+  const track = document.querySelector<HTMLElement>('.ticker-track');
+  const fine = matchMedia('(pointer: fine)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (track && fine && !reduce) {
+    let last = scrollY, vel = 0, rate = 1, raf = 0;
+    const tick = () => {
+      vel *= 0.9;
+      const target = 1 + Math.min(Math.abs(vel) / 40, 2.5);
+      rate += (target - rate) * 0.12;
+      track.getAnimations().forEach((a) => { a.playbackRate = rate; });
+      if (Math.abs(rate - 1) > 0.01 || Math.abs(vel) > 0.5) raf = requestAnimationFrame(tick); else raf = 0;
+    };
+    addEventListener('scroll', () => { vel += scrollY - last; last = scrollY; if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
+  }
+</script>

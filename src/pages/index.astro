@@ -8,6 +8,9 @@ import Feature from '../components/Feature.astro';
 import Steps from '../components/Steps.astro';
 import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
+import DarkBand from '../components/DarkBand.astro';
+import Marquee from '../components/Marquee.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import { href, SITE } from '../lib/site';
 import { getCollection } from 'astro:content';
 import Photo from '../components/Photo.astro';
@@ -40,7 +43,7 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'n
   <Ticker />
 
   <Section eyebrow="Why OnPoint" title="Health acquisition is different. <em class='not-italic text-teal-ink'>We built for it.</em>" lead="The rules are tighter, the scrutiny is higher, and the consequences are real. Most networks are open by default and hope for the best. OnPoint verifies first, tracks everything, and keeps the brand in control of its claims.">
-    <div class="reveal rounded-3xl overflow-hidden aspect-[16/7] mb-6 md:mb-8"><Photo name="home-why" alt="A patient reads a telehealth message on her phone in a bright kitchen" width="2000" height="1120" /></div>
+    <div class="reveal rounded-3xl overflow-hidden aspect-[16/7] mb-6 md:mb-8"><div class="h-full w-full" data-parallax="0.18"><Photo name="home-why" class="!h-[120%] !-mt-[10%]" alt="A patient reads a telehealth message on her phone in a bright kitchen" width="2000" height="1120" /></div></div>
     <div class="grid md:grid-cols-3 gap-5">
       <Feature icon="shield" title="Verified on both sides">Brands clear business and compliance review. Partners clear identity, KYC, channel, and traffic source checks. Nobody runs blind.</Feature>
       <Feature icon="chart" title="Tracking you can trust">Server-side postbacks and platform reporting through Everflow and Google Tag Manager. Same numbers for the brand and the partner.</Feature>
@@ -116,29 +119,11 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'n
     <a href={href('/programs/')} class="inline-block mt-6 text-navy font-medium underline underline-offset-4">All programs, including brand-side solutions</a>
   </Section>
 
-  <Section eyebrow="How OnPoint operates" title="Verify, launch, track, pay. In that order.">
-    <div class="grid lg:grid-cols-2 gap-6">
-      <Steps label="Brands" steps={[
-        'Business, credential, and compliance verification.',
-        'Offer intake, claims review, and commercial terms agreed before launch.',
-        'Funnel, creative, and conversion flow review.',
-        'Tracking, events, attribution, and payment logic set up.',
-        'Launch with verified partners on approved channels only.',
-        'Ongoing reporting, optimization, and support as you scale.',
-      ]} />
-      <Steps label="Media partners" steps={[
-        'Identity, KYC, and traffic source verification.',
-        'Channel and placement approval for quality and compliance.',
-        'Access to approved creative structures, offer rules, and defined terms.',
-        'Launch support and optimization guidance.',
-        'Transparent tracking, reporting, and payouts on approved performance.',
-        'Continuous monitoring for quality, compliance, and performance.',
-      ]} />
-    </div>
-  </Section>
-
+  <DarkBand>
+    <Marquee words={['Verified', 'Tracked', 'Paid', 'Reviewed', 'Audited', 'Approved']} />
+    <HowItWorks />
   <Section eyebrow="Standards" title="What we hold every offer and every partner to." lead="Our founders are members of the American Telemedicine Association. OnPoint runs with the same expectation of responsibility and transparency.">
-    <div class="reveal rounded-3xl overflow-hidden aspect-[3/1] mb-6 md:mb-8"><Photo name="home-standards" alt="A tidy desk with a notebook, stethoscope, and tablet" width="2000" height="672" /></div>
+    <div class="reveal dark-img aspect-[3/1] mb-6 md:mb-8"><div class="h-full w-full" data-parallax="0.12"><Photo name="home-standards" class="!h-[120%] !-mt-[10%]" alt="A tidy desk with a notebook, stethoscope, and tablet" width="2000" height="672" /></div></div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {[
         ['lock', 'Privacy-forward advertising and tracking'],
@@ -171,6 +156,8 @@ const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'n
       ))}
     </div>
   </Section>
+
+  </DarkBand>
 
   <Section eyebrow="Frequently asked" title="Straight answers.">
     <FAQ items={faq} />

@@ -1,0 +1,47 @@
+/* ===== nav: dark-band adaptation, link underline, mobile menu animation ===== */
+header[data-nav] {
+  --nav-bg: rgba(255,255,255,.85);
+  --nav-fg: var(--color-navy);
+  --nav-line: var(--color-line);
+  background: var(--nav-bg);
+  border-color: var(--nav-line);
+  transition: transform .35s ease, box-shadow .35s ease, background .45s ease, border-color .45s ease;
+}
+header[data-nav].nav-dark {
+  --nav-bg: rgba(13,23,52,.82);
+  --nav-fg: #ffffff;
+  --nav-line: rgba(255,255,255,.12);
+}
+header[data-nav].nav-dark.nav-scrolled { box-shadow: 0 10px 30px -20px rgba(0,0,0,.6); }
+header[data-nav] nav a, header[data-nav] #nav-toggle { color: var(--nav-fg); transition: color .35s ease, border-color .35s ease; }
+header[data-nav] #nav-toggle { border-color: var(--nav-line); }
+header[data-nav].nav-dark .nav-logo-light { display: block; }
+header[data-nav].nav-dark .nav-logo-dark { display: none; }
+header[data-nav] .nav-logo-light { display: none; }
+header[data-nav].nav-dark nav a.text-teal-ink { color: var(--color-teal); }
+header[data-nav].nav-dark nav a.btn-teal { color: var(--color-navy-deep); }
+
+/* underline grows from the left */
+header[data-nav] nav a.nav-link { position: relative; padding-bottom: 2px; }
+header[data-nav] nav a.nav-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; border-radius: 2px;
+  background: var(--color-teal); transform: scaleX(0); transform-origin: 0 50%; transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+header[data-nav] nav a.nav-link:hover::after, header[data-nav] nav a.nav-link.text-teal-ink::after { transform: scaleX(1); }
+
+/* mobile menu: animated open/close */
+#nav-mobile {
+  display: grid; grid-template-rows: 0fr; opacity: 0; overflow: hidden;
+  background: var(--nav-bg); border-color: var(--nav-line);
+  transition: grid-template-rows .38s cubic-bezier(.2,.7,.2,1), opacity .3s ease, background .45s ease;
+}
+#nav-mobile > nav { min-height: 0; }
+#nav-mobile.open { grid-template-rows: 1fr; opacity: 1; }
+#nav-mobile nav a { border-color: var(--nav-line); }
+@media (min-width: 768px) { #nav-mobile { display: none; } }
+
+/* no-JS: everything visible */
+html:not(.js) .reveal, html:not(.js) [data-hero], html:not(.js) [data-split] .w > span { opacity: 1 !important; transform: none !important; }
+
+/* grain is expensive on phones; drop it there */
+@media (pointer: coarse) { .grain { display: none; } }
