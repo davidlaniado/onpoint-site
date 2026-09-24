@@ -18,7 +18,7 @@
     if (!canvas || !wrap) return;
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(devicePixelRatio, fine ? 2 : 1.5));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.0;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100); camera.position.set(0, 0.05, 6.4);
     scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
@@ -27,13 +27,13 @@
 
     // one slim capsule, horizontal-ish: left half matte white, right half clear glass with the peptide chain inside
     const L = 3.4, R = 0.62;
-    const white = new THREE.Mesh(new THREE.CapsuleGeometry(R, L / 2, 24, 48), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.32, metalness: 0, clearcoat: 0.6, clearcoatRoughness: 0.25 }));
+    const white = new THREE.Mesh(new THREE.CapsuleGeometry(R, L / 2, 24, 48), new THREE.MeshPhysicalMaterial({ color: 0xf4f7fb, roughness: 0.3, metalness: 0, clearcoat: 0.7, clearcoatRoughness: 0.2 }));
     white.rotation.z = Math.PI / 2;
     // clip the white half so it ends flat at the seam
     const seamPlane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0); // keep x < 0
     (white.material as THREE.Material).clippingPlanes = [seamPlane]; (white.material as THREE.Material).clipShadows = true;
     group.add(white);
-    const glass = new THREE.Mesh(new THREE.CapsuleGeometry(R, L / 2, 24, 48), new THREE.MeshPhysicalMaterial({ color: 0xeafffc, transmission: 0.96, roughness: 0.04, thickness: 0.8, ior: 1.42, clearcoat: 1, clearcoatRoughness: 0.04, transparent: true, opacity: 0.7 }));
+    const glass = new THREE.Mesh(new THREE.CapsuleGeometry(R, L / 2, 24, 48), new THREE.MeshPhysicalMaterial({ color: 0xcfeeea, transmission: 0.92, roughness: 0.06, thickness: 1.0, ior: 1.45, clearcoat: 1, clearcoatRoughness: 0.04, transparent: true, opacity: 0.85 }));
     glass.rotation.z = Math.PI / 2;
     (glass.material as THREE.Material).clippingPlanes = [new THREE.Plane(new THREE.Vector3(1, 0, 0), 0)]; // keep x > 0
     group.add(glass);
@@ -45,8 +45,8 @@
     // peptide chain inside the glass half: a single helix of small glowing beads
     const helix = new THREE.Group(); group.add(helix);
     const beadGeo = new THREE.SphereGeometry(0.075, 20, 20);
-    const beadMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x60d8c8, emissiveIntensity: 2.4, roughness: 0.3 });
-    const linkMat = new THREE.MeshStandardMaterial({ color: 0xbff3ec, emissive: 0x60d8c8, emissiveIntensity: 0.9, transparent: true, opacity: 0.85 });
+    const beadMat = new THREE.MeshStandardMaterial({ color: 0x14867a, emissive: 0x14867a, emissiveIntensity: 0.9, roughness: 0.35, metalness: 0.2 });
+    const linkMat = new THREE.MeshStandardMaterial({ color: 0x3890b0, emissive: 0x3890b0, emissiveIntensity: 0.4, transparent: true, opacity: 0.9 });
     const N = 16, hr = 0.3, span = L / 4 + 0.2;
     let prev: THREE.Vector3 | null = null;
     for (let i = 0; i < N; i++) {
@@ -58,7 +58,7 @@
     }
     const particles = new THREE.Group(); const ring1 = new THREE.Group(); const ring2 = new THREE.Group(); const beadA = beadMat;
     group.rotation.set(0.22, -0.3, -0.55); group.scale.setScalar(1.15);
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x182858, 0.8));
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x9fb3d9, 0.7));
     const key = new THREE.DirectionalLight(0xffffff, 2.4); key.position.set(-3, 5, 4); scene.add(key);
     const fill = new THREE.DirectionalLight(0xbfe8ff, 0.8); fill.position.set(4, -2, 3); scene.add(fill);
     const rim = new THREE.PointLight(0x60d8c8, 10, 14); rim.position.set(3, 1.5, -2.5); scene.add(rim);
@@ -83,7 +83,7 @@
         group.rotation.z = -0.5 + Math.sin(t * 0.3) * 0.04;
         group.position.y = Math.sin(t * 0.8) * 0.08;
         helix.rotation.x = t * 0.8;
-        (beadA as any).emissiveIntensity = 2.2 + Math.sin(t * 3) * 0.7;
+        (beadA as any).emissiveIntensity = 0.8 + Math.sin(t * 3) * 0.35;
       }
       renderer.render(scene, camera);
     };

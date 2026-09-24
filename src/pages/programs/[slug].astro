@@ -37,15 +37,15 @@ const ld = [
 ];
 ---
 <Base title={d.title} description={d.description} jsonLd={ld}>
-  <section class="hero-navy text-white">
+  <section class="hero-light">
     <div class="container-x py-12 md:py-16">
-      <nav class="text-sm text-white/60" aria-label="Breadcrumb"><a href={href('/')} class="hover:text-white">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-white">Programs</a> <span aria-hidden="true">/</span> <span class="text-white">{d.title}</span></nav>
-      <p class="mt-6 text-teal font-semibold text-sm md:text-[15px]">{audienceLabel}</p>
-      <h1 class="mt-3 text-white text-[34px] sm:text-[44px] lg:text-[52px] leading-[1.06] font-extrabold tracking-[-0.02em] max-w-4xl" set:html={d.h1.replace(/text-teal-ink/g, 'text-teal')} />
-      <div class="mt-8 max-w-3xl rounded-[20px] bg-white/10 border border-white/15 p-5 md:p-6"><p class="text-teal font-semibold text-sm mb-1">Quick answer</p><p class="text-white/90 text-[17px] leading-relaxed">{d.quickAnswer}</p></div>
+      <nav class="text-sm text-mist" aria-label="Breadcrumb"><a href={href('/')} class="hover:text-navy">Home</a> <span aria-hidden="true">/</span> <a href={href('/programs/')} class="hover:text-navy">Programs</a> <span aria-hidden="true">/</span> <span class="text-navy">{d.title}</span></nav>
+      <p class="mt-6 text-teal-ink font-semibold text-sm md:text-[15px]">{audienceLabel}</p>
+      <h1 class="mt-3 text-navy text-[34px] sm:text-[44px] lg:text-[52px] leading-[1.06] font-extrabold tracking-[-0.02em] max-w-4xl" set:html={d.h1} />
+      <div class="mt-8 max-w-3xl rounded-[20px] bg-teal-soft border border-teal-line p-5 md:p-6"><p class="text-teal-ink font-semibold text-sm mb-1">Quick answer</p><p class="text-navy text-[17px] leading-relaxed">{d.quickAnswer}</p></div>
       <div class="mt-8 flex flex-col sm:flex-row gap-3">
-        <a href={href(`/contact/?as=${d.audience === 'brands' ? 'brand' : 'partner'}`)} class="btn btn-teal">{d.audience === 'brands' ? 'Apply as a brand' : 'Apply as a partner'}</a>
-        <a href="#faq" class="btn bg-white/10 text-white border border-white/25 hover:bg-white/15">Read the FAQ</a>
+        <a href={href(`/contact/?as=${d.audience === 'brands' ? 'brand' : 'partner'}`)} class="btn btn-primary">{d.audience === 'brands' ? 'Apply as a brand' : 'Apply as a partner'}</a>
+        <a href="#faq" class="btn btn-ghost">Read the FAQ</a>
       </div>
     </div>
   </section>

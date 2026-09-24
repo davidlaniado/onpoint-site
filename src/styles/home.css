@@ -75,3 +75,13 @@
 .pep-canvas.is-on { opacity: 1; }
 .pep-caption { position: absolute; left: 50%; bottom: 2%; transform: translateX(-50%); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .pep-glow { animation: none; } }
+
+/* ===================== white above the fold ===================== */
+.hero-light { background: #fff; border-bottom: 1px solid var(--color-line); position: relative; }
+.hero-light::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 70% at 78% 45%, rgba(96,216,200,.16), transparent 70%); pointer-events: none; }
+.hero-light > * { position: relative; }
+.hero-light .pill-outline { border-color: var(--color-teal-line); color: var(--color-navy); background: var(--color-teal-soft); }
+.hero-light .pill-outline::before { background: var(--color-teal-ink); }
+.hero-form-light { box-shadow: 0 30px 60px -36px rgba(24,40,88,.35); border: 1px solid var(--color-line); }
+.pep-glow { background: radial-gradient(circle, rgba(96,216,200,.42) 0%, rgba(56,144,176,.16) 42%, transparent 70%); }
+.pep-wrap::after { content: ""; position: absolute; left: 22%; right: 18%; bottom: 8%; height: 9%; border-radius: 50%; background: radial-gradient(ellipse, rgba(24,40,88,.22), transparent 70%); filter: blur(10px); pointer-events: none; }

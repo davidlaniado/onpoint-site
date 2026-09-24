@@ -29,13 +29,13 @@ const related = (await getCollection('blog', ({ data, id }) => !data.draft && id
 const relatedPrograms = d.related.length ? (await getCollection('programs')).filter((p) => d.related.includes(p.id)) : [];
 ---
 <Base title={d.title} description={d.description} type="article" jsonLd={ld}>
-  <section class="hero-navy text-white">
+  <section class="hero-light">
     <div class="container-x py-12 md:py-16 max-w-4xl">
-      <a href={href('/blog/')} class="text-sm text-white/60 hover:text-white">All articles</a>
-      <p class="mt-6 text-teal font-semibold text-sm">{fmt(d.pubDate)} · {d.author}</p>
-      <h1 class="mt-3 text-white text-[32px] md:text-[46px] leading-[1.08] font-extrabold tracking-[-0.02em]">{d.title}</h1>
-      <p class="mt-5 text-lg md:text-xl text-white/80 leading-relaxed">{d.description}</p>
-      {d.quickAnswer && <div class="mt-7 rounded-[20px] bg-white/10 border border-white/15 p-5 md:p-6"><p class="text-teal font-semibold text-sm mb-1">Quick answer</p><p class="text-white/90 text-[17px] leading-relaxed">{d.quickAnswer}</p></div>}
+      <a href={href('/blog/')} class="text-sm text-mist hover:text-navy">All articles</a>
+      <p class="mt-6 text-teal-ink font-semibold text-sm">{fmt(d.pubDate)} · {d.author}</p>
+      <h1 class="mt-3 text-navy text-[32px] md:text-[46px] leading-[1.08] font-extrabold tracking-[-0.02em]">{d.title}</h1>
+      <p class="mt-5 text-lg md:text-xl text-slate leading-relaxed">{d.description}</p>
+      {d.quickAnswer && <div class="mt-7 rounded-[20px] bg-teal-soft border border-teal-line p-5 md:p-6"><p class="text-teal-ink font-semibold text-sm mb-1">Quick answer</p><p class="text-navy text-[17px] leading-relaxed">{d.quickAnswer}</p></div>}
     </div>
   </section>
   <article class="container-x pt-12 md:pt-16">
