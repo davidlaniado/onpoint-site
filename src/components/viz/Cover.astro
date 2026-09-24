@@ -1,16 +1,17 @@
 ---
+import '../../styles/viz-covers.css';
 // Linear "FIG 0.N" style line-drawing covers for blog posts and program pages. Pure HTML/CSS/SVG.
 import VizFrame from './VizFrame.astro';
 type Kind = 'payouts' | 'compliant' | 'vet' | 'postback' | 'claims' | 'funnel' | 'offer-sheet' | 'channel-rules' | 'offer-controls';
 interface Props { kind: Kind; title?: string; ratio?: '16/9' | '4/3'; eager?: boolean; static?: boolean; subject?: string; class?: string }
-const { kind, title, ratio = '16/9', static: isStatic = false, subject, class: cls = '' } = Astro.props;
+const { kind, title, ratio = '16/9', eager = false, static: isStatic = false, subject, class: cls = '' } = Astro.props;
 const meta: Record<Kind, { n: string; name: string; foot: string }> = {
-  payouts: { n: '01', name: 'payout structures', foot: 'cpa → first order · revenue share → renewals · hybrid → both' },
-  compliant: { n: '02', name: 'compliant traffic gate', foot: 'source · claims · funnel · tracking → all four or nothing' },
-  vet: { n: '03', name: 'network scorecard', foot: '9 checks before you send a click' },
+  payouts: { n: '01', name: 'payouts', foot: 'cpa → first order · revenue share → renewals · hybrid → both' },
+  compliant: { n: '02', name: 'traffic gate', foot: 'source · claims · funnel · tracking → all four or nothing' },
+  vet: { n: '03', name: 'scorecard', foot: '9 checks before you send a click' },
   postback: { n: '04', name: 's2s postback', foot: 'click id → charged → postback → everflow → attributed' },
   claims: { n: '05', name: 'claim set', foot: 'brand approves · partners build inside it · network enforces' },
-  funnel: { n: '06', name: 'funnel readout', foot: 'five numbers, top to bottom, every morning' },
+  funnel: { n: '06', name: 'funnel', foot: 'five numbers, top to bottom, every morning' },
   'offer-sheet': { n: '07', name: 'offer sheet', foot: 'pays on charged first order · approved channels only' },
   'channel-rules': { n: '08', name: 'channel rules', foot: 'allowed · required · off limits · tracking' },
   'offer-controls': { n: '09', name: 'offer controls', foot: 'the brand owns every switch' },
@@ -21,7 +22,7 @@ const vertical = subject ?? 'GLP-1 program';
 const channel = subject ?? 'Meta';
 ---
 <VizFrame label={label} live={false} right={`OFR-118`} footer={m.foot} class={`cover cover-${kind} ${cls}`}>
-  <div class:list={['cover-body', ratio === '4/3' ? 'aspect-[4/3]' : 'aspect-[16/9]']} data-cover={isStatic ? 'static' : ''}>
+  <div class:list={['cover-body', ratio === '4/3' ? 'aspect-[4/3]' : 'aspect-[16/9]', (isStatic || eager) && 'in']} data-cover={isStatic ? 'static' : ''}>
     {kind === 'payouts' && (
       <div class="cv-payouts">
         {[['CPA', 'first order', [1]], ['revenue share', 'renewals', [0.35, 0.5, 0.62, 0.78, 0.9]], ['hybrid', 'both', [0.55, 0.3, 0.38, 0.45]]].map(([t, s, bars]) => (

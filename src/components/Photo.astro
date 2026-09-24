@@ -1,6 +1,0 @@
----
-import { href } from '../lib/site';
-interface Props { name: string; alt: string; class?: string; width: number; height: number; eager?: boolean }
-const { name, alt, class: cls = '', width, height, eager = false } = Astro.props;
----
-<img src={href(`/img/photos/${name}.webp`)} alt={alt} width={width} height={height} loading={eager ? 'eager' : 'lazy'} decoding="async" class:list={['block w-full h-full object-cover', cls]} />
