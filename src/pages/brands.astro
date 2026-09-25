@@ -6,7 +6,7 @@ import CTASimple from '../components/CTASimple.astro';
 import { href } from '../lib/site';
 const faq = [
   { q: 'Who approves the health claims in my ads?', a: 'You do. Brands retain full ownership and approval authority over all health and medical claims. OnPoint reviews ads and funnels for advertising standards but does not create, modify, or substantiate clinical claims.' },
-  { q: 'Can I see which partners are running my offer?', a: 'Yes. Attribution is visible at the partner and channel level. Only verified partners on approved channels and placements can run your offer.' },
+  { q: 'Can I see which partners are running my offer?', a: 'Yes. Attribution is visible at the partner and channel level. Your offer runs with verified partners on approved channels and placements.' },
   { q: 'What commercial structures do you support?', a: 'CPA, revenue share, and hybrid structures. Terms are agreed before launch and wired into tracking and payment logic from day one.' },
   { q: 'How fast can we launch?', a: 'It depends on verification and how ready your funnel and tracking are. Brands with a working funnel, LegitScript where required, and a clear offer can usually be live with partners within a couple of weeks.' },
   { q: 'Do you handle patient data?', a: 'OnPoint runs on advertising and performance events only. Protected health information stays with the brand and its providers.' },
@@ -14,7 +14,7 @@ const faq = [
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <Base title="For Brands" description="Scale telehealth patient acquisition through verified partners with full control of your claims, your tracking, and your payouts." jsonLd={faqLd}>
-  <PageHero kicker="For brands" title="Scale through partners <span class='text-teal-ink'>without losing control.</span>" lead="You keep ownership of your claims, your funnel, and your providers. Only verified partners run your offer, on the channels you allow. Attribution and payments are visible end to end." primary={['Apply as a brand', '/contact/?as=brand']} secondary={['See how it works', '#how']} pills={['Your claim set, enforced', 'Verified partners only', 'Paid on approved performance']} />
+  <PageHero kicker="For brands" title="Scale through partners, <span class='text-teal-ink'>fully in control.</span>" lead="You keep ownership of your claims, your funnel, and your providers. Verified partners run your offer, on the channels you choose. Attribution and payments are visible end to end." primary={['Apply as a brand', '/contact/?as=brand']} secondary={['See how it works', '#how']} pills={['Your claim set, respected', 'Verified partners', 'Paid on approved performance']} />
 
   <section class="container-x pt-20 md:pt-28">
     <p class="kicker">What you get</p>
@@ -34,7 +34,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <ul class="checks checks-light mt-6">
           <li>Partner verification: identity, KYC, channel, and traffic source before access.</li>
           <li>Creative and funnel review against your claim set, before launch and as partners add angles.</li>
-          <li>Server-side tracking through Everflow and Google Tag Manager, so you and the partner see the same sale.</li>
+          <li>Real-time tracking through Everflow and Google Tag Manager, so you and the partner see the same sale.</li>
           <li>Payout reconciliation, reversals with a reason, and partner support so your team is not fielding tracking questions at 11pm.</li>
         </ul>
       </div>
@@ -49,7 +49,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         ['Verification', 'Business, credential, and compliance review.'],
         ['Offer intake', 'Your claim set, allowed channels, landing pages, and commercial terms, agreed in writing.'],
         ['Funnel and creative review', 'Entry points and approved creative structures checked against advertising standards.'],
-        ['Tracking setup', 'Click ID through your funnel, server-to-server postback on the charge, reversal events on refunds. Tested before spend.'],
+        ['Tracking setup', 'Tracking wired through your funnel and tested before any spend, so every sale and refund is accounted for.'],
         ['Launch', 'Verified partners on approved channels only.'],
         ['Report and optimize', 'Partner-level attribution, funnel events, conversion rate optimization, and support as you add offers and markets.'],
       ].map(([t, d], i) => (

@@ -11,7 +11,7 @@ const isActive = (p: string) => current.startsWith(href(p).replace(/\/$/, ''));
     </a>
     <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-navy" aria-label="Main">
       {NAV.map((n) => (
-        <a href={href(n.path)} class:list={['nav-link', isActive(n.path) && 'text-teal-ink']}>{n.label}</a>
+        <a href={href(n.path)} class="nav-link">{n.label}</a>
       ))}
       <a href={href('/contact/')} class="btn btn-teal !py-2.5 !px-5 text-sm">Book a call</a>
     </nav>

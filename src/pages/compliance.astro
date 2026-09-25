@@ -13,7 +13,7 @@ const faq = [
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
-<Base title="Compliance" description="How compliance works at OnPoint: brand-owned claims, verified partners, creative reviewed before it runs, and server-side tracking." jsonLd={faqLd}>
+<Base title="Compliance" description="How compliance works at OnPoint: brand-owned claims, verified partners, creative reviewed before it runs, and real-time tracking." jsonLd={faqLd}>
   <PageHero kicker="Compliance, built in" title="Telehealth is regulated. <span class='text-teal-ink'>We build for that.</span>" lead="Compliance at OnPoint is a layer that runs under every launch, so brands can scale through partners with confidence and partners can build on offers that last." narrow />
 
   <section class="container-x pt-16 md:pt-24">
@@ -22,7 +22,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         ['Claims stay with the brand', 'Every offer ships with a claim set the brand approved. Creative is reviewed against it, in the brand’s own words.'],
         ['Partners are verified first', 'Identity, business, and traffic source are checked before a partner sees an offer. Channels and placements are approved per offer.'],
         ['Creative is reviewed before it runs', 'Ads and landing pages are checked before launch and as partners add new angles. Flags go back with the reason; passes are logged.'],
-        ['Tracking both sides can trust', 'Server-side postbacks on the charged order, reversals with a reason, and one conversion log for the brand and the partner.'],
+        ['Tracking both sides can trust', 'Every charged order is tracked in real time, reversals come with a reason, and the brand and partner share one conversion log.'],
       ].map(([t, d]) => (
         <div class="rounded-[24px] bg-paper p-7 md:p-9 reveal"><h3 class="text-xl font-bold">{t}</h3><p class="mt-2 text-[15px] text-slate leading-relaxed">{d}</p></div>
       ))}

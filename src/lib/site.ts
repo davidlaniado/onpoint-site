@@ -4,7 +4,7 @@ export const SITE = {
   legalName: 'OnPoint Health Media and Tech, Inc.',
   tagline: 'Take your telehealth brand to the next level.',
   description:
-    'OnPoint is the growth platform for telehealth brands that are ready to scale. Exclusive partnerships, verified media partners, server-side tracking, and compliance built into every launch.',
+    'OnPoint is the growth platform for telehealth brands that are ready to scale. Exclusive partnerships, verified media partners, real-time tracking, and compliance built into every launch.',
   url: 'https://www.onpointhealthmedia.com',
   email: 'david@onpointhealthmedia.com',
   careersEmail: 'david@onpointhealthmedia.com',
@@ -31,6 +31,7 @@ export function href(path: string): string {
 }
 
 export const NAV = [
+  { label: 'Home', path: '/' },
   { label: 'For Brands', path: '/brands/' },
   { label: 'For Partners', path: '/partners/' },
   { label: 'Compliance', path: '/compliance/' },

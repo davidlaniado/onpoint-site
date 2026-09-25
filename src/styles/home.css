@@ -142,3 +142,5 @@
 /* mobile: capsule above headline; even category grid */
 @media (max-width: 1023px) { .hero-grid { display: flex; flex-direction: column; } .hero-grid .pep-wrap { order: -1; aspect-ratio: 1 / 0.62; max-width: 100%; margin-bottom: 8px; } }
 #scroll-progress { display: none !important; }
+/* mobile: no capsule */
+@media (max-width: 1023px) { .hero-grid .pep-wrap { display: none; } }

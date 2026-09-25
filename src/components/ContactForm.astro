@@ -28,8 +28,7 @@ const { bare = false } = Astro.props;
         <select name="i_am" id="i-am" class="field-input">
           <option value="Brand / advertiser">Brand / advertiser</option>
           <option value="Media partner / affiliate">Media partner / affiliate</option>
-          <option value="Candidate">Candidate</option>
-          <option value="Other">Other</option>
+            <option value="Other">Other</option>
         </select>
       </label>
       <label class="field"><span class="field-label">Company or website</span>
@@ -44,7 +43,7 @@ const { bare = false } = Astro.props;
       <span class="loader" aria-hidden="true"><i></i><i></i><i></i></span>
     </button>
     <p id="form-status" class="form-status text-sm text-slate" aria-live="polite"></p>
-    <p class="text-xs text-mist">No spam, no lists. Prefer email? <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+    <p class="text-xs text-mist">Prefer email? <a class="underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
   </div>
   <div class="form-success hidden text-center py-6" aria-live="polite">
     <svg class="mx-auto" width="84" height="84" viewBox="0 0 84 84" fill="none" aria-hidden="true">
@@ -64,7 +63,6 @@ const { bare = false } = Astro.props;
   const sel = document.getElementById('i-am') as HTMLSelectElement | null;
   const as = new URLSearchParams(location.search).get('as');
   if (sel && as === 'partner') sel.value = 'Media partner / affiliate';
-  if (sel && as === 'candidate') sel.value = 'Candidate';
 
   const fields = f?.querySelector('.form-fields') as HTMLElement | null;
   const success = f?.querySelector('.form-success') as HTMLElement | null;
