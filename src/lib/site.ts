@@ -2,9 +2,9 @@ export const SITE = {
   name: 'OnPoint Health Media & Tech',
   shortName: 'OnPoint',
   legalName: 'OnPoint Health Media and Tech, Inc.',
-  tagline: 'Built to take telehealth brands from $1M to $100M.',
+  tagline: 'Take your telehealth brand to the next level.',
   description:
-    'OnPoint is a performance network with a compliance arm, not an agency. It connects telehealth brands that already convert with verified media partners, runs server-side tracking and audited payouts between them, and reviews every claim before it runs.',
+    'OnPoint is the growth platform for telehealth brands that are ready to scale. Exclusive partnerships, verified media partners, server-side tracking, and compliance built into every launch.',
   url: 'https://www.onpointhealthmedia.com',
   email: 'david@onpointhealthmedia.com',
   careersEmail: 'david@onpointhealthmedia.com',
@@ -33,6 +33,7 @@ export function href(path: string): string {
 export const NAV = [
   { label: 'For Brands', path: '/brands/' },
   { label: 'For Partners', path: '/partners/' },
+  { label: 'Compliance', path: '/compliance/' },
   { label: 'About', path: '/about/' },
   { label: 'Blog', path: '/blog/' },
   { label: 'Careers', path: '/careers/' },

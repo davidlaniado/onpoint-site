@@ -4,14 +4,12 @@ import ContactForm from '../components/ContactForm.astro';
 import FAQ from '../components/FAQ.astro';
 import PeptideHero from '../components/PeptideHero.astro';
 import PeptideStrand from '../components/PeptideStrand.astro';
-import Molecule from '../components/Molecule.astro';
-import ReviewPass from '../components/viz/ReviewPass.astro';
 import { href, SITE } from '../lib/site';
 
 const faq = [
-  { q: 'What is OnPoint?', a: 'A compliance-first performance network for telehealth brands. We connect brands with identity-verified media partners, review every ad against the brand’s claim set before it runs, run server-side tracking and payouts between both sides, and remove partners that slip.' },
-  { q: 'Is OnPoint for brands that are just starting?', a: 'No. If you are building your first funnel, an agency is the right move. OnPoint is for brands with a program that already converts, usually past $1M a month, that want verified partners to scale it without the compliance risk.' },
-  { q: 'Who owns the health claims?', a: 'The brand. OnPoint reviews creative against your approved claim set for advertising standards. We never write, change, or substantiate a medical claim.' },
+  { q: 'What is OnPoint?', a: 'The growth platform for telehealth brands that are ready to scale. We bring exclusive partnerships and verified media partners, run server-side tracking and payouts between both sides, and build compliance into every launch.' },
+  { q: 'Is OnPoint a fit for a brand that is just starting out?', a: 'OnPoint works best once a program already converts, usually past $1M a month. If you are building your first funnel, an agency is a great first step, and we are happy to point you to one. When you are ready to scale, that is where we come in.' },
+  { q: 'Who owns the health claims?', a: 'The brand. OnPoint reviews creative against your approved claim set for advertising standards. The claims stay yours, in your words.' },
   { q: 'What do media partners get?', a: 'Exclusive telehealth offers that are not on the open market, from brands with the capital to scale, plus server-side tracking, clear claim rules, and payouts on approved performance.' },
   { q: 'How are partners paid?', a: 'On approved performance under terms agreed before launch: CPA, revenue share, or hybrid depending on the offer. Reversals show up with a reason.' },
 ];
@@ -30,21 +28,21 @@ const categories = [
   ['Preventive care', '<path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/>'],
 ];
 ---
-<Base title="OnPoint Health Media & Tech | The compliance-first performance network for telehealth brands" description={SITE.description} jsonLd={faqLd}>
+<Base title="OnPoint Health Media & Tech | The growth platform for telehealth brands" description={SITE.description} jsonLd={faqLd}>
 
   <!-- HERO -->
   <section class="hero-light">
     <div class="container-x py-10 md:py-20 grid lg:grid-cols-[1fr_1fr] gap-6 lg:gap-14 items-center hero-grid">
       <div>
-        <p class="text-teal-ink font-semibold text-sm md:text-[15px]" data-hero style="opacity:0;transform:translateY(16px)">The compliance-first performance network for telehealth</p>
-        <h1 class="mt-4 text-navy text-[38px] leading-[1.05] sm:text-[50px] lg:text-[60px] font-extrabold tracking-[-0.02em]" data-hero style="opacity:0;transform:translateY(16px)">Take your telehealth brand to the next level. <span class="text-teal-ink">Without the compliance risk.</span></h1>
-        <p class="mt-6 text-lg md:text-xl text-slate max-w-xl leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">For brands past $1M a month. Verified media partners bring the scale. Our compliance arm reviews every claim before it runs, tracks every sale server-side, and removes anyone who slips. You keep the brand, the claims, and the numbers.</p>
+        <p class="text-teal-ink font-semibold text-sm md:text-[15px]" data-hero style="opacity:0;transform:translateY(16px)">The growth platform for telehealth brands</p>
+        <h1 class="mt-4 text-navy text-[38px] leading-[1.05] sm:text-[50px] lg:text-[60px] font-extrabold tracking-[-0.02em]" data-hero style="opacity:0;transform:translateY(16px)">Take your telehealth brand to the <span class="text-teal-ink">next level.</span></h1>
+        <p class="mt-6 text-lg md:text-xl text-slate max-w-xl leading-relaxed" data-hero style="opacity:0;transform:translateY(16px)">For brands past $1M a month. Exclusive partnerships and verified media partners bring the scale. Server-side tracking shows you every sale. Compliance is built into every launch, so you keep the brand, the claims, and the numbers.</p>
         <div class="mt-8 flex flex-col sm:flex-row gap-3" data-hero style="opacity:0;transform:translateY(16px)">
           <a href={href('/brands/')} class="btn btn-primary">I have a brand</a>
           <a href={href('/partners/')} class="btn btn-ghost">I run traffic</a>
         </div>
         <ul class="mt-7 flex flex-wrap gap-2" data-hero style="opacity:0;transform:translateY(16px)">
-          {['Every claim reviewed before it runs', 'Partners verified, not just signed up', 'Paid on approved performance'].map((t) => <li class="pill-outline">{t}</li>)}
+          {['Exclusive partnerships', 'Verified media partners', 'Compliance built in'].map((t) => <li class="pill-outline">{t}</li>)}
         </ul>
       </div>
       <PeptideHero />
@@ -75,22 +73,22 @@ const categories = [
   <section class="container-x pt-10 md:pt-16">
     <div class="max-w-3xl mx-auto text-center">
       <p class="kicker">Where you are decides who you need</p>
-      <h2 class="h2 mt-3">Agencies get you started. OnPoint gets you to $100M.</h2>
-      <p class="lead mx-auto mt-4">Different jobs. An agency builds the flows and gets the first campaigns live. Once your program converts, a compliance-first network is how you scale it with dozens of verified partners instead of one team.</p>
+      <h2 class="h2 mt-3">Agencies get you started. OnPoint takes you to $100M.</h2>
+      <p class="lead mx-auto mt-4">Different jobs, and both matter. An agency builds the flows and gets the first campaigns live. Once your program converts, OnPoint multiplies it through dozens of verified partners and exclusive placements.</p>
     </div>
     <div class="journey mt-12">
       <div class="jcard reveal">
         <p class="jtag">Starting out · $0 to $1M</p>
-        <h3 class="text-2xl font-extrabold">Hire an agency.</h3>
+        <h3 class="text-2xl font-extrabold">Build with an agency.</h3>
         <div>
           <div class="jviz"><svg viewBox="0 0 300 120"><rect class="jblock" x="40" y="70" width="60" height="30" rx="6"/><rect class="jblock" x="110" y="55" width="60" height="45" rx="6"/><rect class="jblock" x="180" y="40" width="60" height="60" rx="6"/><rect class="jblock" x="120" y="20" width="40" height="22" rx="5"/></svg></div>
-          <ul class="jcheck mt-4"><li>Builds your funnel, intake, and first campaigns</li><li>One team, hands on, on a retainer</li><li>Right move for a new brand. Not what we do.</li></ul>
+          <ul class="jcheck mt-4"><li>Builds your funnel, intake, and first campaigns</li><li>One team, hands on, close to the product</li><li>The right first step for a new brand</li></ul>
         </div>
-        <p class="jverdict">Get your program converting first.</p>
+        <p class="jverdict">Get the program converting.</p>
       </div>
       <div class="jcard is-us reveal">
         <p class="jtag">Ready to scale · $1M to $100M</p>
-        <h3 class="text-2xl font-extrabold">Deploy a compliance-first network.</h3>
+        <h3 class="text-2xl font-extrabold">Scale with OnPoint.</h3>
         <div>
           <div class="jviz"><svg viewBox="0 0 300 120">
             <path class="jl jflow" d="M10 30 H120"/><path class="jl jflow" d="M10 60 H120"/><path class="jl jflow" d="M10 90 H120"/>
@@ -98,22 +96,23 @@ const categories = [
             <path class="jl jflow" d="M180 60 H290"/><circle class="jdot" cx="230" cy="60" r="6"/><circle class="jdot" cx="262" cy="60" r="6"/>
             <circle class="jdot" cx="40" cy="30" r="5"/><circle class="jdot" cx="70" cy="60" r="5"/><circle class="jdot" cx="55" cy="90" r="5"/>
           </svg></div>
-          <ul class="jcheck mt-4"><li>Dozens of verified partners, each vetted before access</li><li>Every ad checked against your claim set before it runs</li><li>Server-side tracking, payouts on approved performance</li></ul>
+          <ul class="jcheck mt-4"><li>Dozens of verified partners and exclusive placements</li><li>Media, creative, and funnel expertise behind every launch</li><li>Server-side tracking and compliance built in</li></ul>
         </div>
-        <p class="jverdict">This is OnPoint.</p>
+        <p class="jverdict">Multiply what already works.</p>
       </div>
       <div class="jcard reveal">
-        <p class="jtag">The trap</p>
-        <h3 class="text-2xl font-extrabold">Join an open network.</h3>
+        <p class="jtag">Curated, by design</p>
+        <h3 class="text-2xl font-extrabold">Invited partners, exclusive offers.</h3>
         <div>
           <div class="jviz"><svg viewBox="0 0 300 120">
-            <path class="jl jflow" d="M10 20 C 100 20, 150 60, 290 60"/><path class="jl jflow" d="M10 60 H290"/><path class="jl jflow" d="M10 100 C 100 100, 150 60, 290 60"/>
-            <circle class="jbad" cx="90" cy="24" r="7"/><circle class="jbad" cx="150" cy="60" r="7"/><circle class="jbad" cx="110" cy="96" r="7"/>
-            <circle class="jdot" cx="250" cy="60" r="6"/>
+            <path class="jl jflow" d="M10 30 H120"/><path class="jl jflow" d="M10 60 H120"/><path class="jl jflow" d="M10 90 H120"/>
+            <rect class="jgate" x="120" y="18" width="60" height="84" rx="12"/><path d="M137 60l9 9 17-19" fill="none" stroke="#14867a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="jl jflow" d="M180 60 H290"/><circle class="jdot" cx="230" cy="60" r="6"/><circle class="jdot" cx="262" cy="60" r="6"/>
+            <circle class="jdot" cx="40" cy="30" r="5"/><circle class="jdot" cx="70" cy="60" r="5"/><circle class="jdot" cx="55" cy="90" r="5"/>
           </svg></div>
-          <ul class="jcheck mt-4"><li>Anyone with a login can run your offer</li><li>Claims you never approved, sources you never see</li><li>Your ad account, merchant account, and certification carry the risk</li></ul>
+          <ul class="jcheck mt-4"><li>Partners are invited and verified before they see an offer</li><li>Offers are exclusive to the platform</li><li>Every side sees the same numbers</li></ul>
         </div>
-        <p class="jverdict">Volume today. Shutdown tomorrow.</p>
+        <p class="jverdict">Quality partners, on purpose.</p>
       </div>
     </div>
   </section>
@@ -121,13 +120,13 @@ const categories = [
   <!-- TWO SIDES -->
   <section class="container-x pt-20 md:pt-28">
     <p class="kicker">Two sides, one standard</p>
-    <h2 class="h2 mt-3 max-w-3xl">Built for brands that are ready. Built for partners who want the offers nobody else has.</h2>
+    <h2 class="h2 mt-3 max-w-3xl">Built for brands that are ready. Built for partners who want exclusive offers.</h2>
     <div class="mt-10 grid lg:grid-cols-2 gap-5">
       <div class="panel-mint reveal">
         <p class="jtag">For brands</p>
         <h3 class="text-2xl font-extrabold mt-2">Scale through partners without losing control.</h3>
         <ul class="checks mt-6">
-          <li>You own and approve every health claim. We enforce it.</li>
+          <li>You own and approve every health claim</li>
           <li>Only verified partners, on the channels you allow</li>
           <li>Media buying, creative, funnel optimization, and tracking tech behind every launch</li>
           <li>Attribution and payments visible end to end</li>
@@ -138,7 +137,7 @@ const categories = [
         <p class="jtag" style="color:#60d8c8">For media partners</p>
         <h3 class="text-2xl font-extrabold text-white mt-2">Exclusive offers. Traffic sources you can own.</h3>
         <ul class="checks checks-light mt-6">
-          <li>Telehealth offers you cannot get on the open market</li>
+          <li>Telehealth offers exclusive to OnPoint partners</li>
           <li>Brands with the capital to scale, so caps grow with you</li>
           <li>Partners here run six-figure days in revenue on a single channel</li>
           <li>Server-side tracking, clear claim rules, paid on approved performance</li>
@@ -148,20 +147,21 @@ const categories = [
     </div>
   </section>
 
-  <!-- COMPLIANCE (dark) -->
-  <section class="mt-20 md:mt-28 bg-navy-deep text-white">
-    <div class="container-x py-16 md:py-24 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+  <!-- COMPLIANCE, BUILT IN -->
+  <section class="container-x pt-20 md:pt-28">
+    <div class="rounded-[28px] bg-paper p-8 md:p-12 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center reveal">
       <div>
-        <p class="kicker kicker-light">The compliance arm</p>
-        <h2 class="h2 text-white mt-3">The reason brands say yes to a network.</h2>
-        <p class="text-white/75 text-lg mt-4 leading-relaxed">The fear with affiliates is that they go rogue. On OnPoint they cannot. Every ad is checked against your claim set before it runs. What fails goes back to the partner with the reason. What passes is logged with a reviewer and a time. Sources that slip are removed.</p>
-        <ul class="mt-6 grid sm:grid-cols-2 gap-3 text-[15px]">
-          {['Claims: brand-owned, brand-approved', 'Sources: identity, KYC, traffic verified', 'Tracking: server-side, one number', 'Payouts: approved performance only'].map((t) => <li class="flex gap-2 text-white/85"><span class="text-teal">✓</span>{t}</li>)}
-        </ul>
+        <p class="kicker">Compliance, built in</p>
+        <h2 class="h2 mt-3">Telehealth is regulated. We build for that.</h2>
+        <p class="lead mt-4">Brands own their claims. Partners are verified before they see an offer. Every ad is reviewed before it runs, and every sale is tracked server-side. It runs quietly in the background so you can focus on growth.</p>
+        <a href={href('/compliance/')} class="btn btn-primary mt-7">How compliance works at OnPoint</a>
       </div>
-      <Molecule class="reveal" />
+      <ul class="grid sm:grid-cols-2 gap-4">
+        {[['Claims', 'Yours, in your words, on every ad'], ['Partners', 'Identity and traffic source verified'], ['Creative', 'Reviewed before it runs'], ['Tracking', 'Server-side, one number for both sides']].map(([t, d]) => (
+          <li class="rounded-[20px] bg-white border border-line p-5"><p class="font-bold text-navy">{t}</p><p class="mt-1 text-[15px] text-slate">{d}</p></li>
+        ))}
+      </ul>
     </div>
-    <div class="container-x pb-16 md:pb-24"><div class="review-shell reveal"><ReviewPass /></div></div>
   </section>
 
   <!-- CATEGORIES -->

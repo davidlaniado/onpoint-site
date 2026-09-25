@@ -9,7 +9,7 @@ const faq = [
   { q: 'Can I see which partners are running my offer?', a: 'Yes. Attribution is visible at the partner and channel level. Only verified partners on approved channels and placements can run your offer.' },
   { q: 'What commercial structures do you support?', a: 'CPA, revenue share, and hybrid structures. Terms are agreed before launch and wired into tracking and payment logic from day one.' },
   { q: 'How fast can we launch?', a: 'It depends on verification and how ready your funnel and tracking are. Brands with a working funnel, LegitScript where required, and a clear offer can usually be live with partners within a couple of weeks.' },
-  { q: 'Do you handle patient data?', a: 'No. OnPoint does not collect, store, or process protected health information. Tracking runs on advertising and performance events only.' },
+  { q: 'Do you handle patient data?', a: 'OnPoint runs on advertising and performance events only. Protected health information stays with the brand and its providers.' },
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---

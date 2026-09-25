@@ -38,7 +38,7 @@ const ld = {
 const slug = (t: string) => t.toLowerCase().replace(/\(.*?\)/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
 <Base title="Glossary: telehealth performance marketing terms" description="Plain-English definitions of the terms used in telehealth affiliate marketing: CPA, revenue share, RPA, EPC, S2S postback, click ID, claim set, compliant traffic, and more." jsonLd={ld}>
-  <PageHero kicker="Glossary" title="The words, <span class='text-teal-ink'>defined plainly.</span>" lead="Every term we use on this site and in our offer docs, in one place. If a network cannot define these for you, that tells you something." narrow />
+  <PageHero kicker="Glossary" title="The words, <span class='text-teal-ink'>defined plainly.</span>" lead="Every term we use on this site and in our offer docs, in one place." narrow />
   <section class="container-x pt-14 md:pt-20">
     <dl class="max-w-3xl divide-y divide-line border-y border-line">
       {terms.map(([t, d]) => (
