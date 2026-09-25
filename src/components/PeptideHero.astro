@@ -53,7 +53,7 @@
       const t = i / (N - 1), x = 0.15 + t * span, a = t * Math.PI * 3;
       const pt = new THREE.Vector3(x, Math.cos(a) * hr, Math.sin(a) * hr);
       const b = new THREE.Mesh(beadGeo, beadMat); b.position.copy(pt); helix.add(b);
-      const dir = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize().multiplyScalar(2.2 + Math.random() * 2.2);
+      const dir = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize().multiplyScalar(1.6 + Math.random() * 1.6);
       (b as any).userData = { rest: pt.clone(), burst: dir, spin: new THREE.Vector3(Math.random(), Math.random(), Math.random()) };
       beads.push(b);
       if (prev) { const d = pt.clone().sub(prev); const link = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, d.length(), 8), linkMat); link.position.copy(prev).add(d.clone().multiplyScalar(0.5)); link.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.clone().normalize()); helix.add(link); links.push(link); }
@@ -64,7 +64,7 @@
 
     // burst cloud: fine particles that fly outward from the seam as you scroll
     const BC = 420, bpos = new Float32Array(BC * 3), bdir: THREE.Vector3[] = [];
-    for (let i = 0; i < BC; i++) { const v = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize().multiplyScalar(1.5 + Math.random() * 4.5); bdir.push(v); bpos[i * 3] = 0; bpos[i * 3 + 1] = 0; bpos[i * 3 + 2] = 0; }
+    for (let i = 0; i < BC; i++) { const v = new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize().multiplyScalar(1.2 + Math.random() * 3); bdir.push(v); bpos[i * 3] = 0; bpos[i * 3 + 1] = 0; bpos[i * 3 + 2] = 0; }
     const burstGeo = new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(bpos, 3));
     const burstMat = new THREE.PointsMaterial({ color: 0x14867a, size: 0.045, transparent: true, opacity: 0, sizeAttenuation: true, depthWrite: false });
     const burst = new THREE.Points(burstGeo, burstMat); group.add(burst);
@@ -86,7 +86,7 @@
     let visible = true; new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(wrap);
     const timer = new THREE.Timer(); let frame = 0;
     let scrollT = 0, scrollCur = 0;
-    const onScroll = () => { const span = Math.max(320, innerHeight * 0.55); scrollT = Math.min(1, Math.max(0, scrollY / span)); };
+    const onScroll = () => { const span = 150; scrollT = Math.min(1, Math.max(0, scrollY / span)); };
     addEventListener('scroll', onScroll, { passive: true }); onScroll();
     const loop = () => {
       requestAnimationFrame(loop); if (!visible) return;
@@ -103,9 +103,9 @@
       }
       // scroll-driven dispersion
       const dt = Math.min(0.1, timer.getDelta() || 0.016);
-      scrollCur += (scrollT - scrollCur) * Math.min(1, dt * 6);
+      scrollCur += (scrollT - scrollCur) * Math.min(1, dt * 11);
       const k = reduce ? 0 : ease(scrollCur);
-      white.position.x = -k * 1.5; glass.position.x = k * 1.5; white.rotation.z = Math.PI / 2 + k * 0.35; glass.rotation.z = Math.PI / 2 - k * 0.35;
+      white.position.x = -k * 0.9; glass.position.x = k * 0.9; white.rotation.z = Math.PI / 2 + k * 0.35; glass.rotation.z = Math.PI / 2 - k * 0.35;
       glassMat.opacity = 0.85 * (1 - k * 0.7); whiteMat.opacity = 1 - k * 0.55; seamMat.opacity = 1 - k; seam.scale.setScalar(1 + k * 1.8);
       for (const b of beads) { const u = (b as any).userData; b.position.copy(u.rest).addScaledVector(u.burst, k); b.rotation.x = u.spin.x * k * 6; b.rotation.y = u.spin.y * k * 6; b.scale.setScalar(1 + k * 0.9); }
       for (const l of links) { const m = l.material as THREE.Material; m.transparent = true; m.opacity = 0.9 * Math.max(0, 1 - k * 2.2); }
@@ -113,7 +113,7 @@
       const kk = Math.pow(k, 0.7);
       for (let i = 0; i < BC; i++) { const v = bdir[i]; arr[i * 3] = v.x * kk; arr[i * 3 + 1] = v.y * kk + Math.sin(t * 1.5 + i) * 0.04 * k; arr[i * 3 + 2] = v.z * kk; }
       burstGeo.attributes.position.needsUpdate = true; burstMat.opacity = Math.min(1, k * 1.6) * Math.max(0, 1 - Math.pow(k, 3) * 0.35);
-      group.scale.setScalar(1.15 - k * 0.25);
+      group.scale.setScalar(1.15 - k * 0.38);
       renderer.render(scene, camera);
     };
     loop();
