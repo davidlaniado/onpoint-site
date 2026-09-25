@@ -86,7 +86,7 @@
     let visible = true; new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(wrap);
     const timer = new THREE.Timer(); let frame = 0;
     let scrollT = 0, scrollCur = 0;
-    const onScroll = () => { const span = 150; scrollT = Math.min(1, Math.max(0, scrollY / span)); };
+    const onScroll = () => { const top = wrap.getBoundingClientRect().top + scrollY; const start = Math.max(0, top - innerHeight * 0.45); const span = 150; scrollT = Math.min(1, Math.max(0, (scrollY - start) / span)); };
     addEventListener('scroll', onScroll, { passive: true }); onScroll();
     const loop = () => {
       requestAnimationFrame(loop); if (!visible) return;

@@ -144,3 +144,5 @@
 #scroll-progress { display: none !important; }
 /* mobile: no capsule */
 @media (max-width: 1023px) { .hero-grid .pep-wrap { display: none; } }
+/* mobile: capsule back, placed after the hero copy */
+@media (max-width: 1023px) { .hero-grid .pep-wrap { display: block; order: 2; aspect-ratio: 1 / 0.8; max-width: 100%; margin: 4px auto 0; } }
