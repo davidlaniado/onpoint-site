@@ -33,7 +33,6 @@ export function href(path: string): string {
 export const NAV = [
   { label: 'For Brands', path: '/brands/' },
   { label: 'For Partners', path: '/partners/' },
-  { label: 'Programs', path: '/programs/' },
   { label: 'About', path: '/about/' },
   { label: 'Blog', path: '/blog/' },
   { label: 'Careers', path: '/careers/' },

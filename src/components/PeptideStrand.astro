@@ -1,0 +1,17 @@
+---
+// Flowing peptide strand: beads travelling along a sine path. Pure SVG + CSS.
+interface Props { class?: string; light?: boolean }
+const { class: cls = '', light = false } = Astro.props;
+const beads = Array.from({ length: 22 }, (_, i) => i);
+---
+<div class:list={['strand', light && 'strand-light', cls]} aria-hidden="true">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-full">
+    <path id="strand-path" d="M-20 60 C 150 0, 300 120, 450 60 S 750 0, 900 60 S 1150 120, 1220 60" fill="none" class="strand-line" />
+    <path d="M-20 60 C 150 120, 300 0, 450 60 S 750 120, 900 60 S 1150 0, 1220 60" fill="none" class="strand-line strand-line-2" />
+    {beads.map((i) => (
+      <circle r={i % 3 === 0 ? 5 : 3.5} class:list={['strand-bead', i % 3 === 0 && 'big']}>
+        <animateMotion dur="14s" repeatCount="indefinite" begin={`${-(i / beads.length) * 14}s`}><mpath href="#strand-path" /></animateMotion>
+      </circle>
+    ))}
+  </svg>
+</div>

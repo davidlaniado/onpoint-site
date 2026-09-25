@@ -85,3 +85,60 @@
 .hero-form-light { box-shadow: 0 30px 60px -36px rgba(24,40,88,.35); border: 1px solid var(--color-line); }
 .pep-glow { background: radial-gradient(circle, rgba(96,216,200,.42) 0%, rgba(56,144,176,.16) 42%, transparent 70%); }
 .pep-wrap::after { content: ""; position: absolute; left: 22%; right: 18%; bottom: 8%; height: 9%; border-radius: 50%; background: radial-gradient(ellipse, rgba(24,40,88,.22), transparent 70%); filter: blur(10px); pointer-events: none; }
+
+/* ===================== peptide strand divider + molecule ===================== */
+.strand { height: 90px; width: 100%; overflow: hidden; }
+.strand-line { stroke: rgba(24,40,88,.12); stroke-width: 1.5; }
+.strand-line-2 { stroke: rgba(96,216,200,.35); stroke-dasharray: 4 6; }
+.strand-bead { fill: var(--color-teal-ink); opacity: .55; }
+.strand-bead.big { fill: var(--color-teal); opacity: .9; filter: drop-shadow(0 0 6px rgba(96,216,200,.8)); }
+.strand-light .strand-line { stroke: rgba(255,255,255,.14); } .strand-light .strand-line-2 { stroke: rgba(96,216,200,.45); }
+.molecule { width: 100%; max-width: 380px; aspect-ratio: 1; margin-inline: auto; }
+.mol-ring { transform-origin: 100px 100px; animation: molSpin 24s linear infinite; }
+.mol-bond { stroke: rgba(255,255,255,.55); stroke-width: 2.5; }
+.mol-atom { fill: var(--color-teal); filter: drop-shadow(0 0 8px rgba(96,216,200,.9)); } .mol-atom.alt { fill: #fff; filter: none; }
+.mol-orbit { transform-origin: 100px 100px; animation: molSpin 16s linear infinite; }
+.mol-orbit-2 { animation: molSpinRev 11s linear infinite; }
+.mol-orbit-ring { fill: none; stroke: rgba(255,255,255,.14); stroke-width: 1; stroke-dasharray: 3 5; }
+.mol-sat { fill: var(--color-teal); filter: drop-shadow(0 0 6px rgba(96,216,200,.9)); } .mol-sat.alt { fill: #fff; }
+.mol-core { fill: #fff; filter: drop-shadow(0 0 14px rgba(96,216,200,.9)); animation: molPulse 2.4s ease-in-out infinite; }
+@keyframes molSpin { to { transform: rotate(360deg); } } @keyframes molSpinRev { to { transform: rotate(-360deg); } }
+@keyframes molPulse { 0%,100% { r: 12; } 50% { r: 15; } }
+@media (prefers-reduced-motion: reduce) { .mol-ring, .mol-orbit, .mol-core { animation: none; } .strand-bead animateMotion { display: none; } }
+
+/* ===================== journey (agency vs network vs open) ===================== */
+.journey { display: grid; gap: 18px; }
+@media (min-width: 1024px) { .journey { grid-template-columns: 1fr 1.25fr 1fr; align-items: stretch; } }
+.jcard { border-radius: 24px; padding: 28px; border: 1px solid var(--color-line); background: #fff; display: grid; grid-template-rows: auto auto 1fr auto; gap: 14px; }
+.jcard.is-us { background: var(--color-navy); color: #fff; border-color: var(--color-navy); box-shadow: 0 30px 60px -36px rgba(24,40,88,.6); }
+.jcard.is-us h3, .jcard.is-us p, .jcard.is-us li { color: #fff; }
+.jcard.is-us .jsub { color: rgba(255,255,255,.75); }
+.jtag { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--color-teal-ink); }
+.jcard.is-us .jtag { color: var(--color-teal); }
+.jviz { height: 120px; border-radius: 16px; background: var(--color-paper); position: relative; overflow: hidden; }
+.jcard.is-us .jviz { background: rgba(255,255,255,.06); }
+.jviz svg { width: 100%; height: 100%; }
+.jl { stroke: rgba(24,40,88,.2); stroke-width: 2; fill: none; } .jcard.is-us .jl { stroke: rgba(255,255,255,.25); }
+.jdot { fill: var(--color-teal-ink); } .jcard.is-us .jdot { fill: var(--color-teal); filter: drop-shadow(0 0 5px rgba(96,216,200,.9)); }
+.jbad { fill: #e5484d; }
+.jgate { fill: rgba(96,216,200,.18); stroke: var(--color-teal); stroke-width: 2; }
+.jblock { fill: #fff; stroke: rgba(24,40,88,.25); stroke-width: 1.5; }
+@keyframes jflow { to { stroke-dashoffset: -60; } }
+.jflow { stroke-dasharray: 8 8; animation: jflow 1.6s linear infinite; }
+@keyframes jbuild { 0%, 100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(-4px); opacity: .85; } }
+.jblock:nth-child(2) { animation: jbuild 3s ease-in-out infinite; } .jblock:nth-child(3) { animation: jbuild 3s ease-in-out .6s infinite; } .jblock:nth-child(4) { animation: jbuild 3s ease-in-out 1.2s infinite; }
+@keyframes jflag { 0%, 60%, 100% { opacity: 0; } 20%, 45% { opacity: 1; } }
+.jbad { animation: jflag 3s ease-in-out infinite; } .jbad:nth-of-type(2) { animation-delay: 1s; } .jbad:nth-of-type(3) { animation-delay: 2s; }
+.jcheck { display: grid; gap: 8px; font-size: 15px; color: var(--color-slate); }
+.jcheck li { display: flex; gap: 10px; align-items: flex-start; } .jcheck li::before { content: "✓"; color: var(--color-teal-ink); font-weight: 700; flex: none; }
+.jcard.is-us .jcheck li::before { color: var(--color-teal); }
+.jverdict { font-weight: 700; color: var(--color-navy); }
+
+/* featured wordmarks */
+.press { display: flex; flex-wrap: wrap; gap: 14px 34px; align-items: center; justify-content: center; }
+.press span { font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 20px; letter-spacing: -.01em; color: var(--color-navy); opacity: .55; }
+.press span.sans { font-family: var(--font-display); font-weight: 800; letter-spacing: -.03em; }
+
+/* mobile: capsule above headline; even category grid */
+@media (max-width: 1023px) { .hero-grid { display: flex; flex-direction: column; } .hero-grid .pep-wrap { order: -1; aspect-ratio: 1 / 0.62; max-width: 100%; margin-bottom: 8px; } }
+#scroll-progress { display: none !important; }

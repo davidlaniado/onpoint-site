@@ -3,59 +3,57 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import CTASimple from '../components/CTASimple.astro';
 import { href } from '../lib/site';
-const values = [
-  ['Verify first', 'Nothing runs until both sides are checked. It is slower on day one and faster every day after.'],
-  ['Numbers settle arguments', 'Same tracking, same events, same report for the brand and the partner. If it is not in the data, it did not happen.'],
-  ['Brands own their claims', 'We review for advertising standards. We never write or change a medical claim. That line does not move.'],
-  ['Speed with direction', 'Launch fast, read fast, kill losers fast, scale winners fast. Health advertising rewards operators who move and stay inside the lines.'],
-  ['Small and senior', 'Founder-led. Every person here owns a lane and can see their impact in the numbers the same week.'],
-  ['Say the hard thing', 'If an offer will not work, we say so. If a partner is off, they hear it from us before the brand does.'],
+const offer = [
+  ['Media buying', 'Meta, TikTok, search, native, email, and SMS. Run by buyers who spend every day in the accounts.'],
+  ['Creative engine', 'UGC, AI video, statics, and long-form advertorials. Hundreds of ads a week, tested and killed fast.'],
+  ['Funnel and CRO', 'Quiz flows, pre-sell pages, checkout, and offer structure, optimized on real cost-per-sale data.'],
+  ['Tracking and attribution', 'Server-side postbacks, click IDs through the funnel, Everflow and Google Tag Manager, one number for both sides.'],
+  ['Compliance arm', 'Claim sets, creative review before launch, partner verification, and removal when quality drops.'],
+  ['Payments and providers', 'Payment processing solutions, card tracking and reconciliation, and a working knowledge of provider and pharmacy networks.'],
 ];
 ---
-<Base title="About" description="OnPoint is a founder-led performance network for telehealth brands, built by operators who have driven over $1 billion in revenue for the brands they have scaled.">
-  <PageHero kicker="About OnPoint" title="Operators first. <span class='text-teal-ink'>Network second.</span>" lead="OnPoint was built by people who buy media, build funnels, and read the numbers every morning. We started it because health acquisition needed a network that takes the rules as seriously as the results." narrow />
+<Base title="About" description="OnPoint is a compliance-first performance network for telehealth brands, built by operators who have driven billions in sales.">
+  <PageHero kicker="About OnPoint" title="Built by the operators behind <span class='text-teal-ink'>$9B+ in sales.</span>" lead="OnPoint is the network the operators wished existed when they were scaling brands themselves: verified partners, a compliance arm that actually reviews, and tracking both sides can trust." narrow />
 
   <section class="container-x -mt-8 md:-mt-10 relative z-10">
     <div class="stat-band reveal">
-      <p class="stat-title">A small team with a long track record</p>
+      <p class="stat-title">The scale behind the network</p>
       <div class="stat-grid">
-        {[['$1B+', 'revenue driven for the brands our founders scaled'], ['7', 'global offices built at their last company'], ['Hundreds', 'of team members led before OnPoint'], ['ATA', 'American Telemedicine Association members']].map(([n, l]) => (
+        {[['$9B+', 'in sales driven by our operators'], ['40+', 'specialists across media, creative, compliance, and tech'], ['10', 'regulated health categories live'], ['$100M+', 'the revenue level we build brands toward']].map(([n, l]) => (
           <div><p class="stat-n">{n}</p><p class="stat-l">{l}</p></div>
         ))}
       </div>
     </div>
   </section>
 
+  <section class="container-x pt-16 md:pt-24 text-center">
+    <p class="text-sm font-semibold text-mist">Brands we work with have been featured in</p>
+    <div class="press mt-5"><span>Forbes</span><span class="sans">Inc.</span><span class="sans">BUSINESS INSIDER</span><span>Men's Health</span><span class="sans">TechCrunch</span><span>Fast Company</span></div>
+  </section>
+
   <section class="container-x pt-20 md:pt-28">
-    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
-      <div class="prose-op">
-        <p class="kicker not-prose">Who we are</p>
-        <h2 class="h2 mt-3 !mb-6">Built by people who run this every day.</h2>
-        <p>OnPoint Health Media & Tech is a performance platform for telehealth patient acquisition. We connect brands in metabolic health, hormone optimization, men's wellness, dermatology, and diagnostics with verified media partners, and we run the tracking, review, and payments in between.</p>
-        <p>Before OnPoint, our founders built one of the largest performance marketing companies in the world: hundreds of team members across seven global offices, and over $1 billion in revenue driven for the brands they scaled. OnPoint is their next chapter, and it runs the same way. Small, senior, founder-led, and measured on results.</p>
-        <p>We are also advertisers ourselves. We run our own telehealth campaigns every day, so when we tell a partner what converts or tell a brand what their funnel is leaking, it comes from live experience, not a slide deck.</p>
+    <div class="grid lg:grid-cols-[1fr_1fr] gap-10 items-start">
+      <div>
+        <p class="kicker">Who we are</p>
+        <h2 class="h2 mt-3">Operators who scaled the brands, then built the network.</h2>
       </div>
-      <div class="panel-navy reveal">
-        <h3 class="text-2xl font-extrabold text-white">Three founders. Three lanes.</h3>
-        <ul class="checks checks-light mt-6">
-          <li><b>Chief Executive Officer.</b> Deal flow and advertiser relationships. Brings the offers in and keeps both sides aligned on terms.</li>
-          <li><b>President.</b> Technology, payments, and marketing infrastructure. Owns tracking, processing, and the systems everything runs on.</li>
-          <li><b>Chief Growth Officer.</b> Media buying and creative. Runs the campaigns, the creative engine, and the daily kill and scale calls.</li>
-        </ul>
-        <a href="https://www.linkedin.com/company/onpoint-health-media" target="_blank" rel="noopener" class="btn btn-teal mt-8">Find us on LinkedIn</a>
+      <div class="prose-op">
+        <p>Before OnPoint, our team built and ran one of the largest performance marketing operations in the world: hundreds of people across seven global offices, driving more than $9 billion in sales for the brands they scaled. Telehealth is where that playbook goes next.</p>
+        <p>We still run our own telehealth campaigns every day. When we tell a partner what converts, or tell a brand where its funnel is leaking, it comes from live accounts, not a slide deck.</p>
+        <p>The brands we work with do tens of millions to hundreds of millions a year. They come to us when the program already converts and the question is how to scale it without an affiliate going rogue under their name.</p>
       </div>
     </div>
   </section>
 
   <section class="container-x pt-20 md:pt-28">
-    <p class="kicker text-center">How we work</p>
-    <h2 class="h2 mt-3 text-center">Written for how we actually operate.</h2>
+    <p class="kicker text-center">What we bring</p>
+    <h2 class="h2 mt-3 text-center">Everything between the offer and the sale.</h2>
     <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {values.map(([t, d]) => (
+      {offer.map(([t, d]) => (
         <div class="rounded-[24px] bg-paper p-7 reveal"><h3 class="text-lg font-bold">{t}</h3><p class="mt-2 text-[15px] text-slate leading-relaxed">{d}</p></div>
       ))}
     </div>
   </section>
 
-  <CTASimple />
+  <CTASimple title="Ready for the next level? Let’s talk." lead="One call. We tell you honestly whether your program fits the network, and what it would take to scale it." />
 </Base>

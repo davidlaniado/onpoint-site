@@ -1,0 +1,17 @@
+---
+// Animated peptide molecule: rotating ring of atoms with bonds, orbiting nodes. Inline SVG + CSS.
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+const atoms = [[100, 40], [152, 70], [152, 130], [100, 160], [48, 130], [48, 70]];
+---
+<div class:list={['molecule', cls]} aria-hidden="true">
+  <svg viewBox="0 0 200 200" class="w-full h-full">
+    <g class="mol-ring">
+      {atoms.map(([x, y], i) => { const [nx, ny] = atoms[(i + 1) % atoms.length]; return <line x1={x} y1={y} x2={nx} y2={ny} class="mol-bond" />; })}
+      {atoms.map(([x, y], i) => <circle cx={x} cy={y} r={i % 2 ? 7 : 9} class:list={['mol-atom', i % 2 && 'alt']} />)}
+    </g>
+    <g class="mol-orbit"><circle cx="100" cy="100" r="86" class="mol-orbit-ring" /><circle cx="186" cy="100" r="6" class="mol-sat" /></g>
+    <g class="mol-orbit mol-orbit-2"><circle cx="100" cy="100" r="64" class="mol-orbit-ring" /><circle cx="36" cy="100" r="4.5" class="mol-sat alt" /></g>
+    <circle cx="100" cy="100" r="12" class="mol-core" />
+  </svg>
+</div>
